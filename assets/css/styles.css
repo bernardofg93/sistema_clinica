@@ -1,0 +1,83 @@
+label {
+    font-size: 12px;
+}
+
+/* =============== CONTAINER USER REGISTER =============== */
+.container-register-us {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-register-us {
+    height: 100%;
+    width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    .card-register-us {
+        width: 100%;
+    }
+}
+
+.container-register-us .cd-sp {
+    margin-left: 1rem;
+}
+
+.status-active {
+    background: green;
+    width: 100%;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.status-inactive {
+    background: red;
+    width: 100%;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.card-body .container-asigns .paciente-asigns {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.fa-folder {
+    color: #e7c9a9;
+    font-size: 18px;
+}
+
+.card .title-table-sust {
+    font-size: 12px !important;
+}
+
+.modal .modal-body .none-inputs {
+    display: none;
+}
+
+.modal .modal-body .show-inputs {
+    display: block;
+}
+
+.field-duracion {
+    display: flex;
+}
+
+.field-duracion #cont-duracion {
+    margin-left: 5px;
+}
+
+.navbar-center {
+    position: absolute;
+    left: 15%;
+    transform: translatex(-50%);
+}
+
+.btn-save {
+    background: #3c8dbc !important;
+    color: #FFFFFF !important;
+}
+
+.btn-cns {
+    background: #ecf0f6 !important;
+}

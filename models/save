@@ -1,0 +1,2 @@
+        $query = "SELECT * FROM asignacion_usuario_paciente WHERE usuario_id = '{$this->getUsuarioId()}' AND paciente_id = '{$this->getPacienteId()}'";
+        $res = $this->db->query($query);

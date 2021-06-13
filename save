@@ -1,0 +1,7 @@
+            <a type="button" class="btn btn-danger btn-flat"
+               href="<?= base_url ?>docs/contrato_ingreso_esp.php?&id=<?= $data->id_paciente ?>">
+                <i class="fas fa-file-pdf"></i>
+            </a>
+
+
+             for($i = 0; $i < count($dataArr); $i++){

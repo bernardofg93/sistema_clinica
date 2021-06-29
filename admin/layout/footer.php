@@ -27,7 +27,7 @@
 </footer>
 </div>
 <!-- ./wrapper -->
-
+<script src="<?= base_url ?>assets/js/alerts.js"></script>
 <!-- REQUIRED SCRIPTS -->
 <!-- Alert -->
 <script src="<?= base_url ?>assets/js/alerts.js"></script>

@@ -15,7 +15,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item">
-                    <a href="<?= base_url ?>paciente/registros">Registros</a>
+                    <a href="<?= base_url ?>venta/registros">Registros</a>
                 </li>
                 <li class="breadcrumb-item active">Registro</li>
             </ol>
@@ -34,7 +34,7 @@
                 <a class="btn btn-app bg-primary">
                     <i class="fas fa-phone-volume"></i> Llamadas en seg
                 </a>
-                <a class="btn btn-app bg-primary" href="<?= base_url ?>ventas/registro">
+                <a class="btn btn-app bg-primary" href="<?= base_url ?>venta/registro">
                     <i class="fas fa-plus"></i> Nuevo ingreso
                 </a>
             </div>

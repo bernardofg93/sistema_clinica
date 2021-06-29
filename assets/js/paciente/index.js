@@ -273,7 +273,7 @@ function sendDb(data) {
 function editData(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/usuario/save');
+    xhr.open('POST', 'http://localhost/clinica_soft/usuario/save', true);
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -286,96 +286,6 @@ function editData(data) {
     xhr.send(data)
 }
 
-// funcion para cambiar el pass del usuario 
-function readPass(e) {
-    e.preventDefault();
-
-    const pass = document.querySelector('#pass').value,
-        newpass = document.querySelector('#newpass').value,
-        idUser = document.querySelector('#idUser').value;
-
-    const data = new FormData();
-    data.append("pass", pass);
-    data.append("newpass", newpass);
-    data.append("idUser", idUser);
-
-    if (pass === '' || newpass === '') {
-        alert('Todos los Campos son Obligatorios');
-    } else if (pass != newpass) {
-        alert('Las controaseñas no coinciden');
-    } else {
-        const xhr = new XMLHttpRequest();
-
-        xhr.open("POST", "http://localhost/clinica_soft/usuario/changePassword", true);
-
-        xhr.onload = function () {
-            if (this.status === 200) {
-                const result = JSON.parse(xhr.responseText);
-                if (result.result === 'true') {
-                    alert('Contraseña actualizada correctamente');
-                }
-            }
-        }
-        xhr.send(data);
-    }
-}
-
-// Funcion para cambiar el estado del usuario si esta activo o inactivo
-function stateUsers(e) {
-    const state = (e.target);
-    const id = (e.target.getAttribute('data-v'));
-
-    if (!state.checked) {
-        const res = confirm('¿ Estas seguro que deseas inabilitarlo ?');
-
-        if (res) {
-            const xhr = new XMLHttpRequest();
-
-            const status = 'Inactivo';
-
-            const data = new FormData();
-            data.append('status', status);
-            data.append('id', id);
-
-            xhr.open("POST", "http://localhost/clinica_soft/usuario/estado", true);
-
-            xhr.onload = function () {
-                if (this.status === 200) {
-                    const result = JSON.parse(xhr.responseText);
-                    if (result.result === 'true') {
-                        const status_input = document.querySelector('#estado_us');
-                        status_input.value = result.status;
-                    }
-                }
-            }
-            xhr.send(data);
-        }
-    } else {
-        const res = confirm('¿ Estas seguro que deseas habilitarlo ?');
-        if (res) {
-            const xhr = new XMLHttpRequest();
-
-            const status = 'Activo';
-
-            const data = new FormData();
-            data.append('status', status);
-            data.append('id', id);
-
-            xhr.open("POST", "http://localhost/clinica_soft/usuario/estado", true);
-
-            xhr.onload = function () {
-                if (this.status === 200) {
-                    const result = JSON.parse(xhr.responseText);
-                    if (result.result === 'true') {
-                        const status_input = document.querySelector('#estado_us');
-                        status_input.value = result.status;
-                    }
-                }
-            }
-            xhr.send(data);
-        }
-    }
-}
 
 
 

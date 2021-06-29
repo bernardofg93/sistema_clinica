@@ -8,7 +8,8 @@ class usuarioController
         require_once './views/usuario/login.php';
     }
 
-    public function pacientesAsignados(){
+    public function pacientesAsignados()
+    {
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/usuario/pacientesAsignados.php';
@@ -138,7 +139,7 @@ class usuarioController
             $identity = $usuario->login();
 
             if ($identity && is_object($identity)) {
-                if ($identity->estado_us == 1 ) {
+                if ($identity->estado_us == 1) {
                     $_SESSION['identity'] = $identity;
 
                     if ($identity->rol == 'admin') {

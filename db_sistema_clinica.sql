@@ -1,37 +1,7 @@
 create
-    database db_sistema_clinica_01;
+    database db_sistema_clinica_03;
 use
-    db_sistema_clinica_01;
-
-
-CREATE TABLE nota_venta
-(
-    id_nota_venta INT NOT NULL AUTO_INCREMENT,
-    venta_id      INT(255)
-    nota_desc     TEXT,
-    constraint pk_nota_venta primary key (id_nota_venta),
-    constraint fk_foreign foreign key (venta_id) references venta (id_venta)
-)engine = InnoDB;
-
-
-CREATE TABLE venta
-(
-    id_venta            INT NOT NULL AUTO_INCREMENT,
-    fecha_llamada       DATE NOT NULL,
-    hora_llamada        TIME NOT NULL,
-    lada_tel            VARCHAR(20) NULL,
-    razon_llamada       varchar(50) NOT NULL,
-    nombre_cont         varchar(50) NOT NULL,
-    correo_cont         varchar(70) NOT NULL,
-    parentesco_cont     varchar(20) NULL,
-    tipo_consumo        varchar(30) NULL,
-    edad_cont           smallint(2) NULL,
-    aceptacion          varchar(9) NULL,
-    detalles_ad         varchar(100),
-    fecha_seguimiento   DATE NOT NULL,
-    medio_de_envio      varchar(13) NULL,
-    constraint pk_venta primary key (id_venta)
-)engine = InnoDB;
+    db_sistema_clinica_03;
 
 CREATE TABLE entidad
 (
@@ -58,6 +28,36 @@ CREATE TABLE usuario
         REFERENCES entidad (id_entidad)
 ) ENGINE = InnoDB;
 
+CREATE TABLE venta
+(
+    id_venta            INT NOT NULL AUTO_INCREMENT,
+    usuario_id          INT(255) NOT NULL,
+    fecha_llamada       DATE NOT NULL,
+    hora_llamada        TIME NOT NULL,
+    lada_tel            VARCHAR(20) NULL,
+    razon_llamada       varchar(50) NOT NULL,
+    nombre_cont         varchar(50) NOT NULL,
+    correo_cont         varchar(70) NOT NULL,
+    parentesco_cont     varchar(20) NULL,
+    tipo_consumo        varchar(30) NULL,
+    edad_cont           smallint(2) NULL,
+    aceptacion          varchar(9) NULL,
+    detalles_ad         varchar(100),
+    fecha_seguimiento   DATE NOT NULL,
+    medio_de_envio      varchar(13) NULL,
+    constraint pk_venta primary key (id_venta),
+    constraint fk_venta_usuario foreign key (usuario_id) references usuario (id_usuario)
+)engine = InnoDB;
+
+CREATE TABLE nota_venta
+(
+    id_nota_venta INT NOT NULL AUTO_INCREMENT,
+    venta_id      INT(255),
+    nota_desc     TEXT,
+    constraint pk_nota_venta primary key (id_nota_venta),
+    constraint fk_nota_venta_venta foreign key (venta_id) references venta (id_venta)
+)engine = InnoDB;
+
 CREATE TABLE paciente
 (
     id_paciente         INT NOT NULL AUTO_INCREMENT,
@@ -75,6 +75,7 @@ CREATE TABLE ingreso_paciente
     entidad_id             INT NOT NULL,
     paciente_id            INT NULL,
     usuario_id             INT NOT NULL,
+    venta_id               INT NOT NULL, 
     edad_pa                SMALLINT(3),
     estado_civil_ip        VARCHAR(15),
     hijos_ip               SMALLINT(2),
@@ -107,7 +108,8 @@ CREATE TABLE ingreso_paciente
     CONSTRAINT pk_ingreso_paciente primary key (id_ingreso_paciente),
     CONSTRAINT fk_ingreso_paciente_paciente FOREIGN KEY (paciente_id) REFERENCES paciente (id_paciente),
     CONSTRAINT fk_ingreso_paciente_entidad FOREIGN KEY (entidad_id) REFERENCES entidad (id_entidad),
-    CONSTRAINT fk_infreso_paciente_usuario FOREIGN KEY (usuario_id) REFERENCES usuario (id_usuario)
+    CONSTRAINT fk_infreso_paciente_usuario FOREIGN KEY (usuario_id) REFERENCES usuario (id_usuario),
+    CONSTRAINT fk_ingreso_paciente_venta FOREIGN KEY (venta_id) REFERENCES venta (id_venta)
 ) ENGINE = InnoDB;
 
 create table contactos_paciente
@@ -121,7 +123,7 @@ create table contactos_paciente
     CONSTRAINT pk_id_contactos_paciente PRIMARY KEY (id_contactos_paciente),
     CONSTRAINT fk_contactos_paciente_paciente FOREIGN KEY (paciente_id) references paciente(id_paciente),
     CONSTRAINT fk_contactos_paciente_ingreso_paciente FOREIGN KEY (ingreso_paciente_id) references ingreso_paciente(id_ingreso_paciente)
-) ENGINE = InnDB;
+) ENGINE = InnoDB;
 
 CREATE TABLE asignacion_usuario_paciente
 (
@@ -260,9 +262,9 @@ CREATE TABLE situacion_social_familiar
 
 
 INSERT INTO entidad
-VALUES (NULL, 'CAP1');
+VALUES (NULL, 'CAP1', 10);
 INSERT INTO entidad
-VALUES (NULL, 'CAP2');
+VALUES (NULL, 'CAP2', 10);
 
 INSERT INTO sustancia
 VALUES (NULL, 'Alcohol');

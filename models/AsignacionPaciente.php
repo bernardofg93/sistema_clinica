@@ -88,7 +88,6 @@ class AsignacionPaciente
 
         $res = $this->db->query($query);
 
-
         if (mysqli_num_rows($res) == 0) {
             $sql = "INSERT INTO asignacion_usuario_paciente VALUES(NULL, {$this->getUsuarioId()}, '{$rol}' ,{$this->getPacienteId()}, CURDATE())";
             $save = $this->db->query($sql);

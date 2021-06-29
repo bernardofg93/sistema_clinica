@@ -1,12 +1,43 @@
 create
     database db_sistema_clinica_01;
 use
-    db_sistema_clinica;
+    db_sistema_clinica_01;
+
+
+CREATE TABLE nota_venta
+(
+    id_nota_venta INT NOT NULL AUTO_INCREMENT,
+    venta_id      INT(255)
+    nota_desc     TEXT,
+    constraint pk_nota_venta primary key (id_nota_venta),
+    constraint fk_foreign foreign key (venta_id) references venta (id_venta)
+)engine = InnoDB;
+
+
+CREATE TABLE venta
+(
+    id_venta            INT NOT NULL AUTO_INCREMENT,
+    fecha_llamada       DATE NOT NULL,
+    hora_llamada        TIME NOT NULL,
+    lada_tel            VARCHAR(20) NULL,
+    razon_llamada       varchar(50) NOT NULL,
+    nombre_cont         varchar(50) NOT NULL,
+    correo_cont         varchar(70) NOT NULL,
+    parentesco_cont     varchar(20) NULL,
+    tipo_consumo        varchar(30) NULL,
+    edad_cont           smallint(2) NULL,
+    aceptacion          varchar(9) NULL,
+    detalles_ad         varchar(100),
+    fecha_seguimiento   DATE NOT NULL,
+    medio_de_envio      varchar(13) NULL,
+    constraint pk_venta primary key (id_venta)
+)engine = InnoDB;
 
 CREATE TABLE entidad
 (
     id_entidad     INT         NOT NULL AUTO_INCREMENT,
     nombre_entidad VARCHAR(20) NULL,
+    cupos          SMALLINT(3) NULL,
     constraint pk_id_entidad PRIMARY KEY (id_entidad)
 ) engine = InnoDB;
 

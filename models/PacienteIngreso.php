@@ -9,6 +9,7 @@ class PacienteIngreso
     private $hijos_ip;
     private $edades_hijos_ip;
     private $ocupacion_ip;
+    private $escolaridad_ip;
     private $vive_con_ip;
     private $calle_vive_ip;
     private $ext_vive_ip;
@@ -113,6 +114,18 @@ class PacienteIngreso
     public function setOcupacionIp($ocupacion_ip)
     {
         $this->ocupacion_ip = $ocupacion_ip;
+        return $this;
+    }
+
+    public function getEscolaridadIp()
+    {
+        return $this->escolaridad_ip;
+    }
+
+    public function setEscolaridadIp($escolaridad_ip)
+    {
+        $this->escolaridad_ip = $escolaridad_ip;
+
         return $this;
     }
 
@@ -380,13 +393,41 @@ class PacienteIngreso
         return $this;
     }
 
-    public function getAll(){
+    public function reingreso()
+    {
+        $sql = "SELECT 
+                * FROM ingreso_paciente i
+                INNER JOIN paciente p ON i.paciente_id = p.id_paciente 
+                WHERE i.paciente_id = {$this->getPacienteId()}";
+
+        return $query = $this->db->query($sql);
+    }
+
+    public function getAll()
+    {
+        $sql = "SELECT
+                *
+                FROM 
+                ingreso_paciente i
+                INNER JOIN 
+                paciente p ON i.paciente_id = p.id_paciente 
+                WHERE 
+                i.paciente_id = {$this->getPacienteId()} 
+                AND 
+                i.id_ingreso_paciente = {$this->getId()}";
+
+        $query = $this->db->query($sql);
+        return $query->fetch_object();
+    }
+
+    public function getOne()
+    {
         $sql = "SELECT 
                 * FROM ingreso_paciente i 
                 INNER JOIN paciente p ON i.paciente_id = p.id_paciente
                 WHERE id_ingreso_paciente = {$this->getId()} AND paciente_id = {$this->getPacienteId()}";
-                $res = $this->db->query($sql);
-       return $res->fetch_object();
+        $res = $this->db->query($sql);
+        return $res->fetch_object();
     }
 
     public function save()
@@ -398,6 +439,7 @@ class PacienteIngreso
         $hijos = $this->hijos_ip;
         $edades = $this->edades_hijos_ip;
         $ocupacion = $this->ocupacion_ip;
+        $escolaridad = $this->escolaridad_ip;
         $vive = $this->vive_con_ip;
         $calle = $this->calle_vive_ip;
         $ext = $this->ext_vive_ip;
@@ -427,7 +469,7 @@ class PacienteIngreso
         $sql = "INSERT INTO ingreso_paciente VALUES
                                     (
                                      NULL, NULL, '$paciente_id', '$usuario_id', '$edad', '$civil', '$hijos', '$edades'
-                                     '$ocupacion', '$vive', '$calle', '$calle', '$ext',
+                                     '$ocupacion','$escolaridad', '$vive', '$calle', '$calle', '$ext',
                                      '$interior', '$colonia', '$ciudad_vive', '$postal',
                                      '$estado_vive', '$pais', '$modo', '$recomendado',
                                      '$legal', '$actitud', '$observaciones',
@@ -447,5 +489,4 @@ class PacienteIngreso
             return ['res' => 'false'];
         }
     }
-
 }

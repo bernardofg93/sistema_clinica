@@ -81,3 +81,14 @@ label {
 .btn-cns {
     background: #ecf0f6 !important;
 }
+/* ===============            =============== */
+/* =============== EXPEDIENTE =============== */
+/* ===============            =============== */
+
+.c-view-of {
+    display: none;
+}
+
+.c-view-on {
+    display: block;
+}

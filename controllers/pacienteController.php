@@ -10,25 +10,39 @@ class pacienteController
 {
     public function expediente()
     {
-        if ($_GET['id']) {
+        if (isset($_GET['id'])) {
+
             //Get paciente
             $paciente_id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : false;
             $paciente = new Paciente();
-            $paciente->setId($paciente_id);
+            $paciente->setIdPaciente($paciente_id);
             $pac = $paciente->getOne();
-            //Get user
-            $usuario = new Usuario();
-            $usuario_id = $_SESSION['identity']->id_usuario;
-            $usuario->setIdUsuario($usuario_id);
-            $us = $usuario->getAll();
-            //GET AsignacionPaciente
-            $asignacion = new AsignacionPaciente();
-            $asignacion->setPacienteId($paciente_id);
-            $as = $asignacion->getOne();
+
+            //reingreso
+            $reingreso = new PacienteIngreso();
+            $reingreso->setPacienteId($paciente_id);
+            $res = $reingreso->reingreso();
+
             require_once './admin/layout/header.php';
             require_once './admin/layout/sidebar.php';
             require_once './views/paciente/expediente.php';
         }
+    }
+
+    public function generatePdf()
+    {
+        if (isset($_GET)) {
+            $id = $_GET['id'];
+            $ingreso = new PacienteIngreso();
+            $ingreso->setPacienteId($id);
+            $data = $ingreso->reingreso();
+            $data = $data->fetch_object();
+            $arr = [
+                'idIngresoPaciente' => $data->id_ingreso_paciente,
+                'idPaciente' => $data->paciente_id
+            ];
+        }
+        echo json_encode($arr);
     }
 
     public function reingreso()
@@ -49,6 +63,11 @@ class pacienteController
     {
         $paciente = new Paciente();
         $data = $paciente->getAll();
+
+        //registros con reingreso
+        $reingresos = new PacienteIngreso();
+        $rein = $reingresos->reingreso();
+
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/paciente/registros.php';
@@ -76,6 +95,7 @@ class pacienteController
             $hijos = isset($_POST['hijos']) ? filter_var($_POST['hijos'], FILTER_SANITIZE_STRING) : false;
             $edades = isset($_POST['edades']) ? filter_var($_POST['edades'], FILTER_SANITIZE_STRING) : false;
             $ocupacion = isset($_POST['ocupacion']) ? filter_var($_POST['ocupacion'], FILTER_SANITIZE_STRING) : false;
+            $escolaridad = isset($_POST['escolaridad']) ? filter_var($_POST['escolaridad'], FILTER_SANITIZE_STRING) : false;
             $vive_con = isset($_POST['vive_con']) ? filter_var($_POST['vive_con'], FILTER_SANITIZE_STRING) : false;
             $calle = isset($_POST['calle']) ? filter_var($_POST['calle'], FILTER_SANITIZE_STRING) : false;
             $ext = isset($_POST['ext']) ? filter_var($_POST['ext'], FILTER_SANITIZE_STRING) : false;
@@ -119,6 +139,7 @@ class pacienteController
             $pacienteIngreso->setHijosIp($hijos);
             $pacienteIngreso->setEdadesHijosIp($edades);
             $pacienteIngreso->setOcupacionIp($ocupacion);
+            $pacienteIngreso->setEscolaridadIp($escolaridad);
             $pacienteIngreso->setViveConIp($vive_con);
             $pacienteIngreso->setCalleViveIp($calle);
             $pacienteIngreso->setExtViveIp($ext);
@@ -171,7 +192,6 @@ class pacienteController
                         $contacto->save();
                     }
                 }
-
             } else if ($_POST['action'] == 'reingreso') {
                 $pacienteIngreso->setId($usuaio_id);
                 $pacienteIngreso->setPacienteId($paciente_id);
@@ -181,7 +201,6 @@ class pacienteController
                 $paciente->setId($id);
                 $save = $paciente->edit();
             }
-
         }
         echo json_encode($save);
     }

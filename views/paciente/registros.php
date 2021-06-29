@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h3 class="card-title">Administración de usuarios</h3>
+            <h3 class="card-title">Administración de pacientes</h3>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -24,33 +24,31 @@
         -->
         <table id="tblRegistros" class="table table-bordered table-striped">
             <thead>
-            <tr>
-                <th> No.Paciente</th>
-                <th> Nombre</th>
-                <th> Apellido Paterno</th>
-                <th> Apellido Materno</th>
-                <th> Opciones</th>
-            </tr>
+                <tr>
+                    <th> No.Paciente</th>
+                    <th> Nombre</th>
+                    <th> Apellido Paterno</th>
+                    <th> Apellido Materno</th>
+                    <th> Opciones</th>
+                </tr>
             </thead>
             <tbody>
-            <?php while ($pac = $data->fetch_object()) : ?>
-                <tr>
-                    <td class="col-1"><?= $pac->id_paciente ?></td>
-                    <td class="col-3"><?= $pac->nombre_pa ?></td>
-                    <td class="col-3"><?= $pac->apellido_paterno_pa ?></td>
-                    <td class="col-3"><?= $pac->apellido_materno_pa ?></td>
-                    <td class="col-1">
-                        <a type="button" class="btn bg-gradient-white btn-sm"
-                           href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
-                            <i class="fas fa-folder"></i>
-                        </a>
-                        <a type="button" class="btn bg-gradient-white btn-sm"
-                           href="<?= base_url ?>paciente/reingreso&id=<?= $pac->id_paciente ?>">
-                            <i class="fas fa-redo-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
+                <?php while ($pac = $data->fetch_object()) : ?>
+                    <tr>
+                        <td class="col-1"><?= $pac->id_paciente ?></td>
+                        <td class="col-3"><?= $pac->nombre_pa ?></td>
+                        <td class="col-3"><?= $pac->apellido_paterno_pa ?></td>
+                        <td class="col-3"><?= $pac->apellido_materno_pa ?></td>
+                        <td class="col-1">
+                            <a type="button" class="btn bg-gradient-white btn-sm" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
+                                <i class="fas fa-folder"></i>
+                            </a>
+                            <a type="button" class="btn bg-gradient-white btn-sm" href="<?= base_url ?>paciente/reingreso&id=<?= $pac->id_paciente ?>">
+                                <i class="fas fa-redo-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>

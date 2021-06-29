@@ -12,8 +12,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a
-                                href="<?= base_url ?>paciente/expediente&id=<?= $id ?>">Expediente</a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url ?>paciente/expediente&id=<?= $id ?>">Expediente</a></li>
                     <li class="breadcrumb-item active">Disposición al cambio</li>
                 </ol>
             </div>
@@ -21,7 +20,6 @@ if (isset($_GET['id'])) {
     </div><!-- /.container-fluid -->
 </section>
 
-<!-- Main content -->
 <section class="content">
     <div class="row">
         <div class="col-md-6">
@@ -46,12 +44,8 @@ if (isset($_GET['id'])) {
                         <div class="form-group">
                             <label>¿Cuándo ocurrió?</label>
                             <div class="input-group date " data-target-input="nearest">
-                                <input type="date" id="fecha_nac" class="form-control form-control-sm"
-                                       data-target="#reservationdate"
-                                       value="value=" <?= isset($data) && is_object($data) ? $data->fecha_nac_pac : '' ?>
-                                "" />
-                                <div class="input-group-append" data-target="#reservationdate"
-                                     data-toggle="datetimepicker">
+                                <input type="date" id="fecha_nac" class="form-control form-control-sm" data-target="#reservationdate" value="value=" <?= isset($data) && is_object($data) ? $data->fecha_nac_pac : '' ?> />
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
@@ -70,10 +64,7 @@ if (isset($_GET['id'])) {
                     <div class="form-group">
                         <label>¿Cuándo ocurrió?</label>
                         <div class="input-group date " data-target-input="nearest">
-                            <input type="date" id="fecha_nac" class="form-control form-control-sm"
-                                   data-target="#reservationdate"
-                                   value="value=" <?= isset($data) && is_object($data) ? $data->fecha_nac_pac : '' ?>""
-                            />
+                            <input type="date" id="fecha_nac" class="form-control form-control-sm" data-target="#reservationdate" value="value=" <?= isset($data) && is_object($data) ? $data->fecha_nac_pac : '' ?>"" />
                             <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>

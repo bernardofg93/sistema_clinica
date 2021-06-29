@@ -5,12 +5,12 @@
             <div class="inner">
                 <h3>150</h3>
 
-                <p>Sesiones</p>
+                <p>Ventas</p>
             </div>
             <div class="icon">
                 <i class="fas fa-user-friends"></i>
             </div>
-            <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?=base_url?>ventas/index" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->

@@ -1,2 +1,86 @@
         $query = "SELECT * FROM asignacion_usuario_paciente WHERE usuario_id = '{$this->getUsuarioId()}' AND paciente_id = '{$this->getPacienteId()}'";
         $res = $this->db->query($query);
+
+
+
+
+
+
+                                        <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-6">
+                                                <!-- small box -->
+                                                <div class="small-box bg-info">
+                                                    <div class="inner">
+                                                        <?php if (isset($data) && is_object($data)) : ?>
+                                                            <i class="fas fa-check"></i>
+                                                        <?php else : ?>
+                                                            <i class="fas fa-plus"></i>
+                                                        <?php endif; ?>
+                                                        <p>Consumo Sustancias</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="fas fa-user-alt"></i>
+                                                    </div>
+                                                    <a href="<?= base_url ?>consumoSustancias/registro&id=<?= $id ?>" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- ./col -->
+                                            <div class="col-lg-3 col-6">
+                                                <!-- small box -->
+                                                <div class="small-box bg-success">
+                                                    <div class="inner">
+                                                        <?php if (isset($info) && is_object($info)) : ?>
+                                                            <i class="fas fa-check"></i>
+                                                        <?php else : ?>
+                                                            <i class="fas fa-plus"></i>
+                                                        <?php endif; ?>
+                                                        <p>Disposición al Cambio</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-stats-bars"></i>
+                                                    </div>
+                                                    <a href="<?= base_url ?>dispocisionCambio/registro&id=<?= $id ?>" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- ./col -->
+                                            <div class="col-lg-3 col-6">
+                                                <!-- small box -->
+                                                <div class="small-box bg-warning">
+                                                    <div class="inner">
+                                                        <?php if (isset($dom) && is_object($dom)) : ?>
+                                                            <i class="fas fa-check"></i>
+                                                        <?php else : ?>
+                                                            <i class="fas fa-plus"></i>
+                                                        <?php endif; ?>
+                                                        <p>SITUACIÓN SOCIAL FAMILIAR</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-person-add"></i>
+                                                    </div>
+                                                    <a href="<?= base_url ?>situacionSocialFamiliar/registro&id=<?= $id ?>" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- ./col -->
+                                            <div class="col-lg-3 col-6">
+                                                <!-- small box -->
+                                                <div class="small-box bg-danger">
+                                                    <div class="inner">
+                                                        <?php if (isset($sust) && is_object($sust)) : ?>
+                                                            <i class="fas fa-check"></i>
+                                                        <?php else : ?>
+                                                            <i class="fas fa-plus"></i>
+                                                        <?php endif; ?>
+
+                                                        <p>sustancias</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-pie-graph"></i>
+                                                    </div>
+                                                    <a href="<?= base_url ?>consumo/paciente&id=<?= $id ?>" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>

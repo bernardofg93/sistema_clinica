@@ -5,10 +5,7 @@ const formPaciente = document.querySelector('#rgPaciente'),
     selectRecomendacion = document.querySelector('#se_entrero'),
     selectTratamiento = document.querySelector('#tratamiento');
 
-const mgError = 'Favor de llenar los campos requeridos',
-    resError = 'error',
-    mgTrue = 'Generado correctamente',
-    resTrue = 'success';
+let data = JSON.parse(localStorage.getItem("db"));
 
 eventListener();
 
@@ -106,6 +103,7 @@ function readForm(e) {
         hijos = document.querySelector('#hijos').value,
         edades = document.querySelector('#edades').value,
         ocupacion = document.querySelector('#ocupacion').value,
+        escolaridad = document.querySelector('#escolaridad').value,
         vive_con = document.querySelector('#vive_con').value,
         calle = document.querySelector('#calle').value,
         ext = document.querySelector('#ext').value,
@@ -135,7 +133,7 @@ function readForm(e) {
 
     let dataCp = [];
 
-    document.querySelectorAll('.table-bordered tbody tr').forEach(function (e){
+    document.querySelectorAll('.table-bordered tbody tr').forEach(function (e) {
         let dataTable = {
             nombreCp: e.querySelector('.nombre-cp').innerText,
             telCp: e.querySelector('.tel-cp').innerText,
@@ -161,6 +159,7 @@ function readForm(e) {
     data.append("hijos", hijos);
     data.append("edades", edades);
     data.append("ocupacion", ocupacion);
+    data.append("escolaridad", escolaridad);
     data.append("vive_con", vive_con);
     data.append("calle", calle);
     data.append("ext", ext);
@@ -191,11 +190,9 @@ function readForm(e) {
     data.append("deposito_letra", deposito_letra);
     data.append("forma_pago", forma_pago);
 
-    console.log(...data);
-
     if (nombre === '' || apellido_p === '' || apellido_m === '' || fecha_nac === '' || lugar_nac === '') {
 
-        sweetAlert(mgError, resError);
+        sweetAlert('Favor de llenar los campos requeridos', 'error');
 
     } else if (action === 'create') {
         sendDb(data);
@@ -215,7 +212,6 @@ function readListUsers(e) {
     //eliminar usuario
     if (e.target.classList.contains('delete_us')) {
         id = e.target.getAttribute('data-id');
-        console.log(e.target.parentElement.parentElement);
 
         const respuesta = confirm('¿ Estas seguro de eliminar al usuario ?');
 
@@ -236,7 +232,7 @@ function readListUsers(e) {
     }
 }
 
-// se crea el usuario
+// se crea el paciente
 function sendDb(data) {
     const xhr = new XMLHttpRequest();
 
@@ -248,7 +244,8 @@ function sendDb(data) {
             if (response.res === 'true') {
                 sweetAlert('Generado Correctamente', 'success');
                 formPaciente.reset();
-
+                localStorage.clear();
+                listData();
                 //Generar Boton PDF
                 const $button = document.createElement('a');
                 $button.setAttribute('class', 'btn btn-danger btn-flat');

@@ -66,7 +66,6 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
     .txt-none {
         color: #fff;
     }
-
 </style>
 
 <!-- PAGINA 1 !-->
@@ -186,43 +185,43 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
 
     <table>
         <thead>
-        <tr>
-            <th>
-                PACIENTE
-                <p>
-                    <?= $data->nombre_pa ?> <?= $data->apellido_paterno_pa ?> <?= $data->apellido_materno_pa ?>
-                </p>
-            </th>
-            <th>
-                FAMILIAR DEL PACIENTE
-            </th>
-            <th>
-                APODERADO O TUTOR
-            </th>
-            <th>
-                CLINICA NUEVO SER A.C.
-            </th>
-        </tr>
+            <tr>
+                <th>
+                    PACIENTE
+                    <p>
+                        <?= $data->nombre_pa ?> <?= $data->apellido_paterno_pa ?> <?= $data->apellido_materno_pa ?>
+                    </p>
+                </th>
+                <th>
+                    FAMILIAR DEL PACIENTE
+                </th>
+                <th>
+                    APODERADO O TUTOR
+                </th>
+                <th>
+                    CLINICA NUEVO SER A.C.
+                </th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <p class="firma-line">_______________________</p>
-                <p class="firma-d">Firma</p>
-            </td>
-            <td>
-                <p class="firma-line">_______________________</p>
-                <p class="firma-d">Firma</p>
-            </td>
-            <td>
-                <p class="firma-line">_______________________</p>
-                <p class="firma-d">Nombre y Firma</p>
-            </td>
-            <td>
-                <p class="firma-line">_______________________</p>
-                <p class="firma-d">Nombre y Firma</p>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <p class="firma-line">_______________________</p>
+                    <p class="firma-d">Firma</p>
+                </td>
+                <td>
+                    <p class="firma-line">_______________________</p>
+                    <p class="firma-d">Firma</p>
+                </td>
+                <td>
+                    <p class="firma-line">_______________________</p>
+                    <p class="firma-d">Nombre y Firma</p>
+                </td>
+                <td>
+                    <p class="firma-line">_______________________</p>
+                    <p class="firma-d">Nombre y Firma</p>
+                </td>
+            </tr>
         </tbody>
     </table>
 
@@ -267,36 +266,36 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
 
     <table>
         <thead>
-        <tr>
-            <th>
-                Responsable Legal
-            </th>
-            <th>
-                Testigo
-            </th>
-            <th>
-                Clinica Nuevo SER A.C.
-                <p>
-                    Director General
-                </p>
-            </th>
-        </tr>
+            <tr>
+                <th>
+                    Responsable Legal
+                </th>
+                <th>
+                    Testigo
+                </th>
+                <th>
+                    Clinica Nuevo SER A.C.
+                    <p>
+                        Director General
+                    </p>
+                </th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <p class="firma-line">______________________________</p>
-                <p class="firma-d">Firma</p>
-            </td>
-            <td>
-                <p class="firma-line">______________________________</p>
-                <p class="firma-d">Nombre y Firma</p>
-            </td>
-            <td>
-                <p class="firma-line">______________________________</p>
-                <p class="firma-d">Firma</p>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <p class="firma-line">______________________________</p>
+                    <p class="firma-d">Firma</p>
+                </td>
+                <td>
+                    <p class="firma-line">______________________________</p>
+                    <p class="firma-d">Nombre y Firma</p>
+                </td>
+                <td>
+                    <p class="firma-line">______________________________</p>
+                    <p class="firma-d">Firma</p>
+                </td>
+            </tr>
         </tbody>
     </table>
 
@@ -339,71 +338,71 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
     </div>
     <table>
         <thead>
-        <tr>
-            <th>
-                Nombre del responsable del paciente:
-            </th>
-            <th>
-                <?= $data->resp_legal ?>
-            </th>
-        </tr>
+            <tr>
+                <th>
+                    Nombre del responsable del paciente:
+                </th>
+                <th>
+                    <?= $data->resp_legal ?>
+                </th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <p class="">Parentesco:</p>
-                <p class="">Domicilio:</p>
-                <p class="">Teléfonos:</p>
-            </td>
-            <td>
-                <p class="">______________________________</p>
-                <p class="">______________________________</p>
-                <p class="">______________________________</p>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <p class="">Parentesco:</p>
+                    <p class="">Domicilio:</p>
+                    <p class="">Teléfonos:</p>
+                </td>
+                <td>
+                    <p class="">______________________________</p>
+                    <p class="">______________________________</p>
+                    <p class="">______________________________</p>
+                </td>
+            </tr>
         </tbody>
     </table>
     <div></div>
     <p>Tijuana, B.C. a <?php setlocale(LC_ALL, "es_ES");
-        echo strftime("%A %d de %B del %Y"); ?> </p>
+                        echo strftime("%A %d de %B del %Y"); ?> </p>
     <div></div>
     <div></div>
     <table>
         <thead>
-        <tr>
-            <th class="txt-th">
-                RESPONSABLE LEGAL DEL PACIENTE
-                <p><?= $data->resp_legal ?></p>
-            </th>
-            <th class="txt-th">
-                MEDICO #1 QUE INDICA EL TRATAMIENTO
-            </th>
-            <th class="txt-th">
-                MEDICO #2 QUE INDICA EL TRATAMIENTO
-            </th>
-        </tr>
+            <tr>
+                <th class="txt-th">
+                    RESPONSABLE LEGAL DEL PACIENTE
+                    <p><?= $data->resp_legal ?></p>
+                </th>
+                <th class="txt-th">
+                    MEDICO #1 QUE INDICA EL TRATAMIENTO
+                </th>
+                <th class="txt-th">
+                    MEDICO #2 QUE INDICA EL TRATAMIENTO
+                </th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <p class="firma-line txt-none">________________________________</p>
-                <p class="firma-d txt-none">Nombre y Firma</p>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Firma</p>
-            </td>
-            <td>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Nombre y Firma</p>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Cédula Profesional</p>
-            </td>
-            <td>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Nombre y Firma</p>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Cédula Profesional</p>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <p class="firma-line txt-none">________________________________</p>
+                    <p class="firma-d txt-none">Nombre y Firma</p>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Firma</p>
+                </td>
+                <td>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Nombre y Firma</p>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Cédula Profesional</p>
+                </td>
+                <td>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Nombre y Firma</p>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Cédula Profesional</p>
+                </td>
+            </tr>
         </tbody>
     </table>
 
@@ -497,46 +496,46 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
     <div></div>
     <table>
         <thead>
-        <tr>
-            <th class="txt-th">
-                EL PACIENTE
-                <p><?= $data->nombre_pa ?> <?= $data->apellido_paterno_pa ?> <?= $data->apellido_materno_pa ?></p>
-            </th>
-            <th class="txt-th">
-                RESPONSABLE LEGAL DEL PACIENTE
-                <?= $data->resp_legal ?>
-            </th>
-            <th class="txt-th">
-                TESTIGO
-            </th>
-        </tr>
+            <tr>
+                <th class="txt-th">
+                    EL PACIENTE
+                    <p><?= $data->nombre_pa ?> <?= $data->apellido_paterno_pa ?> <?= $data->apellido_materno_pa ?></p>
+                </th>
+                <th class="txt-th">
+                    RESPONSABLE LEGAL DEL PACIENTE
+                    <?= $data->resp_legal ?>
+                </th>
+                <th class="txt-th">
+                    TESTIGO
+                </th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Firma</p>
-            </td>
-            <td>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Firma</p>
-            </td>
-            <td>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Nombre y Firma</p>
-            </td>
-        </tr>
-        <tr style="margin-top: 25px;">
-            <td></td>
-            <td>
-                <p class="txt-th" style="text-align: center">EL DIRECTOR DE</p>
-                <p class="txt-th" style="text-align: center; margin-top: -15px">CLINICA NUEVO SER A.C.</p>
-                <p class="firma-line">________________________________</p>
-                <p class="firma-d">Nombre y Firma</p>
-            </td>
-            <td>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Firma</p>
+                </td>
+                <td>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Firma</p>
+                </td>
+                <td>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Nombre y Firma</p>
+                </td>
+            </tr>
+            <tr style="margin-top: 25px;">
+                <td></td>
+                <td>
+                    <p class="txt-th" style="text-align: center">EL DIRECTOR DE</p>
+                    <p class="txt-th" style="text-align: center; margin-top: -15px">CLINICA NUEVO SER A.C.</p>
+                    <p class="firma-line">________________________________</p>
+                    <p class="firma-d">Nombre y Firma</p>
+                </td>
+                <td>
+                </td>
+            </tr>
         </tbody>
     </table>
 </page>
@@ -551,98 +550,75 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
 
     <table>
         <thead>
-        <tr>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <p>Fecha y hora de ingreso:</p>
-            </td>
-            <td>
-                <p style="margin-left: 5px; font-weight: bold;"><?= $data->fecha_ingreso ?></p>
-            </td>
-            <td>
-                <p style="font-weight: bold;"><?= $data->hora_ingreso ?></p>
-            </td>
-            <td>
-                <p style="margin-left: 300px; float: right; font-weight: bold;"> Clave: C1098</p>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <h3 style="text-align: center"><span
-                style="font-weight: normal;">Nombre:</span> <?= $data->nombre_pa ?>
-                <?= $data->apellido_paterno_pa ?> <?= $data->apellido_materno_pa ?>
-    </h3>
-    <table>
-        <thead>
-        <tr>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Edad:</td>
-            <td><?= $data->edad_pa ?></td>
-            <td>Estado Civil:</td>
-            <td><?= $data->estado_civil_ip ?></td>
-            <td>Hijos:</td>
-            <td><?= $data->hijos_ip ?></td>
-            <td>Edades:</td>
-            <td><?= $data->edades_hijos_ip ?></td>
-        </tr>
-        <tr>
-            <td>Fecha y lugar de nacimiento:</td>
-            <td><?= $data->fecha_nacimiento_pa ?></td>
-            <td><?= $data->lugar_nacimiento_pa ?></td>
-        </tr>
-        <tr>
-            <td>Domicilio:</td>
-            <td><?= $data->calle_vive_ip ?></td>
-            <td>,<?= $data->codigo_postal_ip ?></td>
-            <td>,<?= $data->colonia_ip ?></td>
-            <td>,<?= $data->ciudad_vive_ip ?></td>
-            <td>,<?= $data->estado_vive_ip ?></td>
-            <td>,<?= $data->pais_vive_ip ?></td>
-        </tr>
-        <tr>
-            <td>Escolaridad y ocupación:</td>
-            <td><?= $data->pais_vive_ip ?></td>
-        </tr>
-        <tr>
-            <td>Drogas que usa:</td>
-            <td><?= $data->pais_vive_ip ?></td>
-        </tr>
-        <tr>
-            <td>Acompañado por:</td>
-            <td><?= $data->pais_vive_ip ?></td>
-        </tr>
-        <tr>
-            <td>Estado y actitud al ingresar:</td>
-            <td><?= $data->estado_actitud ?></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Parentesco</th>
-            <th>Telefono</th>
-            <th>Correo</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php while($cont = $contact->fetch_object()) : ?>
             <tr>
-                <td><?=$cont->nombre_cp?></td>
-                <td><?=$cont->parentesco_cp?></td>
-                <td><?=$cont->telefono_cp?></td>
-                <td><?=$cont->correo_cp?></td>
             </tr>
-        <?php endwhile; ?>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <p>Fecha y hora de ingreso:</p>
+                </td>
+                <td>
+                    <p style="margin-left: 5px; font-weight: bold;"><?= $data->fecha_ingreso ?></p>
+                </td>
+                <td>
+                    <p style="font-weight: bold;"><?= $data->hora_ingreso ?></p>
+                </td>
+                <td>
+                    <p style="margin-left: 300px; float: right; font-weight: bold;"> Clave: C1098</p>
+                </td>
+            </tr>
         </tbody>
     </table>
+    <h3 style="text-align: center"><span style="font-weight: normal;">Nombre:</span> <?= $data->nombre_pa ?>
+        <?= $data->apellido_paterno_pa ?> <?= $data->apellido_materno_pa ?>
+    </h3>
+
+    <ul style="list-style: none;">
+        <li>
+            Edad:
+            <?= $data->edad_pa ?>
+            Estado Civil
+            <?= $data->estado_civil_ip ?>
+            Hijos:
+            <?= $data->hijos_ip ?>
+            Edades:
+            <?= $data->edades_hijos_ip ?>
+        </li>
+    </ul>
+    <ul style="list-style: none;">
+        <li>
+            Fecha y lugar de nacimiento:
+            <?= $data->fecha_nacimiento_pa ?>
+            <?= $data->lugar_nacimiento_pa ?>
+        </li>
+    </ul>
+    <ul style="list-style: none;">
+        <li>
+            Domicilio:
+            <?= $data->calle_vive_ip ?>
+            <?= $data->codigo_postal_ip ?>
+            <?= $data->colonia_ip ?>
+            <?= $data->ciudad_vive_ip ?>
+            <?= $data->estado_vive_ip ?>
+            <?= $data->pais_vive_ip ?>
+        </li>
+    </ul>
+    <ul style="list-style: none;">
+        <li>
+            Escolaridad y ocupación:
+            <?= $data->pais_vive_ip ?>
+        </li>
+    </ul>
+    <ul style="list-style: none;">
+        <li>
+            Drogas que usa:
+            <?= $data->pais_vive_ip ?>
+            Acompañado por:
+            <?= $data->pais_vive_ip ?>
+
+            Estado y actitud al ingresar:
+            <?= $data->estado_actitud ?>
+        </li>
+    </ul>
 </page>

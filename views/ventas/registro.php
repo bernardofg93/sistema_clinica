@@ -1,10 +1,5 @@
-<?php $action = Utils::validate(isset($data) && is_object($data) ? $data : '') ?>
-
+<?php $action = Utils::editData(isset($edit) && $edit ? $edit : '') ?>
 <?php isset($data) && is_object($data) ? $id = $_GET['id'] : '' ?>
-
-<?php if (isset($reingreso) && $reingreso) : ?>
-    <?php $action = 'reingreso'; ?>
-<?php endif; ?>
 
 <!-- Formulario -->
 <div class="container-fluid">
@@ -46,13 +41,15 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label for="nombre">Fecha de llamada:</label>
-                                <input type="text" class="form-control form-control-sm" id="fechaLlamada" value="<?= isset($ident) && is_object($ident) ? $ident->nombre_pa : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="fechaLlamada"
+                                       value="<?= isset($data) && is_object($data) ? $data->fecha_llamada : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="apellido_p">Hora de llamada:</label>
-                                <input type="text" class="form-control form-control-sm" id="horaLlamada" value="<?= isset($ident) && is_object($ident) ? $ident->apellido_paterno_pa : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="horaLlamada"
+                                       value="<?= isset($data) && is_object($data) ? $data->hora_llamada : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -61,19 +58,28 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label for="apellido_m">Lada + Telefono:</label>
-                                <input type="text" class="form-control form-control-sm" id="ladaTel" value="<?= isset($ident) && is_object($ident) ? $ident->apellido_materno_pa : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="ladaTel"
+                                       value="<?= isset($data) && is_object($data) ? $data->lada_tel : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="nombre">Razon de llamada:</label>
                                 <select class="form-control form-control-sm" id="razon">
-                                    <option value="<?= isset($edit) && is_object($edit) ? $edit->adiccion_ip : '' ?>" disabled selected><?= isset($edit) && is_object($edit) ? $edit->adiccion_ip : 'Selecciona'; ?></option>
+                                    <option value="<?= isset($data) && is_object($data) ? $data->razon_llamada : '' ?>"
+                                            disabled
+                                            selected><?= isset($edit) && is_object($edit) ? $edit->razon_llamada : 'Selecciona'; ?></option>
                                     <option value="Prospecto">Prospecto</option>
-                                    <option value="Cobrar algún servicio o producto">Cobrar algún servicio o producto</option>
-                                    <option value="Busca Empleo o Recursos Humanos">Busca Empleo o Recursos Humanos</option>
-                                    <option value="Quiere hablar con paciente activo">Quiere hablar con paciente activo</option>
-                                    <option value="Busca persona perdida o saber si aqui esta">Busca persona perdida o saber si aqui esta</option>
+                                    <option value="Cobrar algún servicio o producto">Cobrar algún servicio o producto
+                                    </option>
+                                    <option value="Busca Empleo o Recursos Humanos">Busca Empleo o Recursos Humanos
+                                    </option>
+                                    <option value="Quiere hablar con paciente activo">Quiere hablar con paciente
+                                        activo
+                                    </option>
+                                    <option value="Busca persona perdida o saber si aqui esta">Busca persona perdida o
+                                        saber si aqui esta
+                                    </option>
                                     <option value="Proveedor">Proveedor</option>
                                     <option value="Otro">Otro</option>
                                     <option value="Busca Empleado">Busca Empleado</option>
@@ -86,38 +92,45 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="lugar_nac">Nombre contacto:</label>
-                                <input type="text" class="form-control form-control-sm" id="nombre" value="<?= isset($ident) && is_object($ident) ? $ident->lugar_nacimiento_pa : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="nombre"
+                                       value="<?= isset($data) && is_object($data) ? $data->nombre_cont : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Correo de contacto:</label>
-                                <input type="text" class="form-control form-control-sm" id="correo" value="<?= isset($edit) && is_object($edit) ? $edit->ocupacion_ip : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="correo"
+                                       value="<?= isset($data) && is_object($data) ? $data->correo_cont : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Parentesco:</label>
-                                <input type="text" class="form-control form-control-sm" id="parentesco" value="<?= isset($edit) && is_object($edit) ? $edit->ocupacion_ip : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="parentesco"
+                                       value="<?= isset($data) && is_object($data) ? $data->parentesco_cont : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Tipo de consumo:</label>
-                                <input type="text" class="form-control form-control-sm" id="consumo" value="<?= isset($edit) && is_object($edit) ? $edit->ocupacion_ip : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="consumo"
+                                       value="<?= isset($data) && is_object($data) ? $data->tipo_consumo : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Edad:</label>
-                                <input type="text" class="form-control form-control-sm" id="edad" value="<?= isset($edit) && is_object($edit) ? $edit->ocupacion_ip : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="edad"
+                                       value="<?= isset($data) && is_object($data) ? $data->edad_cont : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="nombre">Acepta:</label>
                                 <select class="form-control form-control-sm" id="acepta">
-                                    <option value="<?= isset($edit) && is_object($edit) ? $edit->adiccion_ip : '' ?>" disabled selected><?= isset($edit) && is_object($edit) ? $edit->adiccion_ip : 'Selecciona'; ?></option>
+                                    <option value="<?= isset($data) && is_object($data) ? $data->aceptacion : '' ?>"
+                                            disabled
+                                            selected><?= isset($data) && is_object($data) ? $data->aceptacion : 'Selecciona'; ?></option>
                                     <option value="si">Si</option>
                                     <option value="no">No</option>
                                 </select>
@@ -137,29 +150,38 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="resp">Detalles adicionales:</label>
-                            <textarea class="form-control form-control-sm" name="" id="detalles" cols="30" rows="5"></textarea>
+                            <textarea class="form-control form-control-sm" id="detalles" cols="30" rows="5">
+                                <?= isset($data) && is_object($data) ? $data->detalles_ad : '' ?>
+                            </textarea>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="resp">Nota:</label>
-                            <textarea class="form-control form-control-sm" name="" id="nota" cols="30" rows="5"></textarea>
+                    <?php if (!isset($edit)) : ?>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="resp">Nota:</label>
+                                <textarea class="form-control form-control-sm" name="" id="nota" cols="30" rows="5">
+                            </textarea>
+                            </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="actitud">Por que medio se envio:</label>
-                            <input type="text" class="form-control form-control-sm" id="medioEnvio" value="<?= isset($edit) && is_object($edit) ? $edit->estado_actitud : '' ?>" required>
+                            <input type="text" class="form-control form-control-sm" id="medioEnvio"
+                                   value="<?= isset($data) && is_object($data) ? $data->medio_de_envio : '' ?>"
+                                   required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nombre">Medio por el cual se entero:</label>
                             <select class="form-control form-control-sm" id="medioEntero">
-                                <option value="<?= isset($edit) && is_object($edit) ? $edit->adiccion_ip : '' ?>" disabled selected><?= isset($edit) && is_object($edit) ? $edit->adiccion_ip : 'Selecciona'; ?></option>
+                                <option value="<?= isset($data) && is_object($data) ? $data->medio_entero : '' ?>"
+                                        disabled
+                                        selected><?= isset($data) && is_object($data) ? $data->medio_entero : 'Selecciona'; ?></option>
                                 <option value="Prospecto">Prospecto</option>
                                 <option value="Internet">Internet</option>
                                 <option value="Facebook">Facebook</option>
@@ -174,14 +196,18 @@
                         <div class="form-group">
                             <label>Fecha de seguimiento:</label>
                             <div class="input-group date " data-target-input="nearest">
-                                <input type="date" id="fechaSeg" class="form-control form-control-sm" data-target="#reservationdate" value="<?= isset($ident) && is_object($ident) ? $ident->fecha_nacimiento_pa : '' ?>">
-                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                <input type="date" id="fechaSeg" class="form-control form-control-sm"
+                                       data-target="#reservationdate"
+                                       value="<?= isset($data) && is_object($data) ? $data->fecha_seguimiento : '' ?>">
+                                <div class="input-group-append" data-target="#reservationdate"
+                                     data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" id="action" value="<?=$action?>">
+                    <input type="hidden" id="action" value="<?= $action ?>">
+                    <input type="hidden" id="ventaId" value="<?= $data->id_venta ?>">
                 </div>
             </div>
         </div>

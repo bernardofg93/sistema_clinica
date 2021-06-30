@@ -10,4 +10,12 @@ class Utils
         }
         return $action;
     }
+
+    public static function editData($edit){
+        $action = 'create';
+        if ($edit) {
+            $action = 'edit';
+        }
+        return $action;
+    }
 }

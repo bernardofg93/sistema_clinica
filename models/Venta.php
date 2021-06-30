@@ -164,7 +164,15 @@ class venta
         $this->medio_entero = $medio_entero;
     }
 
-    public function getAll() {
+    public function getOne()
+    {
+        $sql = "SELECT * FROM venta WHERE id_venta = {$this->getId()}";
+        $query = $this->db->query($sql);
+        return $query->fetch_object();
+    }
+
+    public function getAll()
+    {
         $sql = "SELECT * FROM venta ORDER BY id_venta DESC";
         return $this->db->query($sql);
     }
@@ -173,7 +181,7 @@ class venta
     {
         $usuarioId = $this->id;
         $ladaTel = $this->lada_tel;
-        $razonLlamada =  $this->razonLlamada;
+        $razonLlamada = $this->razon_llamada;
         $nombre = $this->nombre_cont;
         $correo = $this->correo_cont;
         $parentesco = $this->parentesco_cont;
@@ -192,12 +200,45 @@ class venta
                                      '$acep', '$detalles', '$fechaSeg','$medioEnv', '$medioEnt'
                                      )";
         $save = $this->db->query($sql);
-        
+
         if ($save) {
-            return [
-                'res' => 'true',
-                'ventaId' => $ventaId = $this->db->insert_id
-            ];
+            return ['res' => 'true', 'ventaId' => $ventaId = $this->db->insert_id];
+        } else {
+            return ['res' => 'false'];
+        }
+    }
+
+
+    public function edit()
+    {
+        $ladaTel = $this->lada_tel;
+        $razon = $this->razon_llamada;
+        $nombre = $this->nombre_cont;
+        $correo = $this->correo_cont;
+        $parentesco = $this->parentesco_cont;
+        $consumo = $this->tipo_consumo;
+        $edad = $this->edad_cont;
+        $acep = $this->aceptacion;
+        $detalles = $this->detalles_ad;
+        $fechaSeg = $this->fecha_seguimiento;
+        $medioEnv = $this->medio_de_envio;
+        $medioEnt = $this->medio_entero;
+
+        $sql = "UPDATE 
+                venta 
+                SET 
+                lada_tel = '$ladaTel', razon_llamada = '$razon',
+                nombre_cont = '$nombre', correo_cont = '$correo',
+                correo_cont = '$correo', parentesco_cont = '$parentesco',
+                tipo_consumo = '$consumo', edad_cont = '$edad', aceptacion = '$acep',
+                detalles_ad = '$detalles', fecha_seguimiento = '$fechaSeg',
+                medio_de_envio = '$medioEnv', medio_entero = '$medioEnt'
+                WHERE id_venta = {$this->getId()}";
+
+        $query = $this->db->query($sql);
+
+        if ($query) {
+            return ['res' => 'true'];
         } else {
             return ['res' => 'false'];
         }

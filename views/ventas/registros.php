@@ -29,6 +29,7 @@
                     <th style="font-size: 15px;"> Fecha seguimiento</th>
                     <th style="font-size: 15px;"> Nombre</th>
                     <th style="font-size: 15px;"> Ascesor</th>
+                    <th style="font-size: 15px;"> Modificar</th>
                     <th style="font-size: 15px;"> Nota Seguimiento</th>
                     <th style="font-size: 15px;"> Finalizar Seguimiento</th>
                     <th style="font-size: 15px;"> Ingreso paciente</th>
@@ -42,17 +43,22 @@
                         <td><?= $data->nombre_cont ?></td>
                         <td><?= $data->usuario_id ?></td>
                         <td style="width:5%; text-align: center">
-                            <a type="button" class="btn bg-gradient-white btn-lg" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
+                            <a type="button" class="btn bg-gradient-white btn-md" href="<?= base_url ?>venta/editar&id=<?= $data->id_venta ?>">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td style="width:5%; text-align: center">
+                            <a type="button" class="btn bg-gradient-white btn-md" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
                                 <i class="fas fa-file-alt"></i>
                             </a>
                         </td>
                         <td style="width:5%; text-align: center">
-                            <a type="button" class="btn bg-gradient-white btn-lg" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
+                            <a type="button" class="btn bg-gradient-white btn-md" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
                                 <i class="fas fa-hourglass-end" style="color: #C70039;"></i>
                             </a>
                         </td>
                         <td style="width:5%; text-align: center">
-                            <a type="button" class="btn bg-gradient-white btn-lg" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
+                            <a type="button" class="btn bg-gradient-white btn-md" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
                                 <i class="fas fa-user-plus" style="color: #2471a3;"></i>
                             </a>
                         </td>

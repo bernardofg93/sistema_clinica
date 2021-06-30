@@ -26,12 +26,8 @@
   <strong>Copyright &copy; 2021-2022 <a href="#">CLINICA NUEVO SER</a>.</strong> All rights reserved.
 </footer>
 </div>
-<!-- ./wrapper -->
-<script src="<?= base_url ?>assets/js/alerts.js"></script>
-<!-- REQUIRED SCRIPTS -->
 <!-- Alert -->
 <script src="<?= base_url ?>assets/js/alerts.js"></script>
-
 <!-- Select -->
 <script src="<?= base_url ?>admin/layout/plugins/select2/js/select2.full.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -44,9 +40,6 @@
 <script src="<?= base_url ?>admin/layout/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url ?>admin/layout/dist/js/adminlte.min.js"></script>
-
-
-<!-- DataTables -->
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url ?>admin/layout/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url ?>admin/layout/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

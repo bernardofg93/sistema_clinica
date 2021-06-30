@@ -81,6 +81,7 @@ label {
 .btn-cns {
     background: #ecf0f6 !important;
 }
+
 /* ===============            =============== */
 /* =============== EXPEDIENTE =============== */
 /* ===============            =============== */
@@ -91,4 +92,9 @@ label {
 
 .c-view-on {
     display: block;
+}
+
+/* ===============  Elements  =============== */
+textarea {
+    white-space: pre-line;
 }

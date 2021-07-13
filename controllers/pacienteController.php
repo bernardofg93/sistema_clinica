@@ -67,7 +67,6 @@ class pacienteController
         //registros con reingreso
         $reingresos = new PacienteIngreso();
         $rein = $reingresos->reingreso();
-
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/paciente/registros.php';
@@ -77,6 +76,16 @@ class pacienteController
     {
         $ent = new Entidad();
         $entidad = $ent->getAll();
+        //$idVenta = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : false;
+        //var_dump($idVenta);
+        $idUrl = isset($_GET['id']) ? $_GET['id'] : false;
+        $idCheck = base64_decode($idUrl);
+        $idCode = filter_var($idCheck, FILTER_VALIDATE_INT);
+        if ($idCode) {
+            $idVenta = $idCode;
+        }else {
+            $idVenta = false;
+        }
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/paciente/ingreso.php';
@@ -125,6 +134,8 @@ class pacienteController
             $forma_pago = isset($_POST['forma_pago']) ? filter_var($_POST['forma_pago'], FILTER_SANITIZE_STRING) : false;
             $usuaio_id = $_SESSION['identity']->id_usuario;
             $paciente_id = isset($_POST['paciente_id']) ? filter_var($_POST['paciente_id'], FILTER_VALIDATE_INT) : false;
+            $ventaId = isset($_POST['ventaId']) ? filter_var($_POST['ventaId'], FILTER_VALIDATE_INT) : false;
+
 
             $paciente = new Paciente();
             $paciente->setNombrePa($nombre_pa);
@@ -166,6 +177,7 @@ class pacienteController
             $pacienteIngreso->setDepositoIp($deposito_ip);
             $pacienteIngreso->setDepositoLetra($deposito_letra);
             $pacienteIngreso->setFormaPagoIp($forma_pago);
+            $pacienteIngreso->setVentaId($ventaId);
 
             if ($_POST['action'] == 'create') {
                 $save = $paciente->save();

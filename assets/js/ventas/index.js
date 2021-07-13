@@ -5,6 +5,30 @@ const fecha = document.querySelector('#fechaLlamada'),
     segSelect = document.querySelector('#fechaSeg'),
     razonSelect = document.querySelector('#razon');
 
+if (razonSelect.value != 'Prospecto') {
+    document.querySelector("#nombre").disabled = true;
+    document.querySelector("#correo").disabled = true;
+    document.querySelector('#parentesco').disabled = true;
+    document.querySelector('#consumo').disabled = true;
+    document.querySelector('#edad').disabled = true;
+    document.querySelector('#acepta').disabled = true;
+    document.querySelector('#detalles').disabled = true;
+    document.querySelector('#medioEnvio').disabled = true;
+    document.querySelector('#medioEntero').disabled = true;
+    document.querySelector('#fechaSeg').disabled = true;
+} else {
+    document.querySelector("#nombre").disabled = false;
+    document.querySelector("#correo").disabled = false;
+    document.querySelector('#parentesco').disabled = false;
+    document.querySelector('#consumo').disabled = false;
+    document.querySelector('#edad').disabled = false;
+    document.querySelector('#acepta').disabled = false;
+    document.querySelector('#detalles').disabled = false;
+    document.querySelector('#medioEnvio').disabled = false;
+    document.querySelector('#medioEntero').disabled = false;
+    document.querySelector('#fechaSeg').disabled = false;
+}
+
 eventListener();
 
 function eventListener() {
@@ -34,7 +58,7 @@ if (action === 'create') {
     let hour = hours + ":" + min + ":" + seconds + ":" + typeHour;
     horaInput.value = hour;
 
-//fecha de la llamada
+    //fecha de la llamada
     const fechaInput = document.querySelector("#fechaLlamada");
     let dataFecha = new Date();
     let month = dataFecha.getMonth() + 1;
@@ -113,7 +137,7 @@ function actionFechaSeguimiento(e) {
     let m = this.value;
     let valMonth = m.slice(5, -3);
     valMonth < 10 ? valMonth = m.slice(6, -3) : valMonth;
-    if (valMonth < month && valYear !='') {
+    if (valMonth < month && valYear != '') {
         segSelect.value = "";
         sweetAlert('La fecha no puede ser menor a la actual', 'error');
     }
@@ -126,3 +150,6 @@ function actionFechaSeguimiento(e) {
         sweetAlert('La fecha no puede ser menor a la actual', 'error');
     }
 }
+
+
+

@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
@@ -58,7 +59,7 @@
                             </a>
                         </td>
                         <td style="width:5%; text-align: center">
-                            <a type="button" class="btn bg-gradient-white btn-md" href="<?= base_url ?>paciente/registro">
+                            <a type="button" class="btn bg-gradient-white btn-md" href="<?= base_url ?>paciente/registro&id=<?= base64_encode($data->id_venta) ?>">
                                 <i class="fas fa-user-plus" style="color: #2471a3;"></i>
                             </a>
                         </td>

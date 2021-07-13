@@ -4,6 +4,7 @@ class PacienteIngreso
 {
     private $id;
     private $paciente_id;
+    private $venta_id;
     private $edad_pa;
     private $estado_civil_ip;
     private $hijos_ip;
@@ -59,6 +60,17 @@ class PacienteIngreso
     public function setPacienteId($paciente_id)
     {
         $this->paciente_id = $paciente_id;
+        return $this;
+    }
+
+    public function getVentaId()
+    {
+        return $this->venta_id;
+    }
+
+    public function setVentaId($venta_id)
+    {
+        $this->venta_id = $venta_id;
         return $this;
     }
 
@@ -434,6 +446,7 @@ class PacienteIngreso
     {
         $usuario_id = $this->id;
         $paciente_id = $this->paciente_id;
+        $venta_id = $this->venta_id;
         $edad = $this->edad_pa;
         $civil = $this->estado_civil_ip;
         $hijos = $this->hijos_ip;
@@ -468,7 +481,7 @@ class PacienteIngreso
 
         $sql = "INSERT INTO ingreso_paciente VALUES
                                     (
-                                     NULL, NULL, '$paciente_id', '$usuario_id', '$edad', '$civil', '$hijos', '$edades'
+                                     NULL, NULL, '$paciente_id', '$usuario_id', '$venta_id', '$edad', '$civil', '$hijos', '$edades'
                                      '$ocupacion','$escolaridad', '$vive', '$calle', '$calle', '$ext',
                                      '$interior', '$colonia', '$ciudad_vive', '$postal',
                                      '$estado_vive', '$pais', '$modo', '$recomendado',

@@ -7,6 +7,10 @@ const formPaciente = document.querySelector('#rgPaciente'),
 
 let data = JSON.parse(localStorage.getItem("db"));
 
+ventaId = document.querySelector('#ventaId').value;
+
+console.log(ventaId);
+
 eventListener();
 
 function eventListener() {
@@ -129,7 +133,8 @@ function readForm(e) {
         deposito_ip = document.querySelector('#deposito_ip').value,
         deposito_letra = document.querySelector('#deposito_letra').value,
         forma_pago = document.querySelector('#forma_pago').value,
-        action = document.querySelector('#action').value;
+        action = document.querySelector('#action').value,
+        ventaId = document.querySelector('#ventaId').value;
 
     let dataCp = [];
 
@@ -189,6 +194,7 @@ function readForm(e) {
     data.append("deposito_ip", deposito_ip);
     data.append("deposito_letra", deposito_letra);
     data.append("forma_pago", forma_pago);
+    data.append("ventaId", ventaId);
 
     if (nombre === '' || apellido_p === '' || apellido_m === '' || fecha_nac === '' || lugar_nac === '') {
 

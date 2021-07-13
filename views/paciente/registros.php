@@ -36,9 +36,9 @@
                 <?php while ($pac = $data->fetch_object()) : ?>
                     <tr>
                         <td class="col-1"><?= $pac->id_paciente ?></td>
-                        <td class="col-3"><?= $pac->nombre_pa ?></td>
-                        <td class="col-3"><?= $pac->apellido_paterno_pa ?></td>
-                        <td class="col-3"><?= $pac->apellido_materno_pa ?></td>
+                        <td class="col-3"><?= $pac->nombre_ip ?></td>
+                        <td class="col-3"><?= $pac->apellido_paterno_ip ?></td>
+                        <td class="col-3"><?= $pac->apellido_materno_ip ?></td>
                         <td class="col-1">
                             <a type="button" class="btn bg-gradient-white btn-sm" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
                                 <i class="fas fa-folder"></i>

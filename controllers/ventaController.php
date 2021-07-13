@@ -28,8 +28,9 @@ class ventaController
         require_once './views/ventas/registros.php';
     }
 
-    public function saveNota(){
-        if(isset($_POST)){
+    public function saveNota()
+    {
+        if (isset($_POST)) {
             $idVenta = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_VALIDATE_INT) : false;
             $notaSeg = isset($_POST['notaSeg']) ? filter_var($_POST['notaSeg'], FILTER_SANITIZE_STRING) : false;
             $idUs = $_SESSION['identity']->id_usuario;

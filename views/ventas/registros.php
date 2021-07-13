@@ -58,7 +58,7 @@
                             </a>
                         </td>
                         <td style="width:5%; text-align: center">
-                            <a type="button" class="btn bg-gradient-white btn-md" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
+                            <a type="button" class="btn bg-gradient-white btn-md" href="<?= base_url ?>paciente/registro">
                                 <i class="fas fa-user-plus" style="color: #2471a3;"></i>
                             </a>
                         </td>

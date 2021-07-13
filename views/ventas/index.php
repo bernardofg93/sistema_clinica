@@ -28,13 +28,13 @@
     <div class="col-sm-6">
         <div class="card card-white">
             <div class="card-body" id="container-buttons">
-                <a class="btn btn-app bg-primary">
+                <a class="btn btn-app bg-primary" href="<?= base_url ?>venta/registro">
                     <i class="fas fa-barcode"></i> Nuevo prospecto
                 </a>
                 <a class="btn btn-app bg-primary">
                     <i class="fas fa-phone-volume"></i> Llamadas en seg
                 </a>
-                <a class="btn btn-app bg-primary" href="<?= base_url ?>venta/registro">
+                <a class="btn btn-app bg-primary" href="<?= base_url ?>paciente/registro">
                     <i class="fas fa-plus"></i> Nuevo ingreso
                 </a>
             </div>

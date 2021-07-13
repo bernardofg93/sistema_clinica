@@ -13,6 +13,7 @@ class ventaController
 
     public function registro()
     {
+        $identity = $_SESSION['identity']->nombre_us;
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/ventas/registro.php';
@@ -25,6 +26,19 @@ class ventaController
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/ventas/registros.php';
+    }
+
+    public function saveNota(){
+        if(isset($_POST)){
+            $idVenta = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_VALIDATE_INT) : false;
+            $notaSeg = isset($_POST['notaSeg']) ? filter_var($_POST['notaSeg'], FILTER_SANITIZE_STRING) : false;
+            $idUs = $_SESSION['identity']->id_usuario;
+            $nota = new NotaVenta();
+            $nota->setId($idVenta);
+            $nota->setUsuarioId($idUs);
+            $nota->setNotaDescripcion($notaSeg);
+            $nota->save();
+        }
     }
 
     public function save()
@@ -59,16 +73,21 @@ class ventaController
             $venta->setMedioEntero($medioEntero);
 
             if ($_POST['action'] == 'create') {
-                $nota = $_POST['nota'] ? filter_var($_POST['nota'], FILTER_SANITIZE_STRING) : false;
                 $venta->setId($usuarioId);
                 $data = $venta->save();
                 $ventaId = $data['ventaId'];
 
+                $notaVenta = new NotaVenta();
+                $arr = json_decode($_POST['arrData'], true);
+                $idUs = $_SESSION['identity']->id_usuario;
+
                 if ($data) {
-                    $notaVenta = new NotaVenta();
-                    $notaVenta->setId($ventaId);
-                    $notaVenta->setNotaDescripcion($nota);
-                    $notaVenta->save();
+                    foreach ($arr as $row) {
+                        $notaVenta->setId($ventaId);
+                        $notaVenta->setUsuarioId($idUs);
+                        $notaVenta->setNotaDescripcion(filter_var($row['nota'], FILTER_SANITIZE_STRING));
+                        $notaVenta->save();
+                    }
                 }
             } else {
                 $ventaId = $_POST['ventaId'] ? filter_var($_POST['ventaId'], FILTER_VALIDATE_INT) : false;
@@ -87,6 +106,11 @@ class ventaController
             $venta = new Venta();
             $venta->setId($id);
             $data = $venta->getOne();
+            //obtenemos las notas para mandarlas a la vista
+            $notas = new NotaVenta();
+            $notas->setId($id);
+            $dataArr = $notas->getAll();
+            $arr = json_decode(json_encode($dataArr), true);
             require_once './admin/layout/header.php';
             require_once './admin/layout/sidebar.php';
             require_once './views/ventas/registro.php';

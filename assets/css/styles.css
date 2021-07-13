@@ -97,4 +97,5 @@ label {
 /* ===============  Elements  =============== */
 textarea {
     white-space: pre-line;
+    resize: none !important;
 }

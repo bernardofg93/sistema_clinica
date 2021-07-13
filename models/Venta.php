@@ -173,8 +173,9 @@ class venta
 
     public function getAll()
     {
-        $sql = "SELECT * FROM venta ORDER BY id_venta DESC";
-        return $this->db->query($sql);
+        $sql = "SELECT * FROM venta ORDER BY id_venta ASC";
+        $data = $this->db->query($sql);
+        return $data;
     }
 
     public function save()

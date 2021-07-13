@@ -14,26 +14,13 @@
                 </li>
                 <li class="breadcrumb-item active">Registro</li>
             </ol>
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-</div>
-
-<!-- Buttons -->
-<div class="card card-white col-sm-6">
-    <div class="card-body" id="container-buttons">
-        <button type="submit" form="rgVenta" class="btn btn-cns btn-flat">
-            Guardar <i class="far fa-save"></i>
-        </button>
-        <a type="button" id="btnCreate" class="btn btn-cns btn-flat" data-toggle="modal" data-target="#modalCategory">
-            <i class="far fa-list-alt"></i>
-        </a>
+        </div>
     </div>
 </div>
 
-<div class="row">
+<form class="row" id="rgVenta">
     <div class="col-md-6">
         <div class="card card-white">
-            <!-- /.card-header -->
             <div class="card-body">
                 <form id="rgVenta">
                     <div class="row">
@@ -58,17 +45,17 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label for="apellido_m">Lada + Telefono:</label>
-                                <input type="text" class="form-control form-control-sm" id="ladaTel"
+                                <input type="text" class="form-control form-control-sm" id="ladaTel" required
                                        value="<?= isset($data) && is_object($data) ? $data->lada_tel : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="nombre">Razon de llamada:</label>
-                                <select class="form-control form-control-sm" id="razon">
+                                <select class="form-control form-control-sm" id="razon" required>
                                     <option value="<?= isset($data) && is_object($data) ? $data->razon_llamada : '' ?>"
                                             disabled
-                                            selected><?= isset($edit) && is_object($edit) ? $edit->razon_llamada : 'Selecciona'; ?></option>
+                                            selected><?= isset($data) && is_object($data) ? $data->razon_llamada : 'Selecciona'; ?></option>
                                     <option value="Prospecto">Prospecto</option>
                                     <option value="Cobrar algún servicio o producto">Cobrar algún servicio o producto
                                     </option>
@@ -87,7 +74,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -99,7 +85,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Correo de contacto:</label>
-                                <input type="text" class="form-control form-control-sm" id="correo"
+                                <input type="email" class="form-control form-control-sm" id="correo"
                                        value="<?= isset($data) && is_object($data) ? $data->correo_cont : '' ?>">
                             </div>
                         </div>
@@ -139,33 +125,21 @@
                     </div>
 
             </div>
-            <!-- /.card-body -->
         </div>
     </div>
     <div class="col-md-6">
         <div class="card card-white">
-            <!-- /.card-header -->
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="form-group">
                             <label for="resp">Detalles adicionales:</label>
-                            <textarea class="form-control form-control-sm" id="detalles" cols="30" rows="5">
+                            <textarea class="form-control form-control-sm" id="detalles" cols="30" rows="3">
                                 <?= isset($data) && is_object($data) ? $data->detalles_ad : '' ?>
                             </textarea>
                         </div>
                     </div>
-                    <?php if (!isset($edit)) : ?>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="resp">Nota:</label>
-                                <textarea class="form-control form-control-sm" name="" id="nota" cols="30" rows="5">
-                            </textarea>
-                            </div>
-                        </div>
-                    <?php endif; ?>
                 </div>
-
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -198,7 +172,8 @@
                             <div class="input-group date " data-target-input="nearest">
                                 <input type="date" id="fechaSeg" class="form-control form-control-sm"
                                        data-target="#reservationdate"
-                                       value="<?= isset($data) && is_object($data) ? $data->fecha_seguimiento : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->fecha_seguimiento : '' ?>"
+                                >
                                 <div class="input-group-append" data-target="#reservationdate"
                                      data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -206,15 +181,87 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nombre">Calificación de llamadas:</label>
+                            <select class="form-control form-control-sm" id="calLLamada" required>
+                                <option selected disabled>Selecciona:</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
                     <input type="hidden" id="action" value="<?= $action ?>">
                     <input type="hidden" id="ventaId" value="<?= $data->id_venta ?>">
                 </div>
             </div>
         </div>
+</form>
+<!-- DIRECT NOTES -->
+<div class="card direct-chat direct-chat-primary">
+    <div class="card-header">
+        <h3 class="card-title">Notas de seguimiento</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="card-body list-notes">
+        <div class="direct-chat-messages" id="listNotes">
+            <?php if (isset($dataArr) && $dataArr) : ?>
+                <?php foreach ($dataArr as $el) : ?>
+                    <div class="direct-chat-msg">
+                        <div class="direct-chat-infos clearfix">
+                            <span class="direct-chat-name float-left">
+                                <?= $el->nombre_us ?>
+                            </span>
+                            <span class="direct-chat-timestamp float-right">
+                                <?= $el->fecha_alta_n ?> | <?= $el->hora_alta_n ?>
+                            </span>
+                        </div>
+                        <div class="direct-chat-text">
+                            <?= $el->nota_desc ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <form id="fmNota">
+            <div class="input-group">
+                <input type="text" id="notaSeg" placeholder="Crear nota..." class="form-control">
+                <input type="hidden" id="nombreUs" value="<?= $_SESSION['identity']->nombre_us ?>">
+                <span class="input-group-append">
+                      <input type="submit" class="btn btn-primary" value="Enviar">
+                </span>
+            </div>
+        </form>
+    </div>
+    <!-- /.card-footer-->
+</div>
+<!-- Buttons -->
+<div class="card card-white col-sm-6">
+    <div class="card-body" id="container-buttons">
+        <button type="submit" form="rgVenta" class="btn btn-cns btn-flat">
+            Guardar <i class="far fa-save"></i>
+        </button>
+        <a type="button" id="btnCreate" class="btn btn-cns btn-flat" data-toggle="modal" data-target="#modalCategory">
+            <i class="far fa-list-alt"></i>
+        </a>
     </div>
 </div>
-<!-- /.table -->
+</div>
+
 <?php include "admin/layout/footer.php" ?>
+<script src="<?= base_url ?>assets/js/alerts.js"></script>
 <script src="<?= base_url ?>assets/js/ventas/index.js"></script>
 <script src="<?= base_url ?>assets/js/ventas/ajax.js"></script>
 <script src="<?= base_url ?>admin/assets/js/table.js"></script>

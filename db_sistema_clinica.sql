@@ -30,24 +30,24 @@ CREATE TABLE usuario
 
 CREATE TABLE venta
 (
-    id_venta            INT NOT NULL AUTO_INCREMENT,
-    usuario_id          INT(255) NOT NULL,
-    fecha_llamada       DATE NOT NULL,
-    hora_llamada        TIME NOT NULL,
-    lada_tel            VARCHAR(20) NULL,
-    razon_llamada       varchar(50) NOT NULL,
-    nombre_cont         varchar(50) NOT NULL,
-    correo_cont         varchar(70) NOT NULL,
-    parentesco_cont     varchar(20) NULL,
-    tipo_consumo        varchar(30) NULL,
-    edad_cont           smallint(2) NULL,
-    aceptacion          varchar(9) NULL,
-    detalles_ad         varchar(100),
-    fecha_seguimiento   DATE NOT NULL,
-    medio_de_envio      varchar(13) NULL,
+    id_venta          INT         NOT NULL AUTO_INCREMENT,
+    usuario_id        INT(255)    NOT NULL,
+    fecha_llamada     DATE        NOT NULL,
+    hora_llamada      TIME        NOT NULL,
+    lada_tel          VARCHAR(20) NULL,
+    razon_llamada     varchar(50) NOT NULL,
+    nombre_cont       varchar(50) NOT NULL,
+    correo_cont       varchar(70) NOT NULL,
+    parentesco_cont   varchar(20) NULL,
+    tipo_consumo      varchar(30) NULL,
+    edad_cont         smallint(2) NULL,
+    aceptacion        varchar(9)  NULL,
+    detalles_ad       varchar(100),
+    fecha_seguimiento DATE        NOT NULL,
+    medio_de_envio    varchar(13) NULL,
     constraint pk_venta primary key (id_venta),
     constraint fk_venta_usuario foreign key (usuario_id) references usuario (id_usuario)
-)engine = InnoDB;
+) engine = InnoDB;
 
 CREATE TABLE nota_venta
 (
@@ -56,7 +56,7 @@ CREATE TABLE nota_venta
     nota_desc     TEXT,
     constraint pk_nota_venta primary key (id_nota_venta),
     constraint fk_nota_venta_venta foreign key (venta_id) references venta (id_venta)
-)engine = InnoDB;
+) engine = InnoDB;
 
 CREATE TABLE paciente
 (
@@ -75,7 +75,7 @@ CREATE TABLE ingreso_paciente
     entidad_id             INT NOT NULL,
     paciente_id            INT NULL,
     usuario_id             INT NOT NULL,
-    venta_id               INT NOT NULL, 
+    venta_id               INT NOT NULL,
     edad_pa                SMALLINT(3),
     estado_civil_ip        VARCHAR(15),
     hijos_ip               SMALLINT(2),
@@ -114,15 +114,15 @@ CREATE TABLE ingreso_paciente
 
 create table contactos_paciente
 (
-    id_contactos_paciente   INT NOT NULL  AUTO_INCREMENT,
-    paciente_id             INT NOT NULL,
-    ingreso_paciente_id     INT NOT NULL,
-    telefono_cp             VARCHAR(15) NULL,
-    correo_cp               VARCHAR(100) NULL,
-    parentesco_cp           VARCHAR(20),
+    id_contactos_paciente INT          NOT NULL AUTO_INCREMENT,
+    paciente_id           INT          NOT NULL,
+    ingreso_paciente_id   INT          NOT NULL,
+    telefono_cp           VARCHAR(15)  NULL,
+    correo_cp             VARCHAR(100) NULL,
+    parentesco_cp         VARCHAR(20),
     CONSTRAINT pk_id_contactos_paciente PRIMARY KEY (id_contactos_paciente),
-    CONSTRAINT fk_contactos_paciente_paciente FOREIGN KEY (paciente_id) references paciente(id_paciente),
-    CONSTRAINT fk_contactos_paciente_ingreso_paciente FOREIGN KEY (ingreso_paciente_id) references ingreso_paciente(id_ingreso_paciente)
+    CONSTRAINT fk_contactos_paciente_paciente FOREIGN KEY (paciente_id) references paciente (id_paciente),
+    CONSTRAINT fk_contactos_paciente_ingreso_paciente FOREIGN KEY (ingreso_paciente_id) references ingreso_paciente (id_ingreso_paciente)
 ) ENGINE = InnoDB;
 
 CREATE TABLE asignacion_usuario_paciente

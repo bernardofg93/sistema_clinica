@@ -29,6 +29,9 @@
         <button type="submit" form="rgPaciente" class="btn btn-cns btn-flat">
             Guardar <i class="far fa-save"></i>
         </button>
+        <a type="button" form="rgPaciente" class="btn btn-cns btn-flat" href="<?=base_url?>venta/registro">
+            Detalle prospecto <i class="fas fa-arrow-right"></i>
+        </a>
     </div>
 </div>
 

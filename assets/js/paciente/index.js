@@ -262,7 +262,6 @@ function sendDb(data) {
                 //Agregar a su contenedor
                 const containerButtons = document.querySelector('#container-buttons');
                 containerButtons.appendChild($button);
-                console.log($button);
             }
         }
     }

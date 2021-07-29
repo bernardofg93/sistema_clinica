@@ -15,7 +15,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item">
-                    <a href="<?= base_url ?>venta/registros">Registros</a>
+                    <a href="<?= base_url ?>venta/registros">Seguimientos</a>
                 </li>
                 <li class="breadcrumb-item active">Registro</li>
             </ol>
@@ -51,16 +51,22 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <!-- /.card-header -->
-                        <table class="table table-bordered" id="listContactos">
+                        <table class="table table-bordered" id="tbldata">
                             <thead>
-                                <tr>
-                                    <th style="font-size: 13px;">Fecha de llamada</th>
-                                    <th style="font-size: 13px;">Fecha de seguimiento</th>
-                                    <th style="font-size: 13px;">Nombre contacto</th>
-                                </tr>
+                            <tr>
+                                <th style="font-size: 13px;">Fecha de llamada</th>
+                                <th style="font-size: 13px;">Fecha de seguimiento</th>
+                                <th style="font-size: 13px;">Nombre contacto</th>
+                            </tr>
                             </thead>
                             <tbody id="contactosPaciente">
-
+                            <?php while ($res = $llamadas->fetch_object()) : ?>
+                                <tr>
+                                    <td><?= $res->fecha_llamada ?></td>
+                                    <td><?= $res->fecha_seguimiento ?></td>
+                                    <td><?= $res->nombre_cont ?></td>
+                                </tr>
+                            <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>
@@ -79,12 +85,12 @@
                         <!-- /.card-header -->
                         <table class="table table-bordered" id="listContactos">
                             <thead>
-                                <tr>
-                                    <th style="font-size: 13px;">Unidad</th>
-                                    <th style="font-size: 13px;">Paciente</th>
-                                    <th style="font-size: 13px;">Fecha</th>
-                                    <th style="font-size: 13px;">Salida</th>
-                                </tr>
+                            <tr>
+                                <th style="font-size: 13px;">Unidad</th>
+                                <th style="font-size: 13px;">Paciente</th>
+                                <th style="font-size: 13px;">Fecha</th>
+                                <th style="font-size: 13px;">Salida</th>
+                            </tr>
                             </thead>
                             <tbody id="contactosPaciente">
 
@@ -104,7 +110,8 @@
                 <div class="row">
                     <div class="col-sm-4 col-6">
                         <div class="description-block border-left border-right">
-                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i>2 Lugares</span>
+                            <span class="description-percentage text-success"><i
+                                        class="fas fa-caret-up"></i>2 Lugares</span>
                             <h5 class="description-header">23 Pacientes</h5>
                             <span class="description-text">CAP 1</span>
                         </div>
@@ -113,7 +120,8 @@
                     <!-- /.col -->
                     <div class="col-sm-4 col-6">
                         <div class="description-block border-right">
-                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i>3 Lugares</span>
+                            <span class="description-percentage text-success"><i
+                                        class="fas fa-caret-up"></i>3 Lugares</span>
                             <h5 class="description-header">24 Pacientes</h5>
                             <span class="description-text">CAP 2</span>
                         </div>

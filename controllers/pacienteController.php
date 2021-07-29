@@ -11,18 +11,15 @@ class pacienteController
     public function expediente()
     {
         if (isset($_GET['id'])) {
-
             //Get paciente
             $paciente_id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : false;
             $paciente = new Paciente();
             $paciente->setIdPaciente($paciente_id);
             $pac = $paciente->getOne();
-
             //reingreso
             $reingreso = new PacienteIngreso();
             $reingreso->setPacienteId($paciente_id);
             $res = $reingreso->reingreso();
-
             require_once './admin/layout/header.php';
             require_once './admin/layout/sidebar.php';
             require_once './views/paciente/expediente.php';
@@ -63,7 +60,6 @@ class pacienteController
     {
         $paciente = new Paciente();
         $data = $paciente->getAll();
-
         //registros con reingreso
         $reingresos = new PacienteIngreso();
         $rein = $reingresos->reingreso();
@@ -74,17 +70,25 @@ class pacienteController
 
     public function registro()
     {
-        $ent = new Entidad();
-        $entidad = $ent->getAll();
-        //$idVenta = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : false;
-        //var_dump($idVenta);
-        $idUrl = isset($_GET['id']) ? $_GET['id'] : false;
-        $idCheck = base64_decode($idUrl);
-        $idCode = filter_var($idCheck, FILTER_VALIDATE_INT);
-        if ($idCode) {
-            $idVenta = $idCode;
-        }else {
-            $idVenta = false;
+        if (isset($_GET['idv'])) {
+            $ventaId = filter_var($_GET['idv'], FILTER_VALIDATE_INT);
+            $paciente = new PacienteIngreso();
+            $paciente->setVentaId($ventaId);
+            $data = $paciente->getIngresoVenta();
+            //var_dump($data);
+
+            if ($data) {
+                $paciente_id = $data->paciente_id;
+                $ingreso_id = $data->id_ingreso_paciente;
+                $contactos = new ContactosPaciente();
+                $contactos->setPacienteId($paciente_id);
+                $contactos->setIngresoId($ingreso_id);
+                $obj = $contactos->getAll();
+                while($d = $obj->fetch_assoc()){
+                    $arr[] = $d;
+                }
+                $arr;
+            }
         }
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
@@ -135,7 +139,6 @@ class pacienteController
             $usuaio_id = $_SESSION['identity']->id_usuario;
             $paciente_id = isset($_POST['paciente_id']) ? filter_var($_POST['paciente_id'], FILTER_VALIDATE_INT) : false;
             $ventaId = isset($_POST['ventaId']) ? filter_var($_POST['ventaId'], FILTER_VALIDATE_INT) : false;
-
 
             $paciente = new Paciente();
             $paciente->setNombrePa($nombre_pa);

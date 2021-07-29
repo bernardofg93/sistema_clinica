@@ -411,8 +411,21 @@ class PacienteIngreso
                 * FROM ingreso_paciente i
                 INNER JOIN paciente p ON i.paciente_id = p.id_paciente 
                 WHERE i.paciente_id = {$this->getPacienteId()}";
-
         return $query = $this->db->query($sql);
+    }
+
+    public function getIngresoVenta()
+    {
+        $sql = "SELECT 
+                * 
+                FROM 
+                ingreso_paciente i
+                INNER JOIN venta v ON i.venta_id = v.id_venta
+                INNER JOIN paciente p ON i.paciente_id = p.id_paciente
+                WHERE venta_id = {$this->getVentaId()}
+                ";
+        $obj = $this->db->query($sql);
+        return $obj->fetch_object();
     }
 
     public function getAll()
@@ -482,7 +495,7 @@ class PacienteIngreso
         $sql = "INSERT INTO ingreso_paciente VALUES
                                     (
                                      NULL, NULL, '$paciente_id', '$usuario_id', '$venta_id', '$edad', '$civil', '$hijos', '$edades'
-                                     '$ocupacion','$escolaridad', '$vive', '$calle', '$calle', '$ext',
+                                     '$ocupacion','$escolaridad', '$vive', '$calle', '$colonia', '$ext',
                                      '$interior', '$colonia', '$ciudad_vive', '$postal',
                                      '$estado_vive', '$pais', '$modo', '$recomendado',
                                      '$legal', '$actitud', '$observaciones',

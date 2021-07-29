@@ -1,7 +1,15 @@
 <?php $action = Utils::validate(isset($data) && is_object($data) ? $data : '') ?>
 
 <?php
-isset($data) && is_object($data) ? $id = $_GET['id'] : '';
+//$id = isset($data) && is_object($data) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : false;
+//$paciente_id = isset($data) && is_object($data) : false;
+if(isset($_GET['id'])){
+    $paciente_id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+}else {
+    $paciente_id = isset($data) && $data && is_object($data) ? $data->paciente_id : false;
+}
+
+$idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) : false;
 ?>
 
 <?php if (isset($reingreso) && $reingreso) : ?>
@@ -28,9 +36,15 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
 <!-- Buttons -->
 <div class="card card-white col-sm-6">
     <div class="card-body" id="container-buttons">
-        <button type="submit" form="rgPaciente" class="btn btn-cns btn-flat">
-            Guardar <i class="far fa-save"></i>
-        </button>
+        <?php if (!$idVenta) : ?>
+            <button type="submit" form="rgPaciente" class="btn btn-cns btn-flat">
+                Guardar <i class="far fa-save"></i>
+            </button>
+        <?php elseif($idVenta && !isset($data) && !$data && !is_object($data)) : ?>
+            <button type="submit" form="rgPaciente" class="btn btn-cns btn-flat">
+                Guardar <i class="far fa-save"></i>
+            </button>
+        <?php endif; ?>
         <a type="button" form="rgPaciente" class="btn btn-cns btn-flat" href="<?= base_url ?>venta/registro">
             Detalle prospecto <i class="fas fa-arrow-right"></i>
         </a>
@@ -49,7 +63,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
                                 <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm" id="nombre"
-                                       value="<?= isset($ident) && is_object($ident) ? $ident->nombre_pa : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->nombre_ip : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -57,7 +71,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                                 <label for="apellido_p">Apellido Paterno:</label>
                                 <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm"
                                        id="apellido_p"
-                                       value="<?= isset($ident) && is_object($ident) ? $ident->apellido_paterno_pa : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->apellido_paterno_ip : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -68,14 +82,14 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                                 <label for="apellido_m">Apellido Materno:</label>
                                 <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm"
                                        id="apellido_m"
-                                       value="<?= isset($ident) && is_object($ident) ? $ident->apellido_materno_pa : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->apellido_materno_ip : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="lugar_nac">Lugar Nacimiento:</label>
                                 <input type="text" class="form-control form-control-sm" id="lugar_nac"
-                                       value="<?= isset($ident) && is_object($ident) ? $ident->lugar_nacimiento_pa : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->lugar_nacimiento_ip : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -87,7 +101,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                                 <div class="input-group date " data-target-input="nearest">
                                     <input type="date" id="fecha_nac" class="form-control form-control-sm"
                                            data-target="#reservationdate"
-                                           value="<?= isset($ident) && is_object($ident) ? $ident->fecha_nacimiento_pa : '' ?>">
+                                           value="<?= isset($data) && is_object($data) ? $ident->fecha_nacimineto_ip : '' ?>">
                                     <div class="input-group-append" data-target="#reservationdate"
                                          data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -99,7 +113,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="edad">Edad:</label>
                                 <input type="text" class="form-control form-control-sm" id="edad"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->edad_pa : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->edad_pa : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -108,9 +122,9 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="rol">Estado Civil:</label>
                                 <select class="form-control form-control-sm" id="civil">
-                                    <option value="<?= isset($edit) && is_object($edit) ? $edit->estado_civil_ip : '' ?>"
+                                    <option value="<?= isset($data) && is_object($data) ? $data->estado_civil_ip : '' ?>"
                                             disabled
-                                            selected><?= isset($edit) && is_object($edit) ? $edit->estado_civil_ip : 'Selecciona'; ?></option>
+                                            selected><?= isset($data) && is_object($data) ? $data->estado_civil_ip : 'Selecciona'; ?></option>
                                     <option value="Soltero(a)">Soltero(a)</option>
                                     <option value="Casado(a)">Casado(a)</option>
                                     <option value="Divorciado(a)">Divorciado(a)</option>
@@ -122,9 +136,9 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="hijos">Hijos:</label>
                                 <select class="form-control form-control-sm" id="hijos">
-                                    <option value="<?= isset($edit) && is_object($edit) ? $edit->hijos_ip : '0' ?>"
+                                    <option value="<?= isset($data) && is_object($data) ? $data->hijos_ip : '0' ?>"
                                             disabled
-                                            selected><?= isset($edit) && is_object($edit) ? $edit->hijos_ip : 'Selecciona'; ?></option>
+                                            selected><?= isset($data) && is_object($data) ? $data->hijos_ip : 'Selecciona'; ?></option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -143,7 +157,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="edades">Edades:</label>
                                 <input type="text" class="form-control form-control-sm" id="edades"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->edades_hijos_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->edades_hijos_ip : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -152,9 +166,9 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="rol">Escolaridad :</label>
                                 <select class="form-control form-control-sm" id="escolaridad">
-                                    <option value="<?= isset($edit) && is_object($edit) ? $edit->estado_civil_ip : '' ?>"
+                                    <option value="<?= isset($data) && is_object($data) ? $data->estado_civil_ip : '' ?>"
                                             disabled
-                                            selected><?= isset($edit) && is_object($edit) ? $edit->estado_civil_ip : 'Selecciona'; ?></option>
+                                            selected><?= isset($data) && is_object($data) ? $data->estado_civil_ip : 'Selecciona'; ?></option>
                                     <option value="Educación preescolar">Educación preescolar</option>
                                     <option value="Educación Primaria">Educación Primaria</option>
                                     <option value="Educación secundaria">Educación secundaria</option>
@@ -167,7 +181,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="ocupacion">Ocupación:</label>
                                 <input type="text" class="form-control form-control-sm" id="ocupacion"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->ocupacion_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->ocupacion_ip : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -183,7 +197,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="ocupacion">Vive con:</label>
                                 <input type="text" class="form-control form-control-sm" id="vive_con"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->vive_con_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->vive_con_ip : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -191,7 +205,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="calle">Calle:</label>
                                 <input type="text" class="form-control form-control-sm" id="calle"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->calle_vive_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->calle_vive_ip : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -199,7 +213,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                                 <label for="colonia">Colonia:</label>
                                 <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm"
                                        id="colonia"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->colonia_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->colonia_ip : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -209,7 +223,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="ext">Ext:</label>
                                 <input type="text" class="form-control form-control-sm" id="ext"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->ext_vive_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->ext_vive_ip : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -217,14 +231,14 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="interior">Int:</label>
                                 <input type="text" class="form-control form-control-sm" id="interior"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->interior_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->interior_ip : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="cp">CP:</label>
                                 <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm" id="cp"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->codigo_postal_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->codigo_postal_ip : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -235,7 +249,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="ciudad">Ciudad:</label>
                                 <input type="text" class="form-control form-control-sm" id="ciudad"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->ciudad_vive_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->ciudad_vive_ip : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -243,14 +257,14 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="estado_vive">Estado:</label>
                                 <input type="text" class="form-control form-control-sm" id="estado_vive"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->estado_vive_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->estado_vive_ip : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="pais">País:</label>
                                 <input type="text" class="form-control form-control-sm" id="pais"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->pais_vive_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->pais_vive_ip : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -267,9 +281,9 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                         <div class="form-group">
                             <label for="hijos">Medio por el cual:</label>
                             <select class="form-control form-control-sm" id="se_entrero">
-                                <option value="<?= isset($edit) && is_object($edit) ? $edit->modo_se_entero : '0' ?>"
+                                <option value="<?= isset($data) && is_object($data) ? $data->modo_se_entero : '0' ?>"
                                         disabled
-                                        selected><?= isset($edit) && is_object($edit) ? $edit->modo_se_entero : 'Selecciona'; ?></option>
+                                        selected><?= isset($data) && is_object($data) ? $data->modo_se_entero : 'Selecciona'; ?></option>
                                 <option value="Internet">Internet</option>
                                 <option value="Recomendación">Recomendación</option>
                                 <option value="Ingreso">Ingreso</option>
@@ -286,7 +300,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                         <div class="form-group">
                             <label for="recomendado">Recomendado por:</label>
                             <input type="text" class="form-control form-control-sm" id="recomendado" disabled="disabled"
-                                   value="<?= isset($edit) && is_object($edit) ? $edit->recomendado_por : '' ?>">
+                                   value="<?= isset($data) && is_object($data) ? $data->recomendado_por : '' ?>">
                         </div>
                     </div>
                 </div>
@@ -297,14 +311,14 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                         <div class="form-group">
                             <label for="resp">Resp Legal:</label>
                             <input type="text" class="form-control form-control-sm" id="resp"
-                                   value="<?= isset($edit) && is_object($edit) ? $edit->resp_legal : '' ?>">
+                                   value="<?= isset($data) && is_object($data) ? $data->resp_legal : '' ?>">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="actitud">Estado y actitud al ingresar:</label>
                             <input type="text" class="form-control form-control-sm" id="actitud"
-                                   value="<?= isset($edit) && is_object($edit) ? $edit->estado_actitud : '' ?>"
+                                   value="<?= isset($data) && is_object($data) ? $data->estado_actitud : '' ?>"
                                    required>
                         </div>
                     </div>
@@ -315,7 +329,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                         <div class="form-group">
                             <label for="observaciones">Observaciones al ingresar:</label>
                             <input type="text" class="form-control form-control-sm" id="observaciones"
-                                   value="<?= isset($edit) && is_object($edit) ? $edit->observaciones_ingreso : '' ?>"
+                                   value="<?= isset($data) && is_object($data) ? $data->observaciones_ingreso : '' ?>"
                                    required>
                         </div>
                     </div>
@@ -341,6 +355,26 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             </tr>
                             </thead>
                             <tbody id="contactosPaciente">
+                                    <?php for($i=0;$i<count($arr);$i++) {
+                                        echo '<tr> . ' . $arr[$i]['nombre_cp']; ' . </tr>';
+                                    }?>
+
+                                    <?php for($i=0;$i<count($arr);$i++) : ?>
+                                      <tr>
+                                          <td>
+                                              <?php echo $arr[$i]['nombre_cp'] ?>
+                                          </td>
+                                          <td>
+                                              <?php echo $arr[$i]['nombre_cp'] ?>
+                                          </td>
+                                          <td>
+                                              <?php echo $arr[$i]['nombre_cp'] ?>
+                                          </td>
+                                          <td>
+                                              <?php echo $arr[$i]['nombre_cp'] ?>
+                                          </td>
+                                      </tr>
+                                    <?php endfor; ?>
 
                             </tbody>
                         </table>
@@ -358,9 +392,9 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <div class="form-group">
                                 <label for="nombre">Adicción o tratamiento:</label>
                                 <select class="form-control form-control-sm" id="adiccion">
-                                    <option value="<?= isset($edit) && is_object($edit) ? $edit->adiccion_ip : '' ?>"
+                                    <option value="<?= isset($data) && is_object($data) ? $data->adicion_tratamiento : '' ?>"
                                             disabled
-                                            selected><?= isset($edit) && is_object($edit) ? $edit->adiccion_ip : 'Selecciona'; ?></option>
+                                            selected><?= isset($data) && is_object($data) ? $data->adicion_tratamiento : 'Selecciona'; ?></option>
                                     <option value="Alcoholismo">Alcoholismo</option>
                                     <option value="Drogadicción">Drogadicción</option>
                                     <option value="Trastorno Mental">Trastorno Mental</option>
@@ -376,9 +410,9 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                         <div class="form-group">
                             <label for="nombre">Tratamiento:</label>
                             <select class="form-control form-control-sm" id="tratamiento">
-                                <option value="<?= isset($edit) && is_object($edit) ? $edit->tratamiento_ip : '' ?>"
+                                <option value="<?= isset($data) && is_object($data) ? $data->tratamiento_ip : '' ?>"
                                         disabled
-                                        selected><?= isset($edit) && is_object($edit) ? $edit->tratamiento_ip : 'Selecciona'; ?></option>
+                                        selected><?= isset($data) && is_object($data) ? $data->tratamiento_ip : 'Selecciona'; ?></option>
                                 <option value="CAP1">CAP1</option>
                                 <option value="CAP2">CAP2</option>
                                 <option value="CAS">CAS</option>
@@ -392,7 +426,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                         <div class="form-group">
                             <label for="nombre">Ingreso:</label>
                             <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm" id="ingreso"
-                                   value="<?= isset($edit) && is_object($edit) ? $data->ingreso_ip : '' ?> ">
+                                   value="<?= isset($data) && is_object($data) ? $data->ingreso_ip : '' ?> ">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -403,7 +437,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                                     <span class="input-group-text">$</span>
                                 </div>
                                 <input type="text" class="form-control" id="precio_trat"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->precio_tratamiento_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->precio_tratamiento_ip : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -415,7 +449,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <label for="nombre">Precio con letra:</label>
                             <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm"
                                    id="precio_letra"
-                                   value="<?= isset($edit) && is_object($edit) ? $edit->precio_letra : '' ?>">
+                                   value="<?= isset($data) && is_object($data) ? $data->precio_letra : '' ?>">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -423,7 +457,7 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                             <label for="nombre">Duracion:</label>
                             <div class="field-duracion">
                                 <input type="text" class="form-control form-control-sm" id="duracion"
-                                       value="<?= isset($edit) && is_object($edit) ? $edit->duracion_ip : '' ?>">
+                                       value="<?= isset($data) && is_object($data) ? $data->duracion_ip : '' ?>">
                                 <div id="txt-bx">
                                     <label for="txt-duracion" id="cont-duracion">
 
@@ -439,15 +473,15 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                         <div class="form-group">
                             <label for="deposito_ip">Deposito:</label>
                             <input type="text" class="form-control form-control-sm" id="deposito_ip"
-                                   value="<?= isset($edit) && is_object($edit) ? $edit->deposito_ip : '' ?>">
+                                   value="<?= isset($data) && is_object($data) ? $data->deposito_ip : '' ?>">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="rol">Moneda</label>
                             <select class="form-control form-control-sm" id="moneda">
-                                <option value="<?= isset($edit) && is_object($edit) ? $edit->moneda_ip : '' ?>" disabled
-                                        selected><?= isset($edit) && is_object($edit) ? $edit->moneda_ip : 'Selecciona'; ?></option>
+                                <option value="<?= isset($data) && is_object($data) ? $data->moneda_ip : '' ?>" disabled
+                                        selected><?= isset($data) && is_object($data) ? $data->moneda_ip : 'Selecciona'; ?></option>
                                 <option value="USD">USD</option>
                                 <option value="MXN">MXN</option>
                             </select>
@@ -461,19 +495,18 @@ isset($data) && is_object($data) ? $id = $_GET['id'] : '';
                         <div class="form-group">
                             <label for="nombre">Deposito letra:</label>
                             <input type="text" class="form-control form-control-sm" id="deposito_letra"
-                                   value="<?= isset($edit) && is_object($edit) ? $edit->deposito_letra : '' ?>">
+                                   value="<?= isset($data) && is_object($data) ? $data->deposito_letra : '' ?>">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nombre">Forma de Pago Saldo:</label>
                             <input type="text" class="form-control form-control-sm" id="forma_pago"
-                                   value="<?= isset($edit) && is_object($edit) ? $edit->forma_pago_ip : '' ?>">
+                                   value="<?= isset($data) && is_object($data) ? $data->forma_pago_ip : '' ?>">
                         </div>
                     </div>
                 </div>
-
-                <input type="hidden" id="paciente_id" value="<?= $id ?>"/>
+                <input type="hidden" id="paciente_id" value="<?= $paciente_id ?>"/>
                 <input type="hidden" id="ventaId" value="<?= $idVenta ?>"/>
                 <input type="hidden" id="action" value="<?= $action ?>"/>
                 </form>

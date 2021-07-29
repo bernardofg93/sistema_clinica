@@ -164,6 +164,23 @@ class venta
         $this->medio_entero = $medio_entero;
     }
 
+    public function getLLamadasSeguimiento()
+    {
+        $fecha = date("Y-m-d");
+        $fechaActual = date("Y-m-d", strtotime("+1 day", strtotime($fecha)));
+        $sql = "SELECT * FROM venta WHERE fecha_seguimiento >= '$fecha' AND fecha_seguimiento < '$fechaActual'";
+        return $res = $this->db->query($sql);
+    }
+
+    public function finalizarSeguimiento()
+    {
+        $sql = "UPDATE venta SET estado_ve = 0, fecha_seguimiento = '' WHERE id_venta = {$this->getId()}";
+        $res = $this->db->query($sql);
+        if ($res) {
+            return ['res' => 'true'];
+        }
+    }
+
     public function getOne()
     {
         $sql = "SELECT * FROM venta WHERE id_venta = {$this->getId()}";
@@ -173,7 +190,48 @@ class venta
 
     public function getAll()
     {
-        $sql = "SELECT * FROM venta ORDER BY id_venta ASC";
+        $sql = "
+                SELECT 
+                *  
+                FROM venta v
+                INNER JOIN usuario u ON v.usuario_id = u.id_usuario
+                ORDER BY 
+                v.id_venta 
+                ASC
+                ";
+        $data = $this->db->query($sql);
+        return $data->fetch_array();
+    }
+
+    public function getAllObj()
+    {
+        $sql = "
+                SELECT 
+                *  
+                FROM venta v
+                INNER JOIN usuario u ON v.usuario_id = u.id_usuario
+                ORDER BY 
+                v.id_venta 
+                ASC
+                ";
+        $data = $this->db->query($sql);
+        while ($arr = $data->fetch_assoc()) {
+            $obj[] = $arr;
+        }
+        return $obj;
+    }
+
+    public function getAsign()
+    {
+        $sql = "
+                SELECT 
+                *  
+                FROM venta v
+                INNER JOIN ingreso_paciente i ON v.id_venta = i.venda_id
+                ORDER BY 
+                id_venta 
+                ASC
+                ";
         $data = $this->db->query($sql);
         return $data;
     }
@@ -198,7 +256,7 @@ class venta
                                     (
                                      NULL, '$usuarioId', CURDATE(), CURTIME(), '$ladaTel', '$razonLlamada',
                                      '$nombre','$correo', '$parentesco','$consumo','$edad', 
-                                     '$acep', '$detalles', '$fechaSeg','$medioEnv', '$medioEnt'
+                                     '$acep', '$detalles', '$fechaSeg','$medioEnv', '$medioEnt', 1
                                      )";
         $save = $this->db->query($sql);
 
@@ -208,7 +266,6 @@ class venta
             return ['res' => 'false'];
         }
     }
-
 
     public function edit()
     {

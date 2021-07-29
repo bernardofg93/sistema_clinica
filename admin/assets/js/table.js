@@ -1,5 +1,5 @@
 $(function () {   
-    $('#tblRegistros').DataTable({
+    $('#tbldata').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": true,

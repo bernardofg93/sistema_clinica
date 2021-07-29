@@ -6,9 +6,16 @@ class ventaController
 {
     public function index()
     {
+        $llamadaSeguimiento = new Venta();
+        $llamadas = $llamadaSeguimiento->getLLamadasSeguimiento();
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/ventas/index.php';
+    }
+
+    public function fecha()
+    {
+        require_once './views/fecha.php';
     }
 
     public function registro()
@@ -19,10 +26,50 @@ class ventaController
         require_once './views/ventas/registro.php';
     }
 
-    public function registros()
+    public function finalizar()
+    {
+        if ($_GET['id']) {
+            $id = isset($_GET) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : false;
+            $fin = new Venta();
+            $fin->set3Id($id);
+            $res = $fin->finalizarSeguimiento();
+        }
+        echo json_encode($res);
+    }
+
+    public function test()
     {
         $registros = new Venta();
-        $reg = $registros->getAll();
+        $arrData = $registros->getAllObj();
+        for ($i = 0; $i < count($arrData); $i++) {
+
+            if ($arrData[$i]['fecha_seguimiento'] == 0) {
+                $arrData[$i]['estado_ve'] = '<span class="badge badge-danger">Inactivo</span>';
+            } else {
+                $arrData[$i]['estado_ve'] = '<span class="badge badge-success">Activo</span>';
+            }
+            $arrData[$i]['edit'] =
+                '<a href=http://localhost/clinica_soft/venta/editar&id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-edit"></i></a>';
+            $arrData[$i]['nota'] =
+                '<a href=http://localhost/clinica_soft/venta/saveNota&id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-file-alt"></i></a>';
+            $arrData[$i]['finalizar'] =
+                '<a data-id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md finSeg btn-table"><i class="fas fa-hourglass-end finSeg" data-id=' . $arrData[$i]['id_venta'] . '></i></a>';
+            $arrData[$i]['ingreso'] =
+                '<a href=http://localhost/clinica_soft/paciente/registro&idv=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-user-plus"></i></a>';
+        }
+        echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function principalTable()
+    {
+        $data = new Venta();
+        $reg = $data->getAll();
+        echo json_encode($reg, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function registros()
+    {
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/ventas/registros.php';

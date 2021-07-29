@@ -3,7 +3,13 @@ const contactosForm = document.querySelector('#cpForm'),
     listContactos = document.querySelector('#listContactos, tbody');
 
 eventListener();
-listData();
+
+//se comprueba si el paciente ya fue creado, si no hay paciente creado se visualiza
+//la data de la localstorage
+const idPaciente = document.querySelector('#paciente_id').value;
+if(!parseInt(idPaciente)) {
+    listData();
+}
 
 function eventListener() {
     if (contactosForm) {

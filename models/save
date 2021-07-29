@@ -84,3 +84,39 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
+                                <?php while ($data = $reg->fetch_object()) : ?>
+                                                <tr>
+                                                    <td><?= $data->fecha_llamada ?></td>
+                                                    <td><?= $data->fecha_seguimiento ?></td>
+                                                    <td><?= $data->nombre_cont ?></td>
+                                                    <td><?= $data->usuario_id ?></td>
+                                                    <td><?= $data->venta_id != "" ? 'Asignado': ''?></td>
+                                                    <td style="width:5%; text-align: center">
+                                                        <a type="button" class="btn bg-gradient-white btn-md"
+                                                           href="<?= base_url ?>venta/editar&id=<?= $data->id_venta ?>">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td style="width:5%; text-align: center">
+                                                        <a type="button" class="btn bg-gradient-white btn-md"
+                                                           href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
+                                                            <i class="fas fa-file-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td style="width:5%; text-align: center">
+                                                        <a type="button" class="btn bg-gradient-white btn-md"
+                                                           href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
+                                                            <i class="fas fa-hourglass-end" style="color: #C70039;"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td style="width:5%; text-align: center">
+                                                        <a type="button" class="btn bg-gradient-white btn-md"
+                                                           href="<?= base_url ?>paciente/registro&id=<?= base64_encode($data->id_venta) ?>">
+                                                            <i class="fas fa-user-plus" style="color: #2471a3;"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php endwhile; ?>

@@ -49,8 +49,6 @@ function readForm(e) {
     data.append('paciente_id', paciente_id);
     data.append('action', action);
 
-    console.log(...data);
-
     if(sustancia == '' || formaConsumo == ''){
         sweetAlert('Favor de llenar los campos requeridos', 'error');
     }else if(action === 'create'){

@@ -22,33 +22,33 @@
             <i class="fa fa-plus"></i>Nuevo Ingreso
         </a>
         -->
-        <table id="tblRegistros" class="table table-bordered table-striped">
+        <table id="tbldata" class="table table-bordered table-striped">
             <thead>
-                <tr>
-                    <th> No.Paciente</th>
-                    <th> Nombre</th>
-                    <th> Apellido Paterno</th>
-                    <th> Apellido Materno</th>
-                    <th> Opciones</th>
-                </tr>
+            <tr>
+                <th> Nombre</th>
+                <th> Apellido Paterno</th>
+                <th> Apellido Materno</th>
+                <th> Opciones</th>
+            </tr>
             </thead>
             <tbody>
-                <?php while ($pac = $data->fetch_object()) : ?>
-                    <tr>
-                        <td class="col-1"><?= $pac->id_paciente ?></td>
-                        <td class="col-3"><?= $pac->nombre_ip ?></td>
-                        <td class="col-3"><?= $pac->apellido_paterno_ip ?></td>
-                        <td class="col-3"><?= $pac->apellido_materno_ip ?></td>
-                        <td class="col-1">
-                            <a type="button" class="btn bg-gradient-white btn-sm" href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
-                                <i class="fas fa-folder"></i>
-                            </a>
-                            <a type="button" class="btn bg-gradient-white btn-sm" href="<?= base_url ?>paciente/reingreso&id=<?= $pac->id_paciente ?>">
-                                <i class="fas fa-redo-alt"></i>
-                            </a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
+            <?php while ($obj = $data->fetch_object()) : ?>
+                <tr>
+                    <td><?= $obj->nombre_ip ?></td>
+                    <td><?= $obj->apellido_paterno_ip ?></td>
+                    <td><?= $obj->apellido_materno_ip ?></td>
+                    <td class="col-1">
+                        <a type="button" class="btn bg-gradient-white btn-sm"
+                           href="<?= base_url ?>paciente/expediente&id=<?= $obj->id_paciente ?>">
+                            <i class="fas fa-folder"></i>
+                        </a>
+                        <a type="button" class="btn bg-gradient-white btn-sm"
+                           href="<?= base_url ?>paciente/reingreso&id=<?= $obj->id_paciente ?>">
+                            <i class="fas fa-redo-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            <?php endwhile;; ?>
             </tbody>
         </table>
     </div>

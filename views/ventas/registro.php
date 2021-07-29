@@ -10,7 +10,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item">
-                    <a href="<?= base_url ?>venta/registros">Seguimientos</a>
+                    <a href="<?= base_url ?>venta/index">Panel de ventas</a>
                 </li>
                 <li class="breadcrumb-item active">Registro</li>
             </ol>
@@ -123,7 +123,6 @@
                             </div>
                         </div>
                     </div>
-
             </div>
         </div>
     </div>

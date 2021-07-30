@@ -5,6 +5,7 @@ require_once './models/Entidad.php';
 require_once './models/Usuario.php';
 require_once './models/AsignacionPaciente.php';
 require_once './models/ContactosPaciente.php';
+require_once './models/Venta.php';
 
 class pacienteController
 {
@@ -75,8 +76,6 @@ class pacienteController
             $paciente = new PacienteIngreso();
             $paciente->setVentaId($ventaId);
             $data = $paciente->getIngresoVenta();
-            //var_dump($data);
-
             if ($data) {
                 $paciente_id = $data->paciente_id;
                 $ingreso_id = $data->id_ingreso_paciente;
@@ -84,7 +83,7 @@ class pacienteController
                 $contactos->setPacienteId($paciente_id);
                 $contactos->setIngresoId($ingreso_id);
                 $obj = $contactos->getAll();
-                while($d = $obj->fetch_assoc()){
+                while ($d = $obj->fetch_assoc()) {
                     $arr[] = $d;
                 }
                 $arr;
@@ -206,6 +205,15 @@ class pacienteController
                         $contacto->setParentescoCp(filter_var($row['parentescoCp'], FILTER_SANITIZE_STRING));
                         $contacto->save();
                     }
+
+                    // Si existe el id de la venta y se crea un nuevo registro
+                    // del paciente se manda a llamar la funcion para finalizar el status
+                    if ($ventaId) {
+                        $status = new Venta();
+                        $status->setIdVenta($ventaId);
+                        $status->finalizarSeguimiento();
+                    }
+
                 }
             } else if ($_POST['action'] == 'reingreso') {
                 $pacienteIngreso->setId($usuaio_id);

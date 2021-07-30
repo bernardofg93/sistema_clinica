@@ -25,7 +25,6 @@ function eventListener() {
 
 function readForm(e) {
     e.preventDefault();
-
     const nombre = document.querySelector('#nombreCp').value,
         telefono = document.querySelector('#telCp').value,
         correo = document.querySelector('#correoCp').value,
@@ -51,7 +50,6 @@ function readForm(e) {
             data.push(contacto);
             localStorage.setItem("db", JSON.stringify(data));
         }
-
         listData();
         contactosForm.reset();
     }

@@ -3,9 +3,9 @@
 <?php
 //$id = isset($data) && is_object($data) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : false;
 //$paciente_id = isset($data) && is_object($data) : false;
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $paciente_id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
-}else {
+} else {
     $paciente_id = isset($data) && $data && is_object($data) ? $data->paciente_id : false;
 }
 
@@ -24,9 +24,15 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                    <a href="<?= base_url ?>paciente/registros">Registros</a>
-                </li>
+                <?php if (isset($arr)) : ?>
+                    <li class="breadcrumb-item">
+                        <a href="<?= base_url ?>paciente/registros">Registros</a>
+                    </li>
+                <?php else: ?>
+                    <li class="breadcrumb-item">
+                        <a href="<?= base_url ?>venta/registros">Seguimientos</a>
+                    </li>
+                <?php endif; ?>
                 <li class="breadcrumb-item active">Registro</li>
             </ol>
         </div><!-- /.col -->
@@ -40,14 +46,16 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
             <button type="submit" form="rgPaciente" class="btn btn-cns btn-flat">
                 Guardar <i class="far fa-save"></i>
             </button>
-        <?php elseif($idVenta && !isset($data) && !$data && !is_object($data)) : ?>
+        <?php elseif ($idVenta && !isset($data) && !$data && !is_object($data)) : ?>
             <button type="submit" form="rgPaciente" class="btn btn-cns btn-flat">
                 Guardar <i class="far fa-save"></i>
             </button>
+        <?php elseif ($idVenta && isset($data) && $data && is_object($data)) : ?>
+            <a type="button" form="rgPaciente" class="btn btn-cns btn-flat"
+               href="<?= base_url ?>venta/detalleProspecto&idDp=<?= $data->id_venta ?>">
+                Detalle prospecto <i class="fas fa-arrow-right"></i>
+            </a>
         <?php endif; ?>
-        <a type="button" form="rgPaciente" class="btn btn-cns btn-flat" href="<?= base_url ?>venta/registro">
-            Detalle prospecto <i class="fas fa-arrow-right"></i>
-        </a>
     </div>
 </div>
 
@@ -337,10 +345,12 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                 <div class="row">
                     <div class="col-sm-12">
                         <div class=" float-right">
-                            <a type="button" id="btnCreate" class="btn btn-cns btn-flat" data-toggle="modal"
-                               data-target="#modalCategory">
-                                Ingresar contactos <i class="far fa-list-alt"></i>
-                            </a>
+                            <?php if (!isset($arr)) : ?>
+                                <a type="button" id="btnCreate" class="btn btn-cns btn-flat" data-toggle="modal"
+                                   data-target="#modalCategory">
+                                    Ingresar contactos <i class="far fa-list-alt"></i>
+                                </a>
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-header -->
                         <table class="table table-bordered" id="listContactos">
@@ -350,32 +360,31 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                                 <th style="font-size: 13px;">Parentesco</th>
                                 <th style="font-size: 13px;">Telefono</th>
                                 <th style="font-size: 13px;">Correo</th>
-                                <th style="font-size: 13px;">Editar</th>
-                                <th style="font-size: 13px;">Eliminar</th>
+                                <?php if (!isset($arr)) : ?>
+                                    <th style="font-size: 13px;">Editar</th>
+                                    <th style="font-size: 13px;">Eliminar</th>
+                                <?php endif; ?>
                             </tr>
                             </thead>
                             <tbody id="contactosPaciente">
-                                    <?php for($i=0;$i<count($arr);$i++) {
-                                        echo '<tr> . ' . $arr[$i]['nombre_cp']; ' . </tr>';
-                                    }?>
-
-                                    <?php for($i=0;$i<count($arr);$i++) : ?>
-                                      <tr>
-                                          <td>
-                                              <?php echo $arr[$i]['nombre_cp'] ?>
-                                          </td>
-                                          <td>
-                                              <?php echo $arr[$i]['nombre_cp'] ?>
-                                          </td>
-                                          <td>
-                                              <?php echo $arr[$i]['nombre_cp'] ?>
-                                          </td>
-                                          <td>
-                                              <?php echo $arr[$i]['nombre_cp'] ?>
-                                          </td>
-                                      </tr>
-                                    <?php endfor; ?>
-
+                            <?php if (isset($arr)) : ?>
+                                <?php for ($i = 0; $i < count($arr); $i++) : ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $arr[$i]['nombre_cp'] ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $arr[$i]['parentesco_cp'] ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $arr[$i]['telefono_cp'] ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $arr[$i]['correo_cp'] ?>
+                                        </td>
+                                    </tr>
+                                <?php endfor; ?>
+                            <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

@@ -1,6 +1,6 @@
 <?php
 
-class venta
+class Venta
 {
     private $id_venta;
     private $id;
@@ -168,7 +168,7 @@ class venta
     {
         $fecha = date("Y-m-d");
         $fechaActual = date("Y-m-d", strtotime("+1 day", strtotime($fecha)));
-        $sql = "SELECT * FROM venta WHERE fecha_seguimiento >= '$fecha' AND fecha_seguimiento < '$fechaActual'";
+        $sql = "SELECT * FROM venta WHERE fecha_seguimiento >= '$fecha' AND fecha_seguimiento <= '$fechaActual'";
         return $res = $this->db->query($sql);
     }
 

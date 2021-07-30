@@ -13,6 +13,21 @@ class ventaController
         require_once './views/ventas/index.php';
     }
 
+    public function detalleProspecto()
+    {
+        if (isset($_GET['idDp'])) {
+            $detalleProspecto = true;
+            $idDp = filter_var($_GET['idDp'], FILTER_VALIDATE_INT);
+            $detalleProspecto = new Venta();
+            $detalleProspecto->setId($idDp);
+            $data = $detalleProspecto->getOne();
+            $dataArr = Utils::getAllNotes($idDp);
+            require_once './admin/layout/header.php';
+            require_once './admin/layout/sidebar.php';
+            require_once './views/ventas/registro.php';
+        }
+    }
+
     public function fecha()
     {
         require_once './views/fecha.php';
@@ -31,7 +46,7 @@ class ventaController
         if ($_GET['id']) {
             $id = isset($_GET) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : false;
             $fin = new Venta();
-            $fin->set3Id($id);
+            $fin->setId($id);
             $res = $fin->finalizarSeguimiento();
         }
         echo json_encode($res);
@@ -155,10 +170,8 @@ class ventaController
             $venta->setId($id);
             $data = $venta->getOne();
             //obtenemos las notas para mandarlas a la vista
-            $notas = new NotaVenta();
-            $notas->setId($id);
-            $dataArr = $notas->getAll();
-            $arr = json_decode(json_encode($dataArr), true);
+            $dataArr = Utils::getAllNotes($id);
+            //$arr = json_decode(json_encode($dataArr), true);
             require_once './admin/layout/header.php';
             require_once './admin/layout/sidebar.php';
             require_once './views/ventas/registro.php';

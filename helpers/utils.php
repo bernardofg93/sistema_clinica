@@ -18,4 +18,11 @@ class Utils
         }
         return $action;
     }
+
+    public static function getAllNotes($id){
+        require_once './models/NotaVenta.php';
+        $notas = new NotaVenta();
+        $notas->setId($id);
+        return $res = $notas->getAll();
+    }
 }

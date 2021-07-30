@@ -9,8 +9,6 @@ let data = JSON.parse(localStorage.getItem("db"));
 
 ventaId = document.querySelector('#ventaId').value;
 
-console.log(ventaId);
-
 eventListener();
 
 function eventListener() {

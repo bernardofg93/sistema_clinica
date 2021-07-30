@@ -1,5 +1,7 @@
 <?php $action = Utils::editData(isset($edit) && $edit ? $edit : '') ?>
-<?php isset($data) && is_object($data) ? $id = $_GET['id'] : '' ?>
+<?php if (!isset($detalleProspecto)) : ?>
+    <?php isset($data) && is_object($data) ? $id = $_GET['id'] : '' ?>
+<?php endif; ?>
 
 <!-- Formulario -->
 <div class="container-fluid">
@@ -210,7 +212,6 @@
             </button>
         </div>
     </div>
-
     <div class="card-body list-notes">
         <div class="direct-chat-messages" id="listNotes">
             <?php if (isset($dataArr) && $dataArr) : ?>
@@ -232,7 +233,6 @@
             <?php endif; ?>
         </div>
     </div>
-    <!-- /.card-body -->
     <div class="card-footer">
         <form id="fmNota">
             <div class="input-group">
@@ -244,7 +244,6 @@
             </div>
         </form>
     </div>
-    <!-- /.card-footer-->
 </div>
 <!-- Buttons -->
 <div class="card card-white col-sm-6">

@@ -105,7 +105,6 @@ class Paciente
         $sql = "INSERT INTO paciente VALUES(NULL, '$nombre', '$apellido_pa', '$apellido_ma', '$fecha_nac', '$lugar')";
         $save = $this->db->query($sql);
 
-
         if ($save) {
             return ['res' => 'true', 'id' => $id = $this->db->insert_id];
         } else {

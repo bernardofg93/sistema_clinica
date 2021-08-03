@@ -14,6 +14,9 @@
                 <li class="breadcrumb-item">
                     <a href="<?= base_url ?>venta/index">Panel de ventas</a>
                 </li>
+                <li class="breadcrumb-item">
+                    <a href="<?= base_url ?>venta/registros">Seguimientos</a>
+                </li>
                 <li class="breadcrumb-item active">Registro</li>
             </ol>
         </div>
@@ -246,7 +249,7 @@
     </div>
 </div>
 <!-- Buttons -->
-<div class="card card-white col-sm-6">
+<div class="card card-white col-sm-6 actionHide" id="actionButtonsContainer">
     <div class="card-body" id="container-buttons">
         <button type="submit" form="rgVenta" class="btn btn-cns btn-flat">
             Guardar <i class="far fa-save"></i>

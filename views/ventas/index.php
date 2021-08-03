@@ -110,9 +110,15 @@
                 <div class="row">
                     <div class="col-sm-4 col-6">
                         <div class="description-block border-left border-right">
-                            <span class="description-percentage text-success"><i
-                                        class="fas fa-caret-up"></i>2 Lugares</span>
-                            <h5 class="description-header">23 Pacientes</h5>
+                            <span class="description-percentage text-success">
+                                <i class="fas fa-caret-up"></i>
+                                 <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[0]['cupos'] - 25 : false ?>
+                                Lugares
+                            </span>
+                            <h5 class="description-header">
+                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[0]['cupos'] : false ?>
+                                Pacientes
+                            </h5>
                             <span class="description-text">CAP 1</span>
                         </div>
                         <!-- /.description-block -->
@@ -120,9 +126,15 @@
                     <!-- /.col -->
                     <div class="col-sm-4 col-6">
                         <div class="description-block border-right">
-                            <span class="description-percentage text-success"><i
-                                        class="fas fa-caret-up"></i>3 Lugares</span>
-                            <h5 class="description-header">24 Pacientes</h5>
+                            <span class="description-percentage text-success">
+                                <i class="fas fa-caret-up"></i>
+                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[1]['cupos'] - 25 : false ?>
+                                Lugares
+                            </span>
+                            <h5 class="description-header">
+                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[1]['cupos'] : false ?>
+                                Pacientes
+                            </h5>
                             <span class="description-text">CAP 2</span>
                         </div>
                         <!-- /.description-block -->
@@ -130,8 +142,15 @@
                     <!-- /.col -->
                     <div class="col-sm-4 col-6">
                         <div class="description-block border-right">
-                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i>10 Lugares</span>
-                            <h5 class="description-header">10 Pacientes</h5>
+                            <span class="description-percentage text-success">
+                                <i class="fas fa-caret-up"></i>
+                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[2]['cupos'] - 25 : false ?>
+                                Lugares
+                            </span>
+                            <h5 class="description-header">
+                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[2]['cupos'] : false ?>
+                                Pacientes
+                            </h5>
                             <span class="description-text">CAS</span>
                         </div>
                         <!-- /.description-block -->

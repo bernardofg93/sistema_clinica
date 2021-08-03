@@ -1,7 +1,7 @@
 create
-    database db_sistema_clinica_03;
+    database db_sistema_clinica_04;
 use
-    db_sistema_clinica_03;
+    db_sistema_clinica_04;
 
 CREATE TABLE entidad
 (
@@ -30,30 +30,35 @@ CREATE TABLE usuario
 
 CREATE TABLE venta
 (
-    id_venta          INT         NOT NULL AUTO_INCREMENT,
-    usuario_id        INT(255)    NOT NULL,
-    fecha_llamada     DATE        NOT NULL,
-    hora_llamada      TIME        NOT NULL,
-    lada_tel          VARCHAR(20) NULL,
-    razon_llamada     varchar(50) NOT NULL,
-    nombre_cont       varchar(50) NOT NULL,
-    correo_cont       varchar(70) NOT NULL,
-    parentesco_cont   varchar(20) NULL,
-    tipo_consumo      varchar(30) NULL,
-    edad_cont         smallint(2) NULL,
-    aceptacion        varchar(9)  NULL,
-    detalles_ad       varchar(100),
-    fecha_seguimiento DATE        NOT NULL,
-    medio_de_envio    varchar(13) NULL,
+    `id_venta`          INT      NOT NULL AUTO_INCREMENT,
+    `usuario_id`        int(255) NOT NULL,
+    `fecha_llamada`     date     NOT NULL,
+    `hora_llamada`      time     NOT NULL,
+    `lada_tel`          varchar(20)  DEFAULT NULL,
+    `razon_llamada`     varchar(50)  DEFAULT NULL,
+    `nombre_cont`       varchar(50)  DEFAULT NULL,
+    `correo_cont`       varchar(70)  DEFAULT NULL,
+    `parentesco_cont`   varchar(20)  DEFAULT NULL,
+    `tipo_consumo`      varchar(30)  DEFAULT NULL,
+    `edad_cont`         smallint(2)  DEFAULT NULL,
+    `aceptacion`        varchar(9)   DEFAULT NULL,
+    `detalles_ad`       varchar(100) DEFAULT NULL,
+    `fecha_seguimiento` date         DEFAULT NULL,
+    `medio_de_envio`    varchar(13)  DEFAULT NULL,
+    `medio_entero`      varchar(20)  DEFAULT NULL,
+    `estado_ve`         smallint(2)  DEFAULT NULL,
     constraint pk_venta primary key (id_venta),
     constraint fk_venta_usuario foreign key (usuario_id) references usuario (id_usuario)
 ) engine = InnoDB;
 
 CREATE TABLE nota_venta
 (
-    id_nota_venta INT NOT NULL AUTO_INCREMENT,
-    venta_id      INT(255),
-    nota_desc     TEXT,
+    id_nota_venta  INT     NOT NULL AUTO_INCREMENT,
+    `venta_id`     int(255) DEFAULT NULL,
+    `usuario_id`   int(11) NOT NULL,
+    `nota_desc`    text     DEFAULT NULL,
+    `fecha_alta_n` date     DEFAULT NULL,
+    `hora_alta_n`  time     DEFAULT NULL,
     constraint pk_nota_venta primary key (id_nota_venta),
     constraint fk_nota_venta_venta foreign key (venta_id) references venta (id_venta)
 ) engine = InnoDB;
@@ -71,40 +76,42 @@ CREATE TABLE paciente
 
 CREATE TABLE ingreso_paciente
 (
-    id_ingreso_paciente    INT NOT NULL AUTO_INCREMENT,
-    entidad_id             INT NOT NULL,
-    paciente_id            INT NULL,
-    usuario_id             INT NOT NULL,
-    venta_id               INT NOT NULL,
-    edad_pa                SMALLINT(3),
-    estado_civil_ip        VARCHAR(15),
-    hijos_ip               SMALLINT(2),
-    edades_hijos_ip        VARCHAR(50),
-    ocupacion_ip           VARCHAR(50),
-    vive_con_ip            VARCHAR(20),
-    calle_vive_ip          VARCHAR(30),
-    ext_vive_ip            VARCHAR(5),
-    interior_ip            VARCHAR(5),
-    colonia_ip             VARCHAR(30),
-    ciudad_vive_ip         VARCHAR(30),
-    codigo_postal_ip       VARCHAR(10),
-    estado_vive_ip         VARCHAR(10),
-    pais_vive_ip           VARCHAR(20),
-    modo_se_entero         VARCHAR(20),
-    recomendado_por        VARCHAR(25),
-    resp_legal             VARCHAR(20),
-    estado_actitud         VARCHAR(50),
-    observaciones_ingreso  VARCHAR(100),
-    adicion_tratamiento    VARCHAR(25),
-    contactos_relacionados TEXT,
-    tratamiento_ip         VARCHAR(50),
-    ingreso_ip             DATE,
-    precio_tratamiento_ip  DECIMAL(6, 2),
-    precio_letra           VARCHAR(10),
-    duracion_ip            VARCHAR(50),
-    deposito_ip            DECIMAL(6, 2),
-    deposito_letra         VARCHAR(10),
-    forma_pago_ip          VARCHAR(12),
+    id_ingreso_paciente     INT     NOT NULL AUTO_INCREMENT,
+    `entidad_id`            int(11)       DEFAULT NULL,
+    `paciente_id`           int(11)       DEFAULT NULL,
+    `usuario_id`            int(11) NOT NULL,
+    `venta_id`              int(11)       DEFAULT NULL,
+    `edad_pa`               smallint(3)   DEFAULT NULL,
+    `estado_civil_ip`       varchar(15)   DEFAULT NULL,
+    `hijos_ip`              smallint(2)   DEFAULT NULL,
+    `edades_hijos_ip`       varchar(50)   DEFAULT NULL,
+    `ocupacion_ip`          varchar(50)   DEFAULT NULL,
+    `escolaridad_ip`        varchar(20)   DEFAULT NULL,
+    `vive_con_ip`           varchar(20)   DEFAULT NULL,
+    `calle_vive_ip`         varchar(30)   DEFAULT NULL,
+    `ext_vive_ip`           varchar(5)    DEFAULT NULL,
+    `interior_ip`           varchar(5)    DEFAULT NULL,
+    `colonia_ip`            varchar(30)   DEFAULT NULL,
+    `ciudad_vive_ip`        varchar(30)   DEFAULT NULL,
+    `codigo_postal_ip`      varchar(10)   DEFAULT NULL,
+    `estado_vive_ip`        varchar(10)   DEFAULT NULL,
+    `pais_vive_ip`          varchar(20)   DEFAULT NULL,
+    `modo_se_entero`        varchar(20)   DEFAULT NULL,
+    `recomendado_por`       varchar(25)   DEFAULT NULL,
+    `resp_legal`            varchar(20)   DEFAULT NULL,
+    `estado_actitud`        varchar(50)   DEFAULT NULL,
+    `observaciones_ingreso` varchar(100)  DEFAULT NULL,
+    `adicion_tratamiento`   varchar(25)   DEFAULT NULL,
+    `ingreso_ip`            date          DEFAULT NULL,
+    `precio_tratamiento_ip` decimal(6, 2) DEFAULT NULL,
+    `precio_letra`          varchar(10)   DEFAULT NULL,
+    `moneda_ip`             varchar(3)    DEFAULT NULL,
+    `duracion_ip`           varchar(50)   DEFAULT NULL,
+    `deposito_ip`           decimal(6, 2) DEFAULT NULL,
+    `deposito_letra`        varchar(10)   DEFAULT NULL,
+    `forma_pago_ip`         varchar(12)   DEFAULT NULL,
+    `fecha_alta_ing`        date          DEFAULT NULL,
+    `hora_alta_ig`          time          DEFAULT NULL,
     CONSTRAINT pk_ingreso_paciente primary key (id_ingreso_paciente),
     CONSTRAINT fk_ingreso_paciente_paciente FOREIGN KEY (paciente_id) REFERENCES paciente (id_paciente),
     CONSTRAINT fk_ingreso_paciente_entidad FOREIGN KEY (entidad_id) REFERENCES entidad (id_entidad),
@@ -260,11 +267,12 @@ CREATE TABLE situacion_social_familiar
         REFERENCES paciente (`id_paciente`)
 ) ENGINE = InnoDB;
 
-
 INSERT INTO entidad
-VALUES (NULL, 'CAP1', 10);
+VALUES (NULL, 'CAP1', 50);
 INSERT INTO entidad
-VALUES (NULL, 'CAP2', 10);
+VALUES (NULL, 'CAP2', 50);
+INSERT INTO entidad
+VALUES (NULL, 'CAS', 50);
 
 INSERT INTO sustancia
 VALUES (NULL, 'Alcohol');

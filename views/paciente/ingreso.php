@@ -245,7 +245,7 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="cp">CP:</label>
-                                <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm" id="cp"
+                                <input type="text" class="form-control form-control-sm" id="cp"
                                        value="<?= isset($data) && is_object($data) ? $data->codigo_postal_ip : '' ?>">
                             </div>
                         </div>
@@ -418,13 +418,13 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nombre">Tratamiento:</label>
-                            <select class="form-control form-control-sm" id="tratamiento">
-                                <option value="<?= isset($data) && is_object($data) ? $data->tratamiento_ip : '' ?>"
+                            <select class="form-control form-control-sm" id="tratamiento" required>
+                                <option value="<?= isset($data) && is_object($data) ? $data->nombre_entidad : '' ?>"
                                         disabled
-                                        selected><?= isset($data) && is_object($data) ? $data->tratamiento_ip : 'Selecciona'; ?></option>
-                                <option value="CAP1">CAP1</option>
-                                <option value="CAP2">CAP2</option>
-                                <option value="CAS">CAS</option>
+                                        selected><?= isset($data) && is_object($data) ? $data->nombre_entidad : 'Selecciona'; ?></option>
+                                <?php while ($ent = $tratamiento->fetch_object()) : ?>
+                                    <option value="<?= $ent->id_entidad ?>"><?= $ent->nombre_entidad ?></option>
+                                <?php endwhile; ?>
                             </select>
                         </div>
                     </div>
@@ -456,7 +456,7 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                         <!-- textarea -->
                         <div class="form-group">
                             <label for="nombre">Precio con letra:</label>
-                            <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm"
+                            <input  type="text" class="form-control form-control-sm"
                                    id="precio_letra"
                                    value="<?= isset($data) && is_object($data) ? $data->precio_letra : '' ?>">
                         </div>

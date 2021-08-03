@@ -1,6 +1,8 @@
 <?php
 require_once './models/Venta.php';
 require_once './models/NotaVenta.php';
+require_once 'models/PacienteIngreso.php';
+require_once './models/entidad.php';
 
 class ventaController
 {
@@ -8,6 +10,19 @@ class ventaController
     {
         $llamadaSeguimiento = new Venta();
         $llamadas = $llamadaSeguimiento->getLLamadasSeguimiento();
+
+        // se obtionenen los lugares disponibles por unidad
+        $entidad = new Entidad();
+        $ent = $entidad->getAll();
+        while ($arr = $ent->fetch_assoc()) {
+            $arrEntidad[] = $arr;
+        }
+        $arrEntidad;
+
+        // se obtienen los pacientes activos por unidada
+        $totalPaciente = new PacienteIngreso();
+        $test = $totalPaciente->getTotal();
+
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/ventas/index.php';
@@ -28,9 +43,21 @@ class ventaController
         }
     }
 
-    public function fecha()
+    public function validateDetalleProspecto()
     {
-        require_once './views/fecha.php';
+        if (isset($_GET['id'])) {
+            $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+            $validate = new PacienteIngreso();
+            $validate->setVentaId($id);
+            $obj = $validate->getIngresoVenta();
+
+            if ($obj) {
+                $arrObj = ['res' => 'true'];
+            } else {
+                $arrObj = ['res' => 'false'];
+            }
+        }
+        echo json_encode($arrObj);
     }
 
     public function registro()

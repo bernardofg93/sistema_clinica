@@ -151,5 +151,32 @@ function actionFechaSeguimiento(e) {
     }
 }
 
+/*
+document.addEventListener('DOMContentLoaded', function () {
+     const ventaId = document.querySelector('#ventaId').value;
+     const divButtons = document.querySelector('#actionButtonsContainer');
+    //console.log(ventaId);
+    if(parseInt(ventaId)){
+
+        const data = new FormData();
+        data.append('ventaId', ventaId);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://localhost/clinica_soft/venta/validateDetalleProspecto&id=${ventaId}` , true );
+
+        xhr.onload = function (){
+            if (xhr.status === 200){
+                const res = JSON.parse(xhr.responseText);
+                if(res.res === 'true'){
+                    divButtons.classList.remove('actionHide');
+                    divButtons.setAttribute('class', 'card card-white col-sm-6 actionHideOff');
+                }
+            }
+        }
+        xhr.send(data);
+    }
+
+})
+*/
 
 

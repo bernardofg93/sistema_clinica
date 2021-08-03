@@ -3,6 +3,7 @@
 class PacienteIngreso
 {
     private $id;
+    private $entidad_id;
     private $paciente_id;
     private $venta_id;
     private $edad_pa;
@@ -39,6 +40,17 @@ class PacienteIngreso
     public function __construct()
     {
         $this->db = Database::connect();
+    }
+
+    public function getEntidadId()
+    {
+        return $this->entidad_id;
+    }
+
+    public function setEntidadId($entidad_id)
+    {
+        $this->entidad_id = $entidad_id;
+        return $this;
     }
 
     public function getId()
@@ -405,6 +417,20 @@ class PacienteIngreso
         return $this;
     }
 
+    public function getTotal()
+    {
+        $res = 1;
+        $sql = "SELECT 
+                COUNT(id_ingreso_paciente) 
+                FROM ingreso_paciente i 
+                INNER JOIN entidad u ON i.entidad_id = u.id_entidad
+                WHERE u.id_unidad = '$res'
+                ";
+       $obj = $this->db->query($sql);
+       return $obj->fetch_object();
+    }
+
+
     public function reingreso()
     {
         $sql = "SELECT 
@@ -422,6 +448,7 @@ class PacienteIngreso
                 ingreso_paciente i
                 INNER JOIN venta v ON i.venta_id = v.id_venta
                 INNER JOIN paciente p ON i.paciente_id = p.id_paciente
+                INNER JOIN entidad e ON i.entidad_id = e.id_entidad
                 WHERE venta_id = {$this->getVentaId()}
                 ";
         $obj = $this->db->query($sql);
@@ -435,7 +462,9 @@ class PacienteIngreso
                 FROM 
                 ingreso_paciente i
                 INNER JOIN 
-                paciente p ON i.paciente_id = p.id_paciente 
+                paciente p ON i.paciente_id = p.id_paciente
+                INNER JOIN
+                entidad e ON i.entidad_id = e.id_entidad
                 WHERE 
                 i.paciente_id = {$this->getPacienteId()} 
                 AND 
@@ -457,6 +486,7 @@ class PacienteIngreso
 
     public function save()
     {
+        $entidad_id = $this->entidad_id;
         $usuario_id = $this->id;
         $paciente_id = $this->paciente_id;
         $venta_id = $this->venta_id;
@@ -487,29 +517,32 @@ class PacienteIngreso
         $precio_letra = $this->precio_letra;
         $moneda = $this->moneda_ip;
         $duracion = $this->duracion_ip;
-
         $deposito = $this->deposito_ip;
         $deposito_letra = $this->deposito_letra;
         $forma_pago = $this->forma_pago_ip;
 
         $sql = "INSERT INTO ingreso_paciente VALUES
                                     (
-                                     NULL, NULL, '$paciente_id', '$usuario_id', '$venta_id', '$edad', '$civil', '$hijos', '$edades'
+                                     NULL, '$entidad_id', '$paciente_id', '$usuario_id', null, '$edad', '$civil', '$hijos', '$edades'
                                      '$ocupacion','$escolaridad', '$vive', '$calle', '$colonia', '$ext',
                                      '$interior', '$colonia', '$ciudad_vive', '$postal',
                                      '$estado_vive', '$pais', '$modo', '$recomendado',
                                      '$legal', '$actitud', '$observaciones',
-                                     '$adiccion', '$tratamiento', '$ingreso', '$precio',
+                                     '$adiccion', '$ingreso', '$precio',
                                      '$precio_letra','$moneda', '$duracion', '$deposito', '$deposito_letra',
                                      '$forma_pago', CURDATE(), CURTIME()
                                      )";
         $save = $this->db->query($sql);
 
+        // var_dump($save);
+        // echo $this->db->error;
+
         if ($save) {
             return [
                 'res' => 'true',
                 'paciente_id' => $paciente_id,
-                'ingreso_id' => $ingreso_id = $this->db->insert_id
+                'ingreso_id' => $ingreso_id = $this->db->insert_id,
+                'entidad_id' => $entidad_id
             ];
         } else {
             return ['res' => 'false'];

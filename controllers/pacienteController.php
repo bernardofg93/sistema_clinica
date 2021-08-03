@@ -89,6 +89,8 @@ class pacienteController
                 $arr;
             }
         }
+        $entidad = new Entidad();
+        $tratamiento = $entidad->getAll();
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/paciente/ingreso.php';
@@ -126,7 +128,6 @@ class pacienteController
             $adiccion = isset($_POST['adiccion']) ? filter_var($_POST['adiccion'], FILTER_SANITIZE_STRING) : false;
 
             $estado_civil = isset($_POST['estado_civil']) ? filter_var($_POST['estado_civil'], FILTER_SANITIZE_STRING) : false;
-            $tratamiento = isset($_POST['tratamiento']) ? filter_var($_POST['tratamiento'], FILTER_SANITIZE_STRING) : false;
             $ingreso = isset($_POST['ingreso']) ? filter_var($_POST['ingreso'], FILTER_SANITIZE_STRING) : false;
             $precio_trat = isset($_POST['precio_trat']) ? filter_var($_POST['precio_trat'], FILTER_SANITIZE_STRING) : false;
             $precio_letra = isset($_POST['precio_letra']) ? filter_var($_POST['precio_letra'], FILTER_SANITIZE_STRING) : false;
@@ -138,6 +139,7 @@ class pacienteController
             $usuaio_id = $_SESSION['identity']->id_usuario;
             $paciente_id = isset($_POST['paciente_id']) ? filter_var($_POST['paciente_id'], FILTER_VALIDATE_INT) : false;
             $ventaId = isset($_POST['ventaId']) ? filter_var($_POST['ventaId'], FILTER_VALIDATE_INT) : false;
+            $entidad_id = isset($_POST['tratamiento']) ? filter_var($_POST['tratamiento'], FILTER_VALIDATE_INT) : false;
 
             $paciente = new Paciente();
             $paciente->setNombrePa($nombre_pa);
@@ -170,8 +172,8 @@ class pacienteController
             $pacienteIngreso->setObservacionesIngreso($observaciones);
 
             $pacienteIngreso->setAdiccionIp($adiccion);
-            $pacienteIngreso->setTratamientoIp($tratamiento);
-            $pacienteIngreso->setInteriorIp($ingreso);
+            $pacienteIngreso->setEntidadId($entidad_id);
+            $pacienteIngreso->setIngresoIp($ingreso);
             $pacienteIngreso->setPrecioTratamientoIp($precio_trat);
             $pacienteIngreso->setPrecioLetra($precio_letra);
             $pacienteIngreso->setMonedaIp($moneda);
@@ -192,6 +194,12 @@ class pacienteController
                     $save = $pacienteIngreso->save();
                     $ingreso_id = $save['ingreso_id'];
 
+                    //una vez cumplido el registro del paciente se
+                    // procede a restar el cupo de las entidades
+                    $id_ent = $save['entidad_id'];
+                    $entidad = new Entidad();
+                    $entidad->setIdEntidad($id_ent);
+                    $entidad->subtraction();
                     //Se insertan los contactos del paciente
                     $contacto = new ContactosPaciente();
                     $arr = json_decode($_POST['arrData'], true);

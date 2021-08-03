@@ -55,3 +55,12 @@
     margin: 0 auto !important;
     width: 100%;
 }
+
+/* Action Hide botons */
+.actionHide {
+    display: block !important;
+}
+
+.actionHideOff {
+    display: none !important;
+}

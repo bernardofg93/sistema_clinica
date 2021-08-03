@@ -3,8 +3,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>150</h3>
-
+                <h3></h3>
                 <p>Ventas</p>
             </div>
             <div class="icon">
@@ -16,16 +15,15 @@
     <!-- ./col -->
     <div class="col-lg-3 col-6">
         <!-- small box -->
-        <div class="small-box bg-success">
+        <div class="small-box bg-danger">
             <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Próximas sesiones</p>
+                <h3><sup style="font-size: 20px"></sup></h3>
+                <p>Coordinador clínico</p>
             </div>
             <div class="icon">
-                <i class="fas fa-clipboard-list"></i>
+                <i class="fas fa-user-nurse"></i>
             </div>
-            <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?=base_url?>coordinadorClinico/panel" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
@@ -33,8 +31,7 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>44</h3>
-
+                <h3></h3>
                 <p>Pacientes</p>
             </div>
             <div class="icon">
@@ -48,7 +45,7 @@
         <!-- small box -->
         <div class="small-box bg-secondary">
             <div class="inner">
-                <h3>65</h3>
+                <h3></h3>
                 <p>Nuevos asignados</p>
             </div>
             <div class="icon">

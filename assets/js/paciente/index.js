@@ -194,6 +194,8 @@ function readForm(e) {
     data.append("forma_pago", forma_pago);
     data.append("ventaId", ventaId);
 
+    console.log(...data);
+
     if (nombre === '' || apellido_p === '' || apellido_m === '' || fecha_nac === '' || lugar_nac === '') {
 
         sweetAlert('Favor de llenar los campos requeridos', 'error');

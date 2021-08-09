@@ -61,6 +61,7 @@ class pacienteController
     {
         $paciente = new Paciente();
         $data = $paciente->getAll();
+
         //registros con reingreso
         $reingresos = new PacienteIngreso();
         $rein = $reingresos->reingreso();
@@ -91,6 +92,10 @@ class pacienteController
         }
         $entidad = new Entidad();
         $tratamiento = $entidad->getAll();
+
+        //fecha de ingreso
+        $dataNow = Utils::getDate();
+
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/paciente/ingreso.php';
@@ -140,6 +145,11 @@ class pacienteController
             $paciente_id = isset($_POST['paciente_id']) ? filter_var($_POST['paciente_id'], FILTER_VALIDATE_INT) : false;
             $ventaId = isset($_POST['ventaId']) ? filter_var($_POST['ventaId'], FILTER_VALIDATE_INT) : false;
             $entidad_id = isset($_POST['tratamiento']) ? filter_var($_POST['tratamiento'], FILTER_VALIDATE_INT) : false;
+            $estadia = isset($_POST['estadia']);
+
+            //var_dump($estadia);
+            $fechaEstadia = Utils::getTime($estadia);
+            //var_dump($fechaEstadia);
 
             $paciente = new Paciente();
             $paciente->setNombrePa($nombre_pa);
@@ -182,6 +192,7 @@ class pacienteController
             $pacienteIngreso->setDepositoLetra($deposito_letra);
             $pacienteIngreso->setFormaPagoIp($forma_pago);
             $pacienteIngreso->setVentaId($ventaId);
+            $pacienteIngreso->setFechaEstadia($fechaEstadia);
 
             if ($_POST['action'] == 'create') {
                 $save = $paciente->save();
@@ -213,7 +224,6 @@ class pacienteController
                         $contacto->setParentescoCp(filter_var($row['parentescoCp'], FILTER_SANITIZE_STRING));
                         $contacto->save();
                     }
-
                     // Si existe el id de la venta y se crea un nuevo registro
                     // del paciente se manda a llamar la funcion para finalizar el status
                     if ($ventaId) {
@@ -221,7 +231,6 @@ class pacienteController
                         $status->setIdVenta($ventaId);
                         $status->finalizarSeguimiento();
                     }
-
                 }
             } else if ($_POST['action'] == 'reingreso') {
                 $pacienteIngreso->setId($usuaio_id);

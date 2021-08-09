@@ -112,6 +112,8 @@ CREATE TABLE ingreso_paciente
     `forma_pago_ip`         varchar(12)   DEFAULT NULL,
     `fecha_alta_ing`        date          DEFAULT NULL,
     `hora_alta_ig`          time          DEFAULT NULL,
+    `fecha_estadia`         time          DEFAULT NULL,
+
     CONSTRAINT pk_ingreso_paciente primary key (id_ingreso_paciente),
     CONSTRAINT fk_ingreso_paciente_paciente FOREIGN KEY (paciente_id) REFERENCES paciente (id_paciente),
     CONSTRAINT fk_ingreso_paciente_entidad FOREIGN KEY (entidad_id) REFERENCES entidad (id_entidad),

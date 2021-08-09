@@ -433,9 +433,11 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                     <div class="col-sm-6">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="nombre">Ingreso:</label>
-                            <input pattern="[a-zA-Z ]*" type="text" class="form-control form-control-sm" id="ingreso"
-                                   value="<?= isset($data) && is_object($data) ? $data->ingreso_ip : '' ?> ">
+                            <label for="nombre">
+                                Ingreso:
+                            </label>
+                            <input  type="text" class="form-control form-control-sm" id="ingreso"
+                                   value="<?= isset($data) && is_object($data) ? $data->ingreso_ip : $dataNow ?> ">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -456,7 +458,7 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                         <!-- textarea -->
                         <div class="form-group">
                             <label for="nombre">Precio con letra:</label>
-                            <input  type="text" class="form-control form-control-sm"
+                            <input type="text" class="form-control form-control-sm"
                                    id="precio_letra"
                                    value="<?= isset($data) && is_object($data) ? $data->precio_letra : '' ?>">
                         </div>
@@ -465,7 +467,7 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                         <div class="form-group">
                             <label for="nombre">Duracion:</label>
                             <div class="field-duracion">
-                                <input type="text" class="form-control form-control-sm" id="duracion"
+                                <input type="number" class="form-control form-control-sm" id="duracion"
                                        value="<?= isset($data) && is_object($data) ? $data->duracion_ip : '' ?>">
                                 <div id="txt-bx">
                                     <label for="txt-duracion" id="cont-duracion">

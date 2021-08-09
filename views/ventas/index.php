@@ -116,7 +116,7 @@
                                 Lugares
                             </span>
                             <h5 class="description-header">
-                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[0]['cupos'] : false ?>
+                                <?= isset($resp) && $resp ? $resp[0] : false ?>
                                 Pacientes
                             </h5>
                             <span class="description-text">CAP 1</span>
@@ -132,7 +132,7 @@
                                 Lugares
                             </span>
                             <h5 class="description-header">
-                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[1]['cupos'] : false ?>
+                                <?= isset($resp) && $resp ? $resp[1] : false ?>
                                 Pacientes
                             </h5>
                             <span class="description-text">CAP 2</span>
@@ -148,7 +148,7 @@
                                 Lugares
                             </span>
                             <h5 class="description-header">
-                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[2]['cupos'] : false ?>
+                                <?= isset($resp) && $resp ? $resp[2] : false ?>
                                 Pacientes
                             </h5>
                             <span class="description-text">CAS</span>

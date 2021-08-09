@@ -17,11 +17,33 @@ class ventaController
         while ($arr = $ent->fetch_assoc()) {
             $arrEntidad[] = $arr;
         }
-        $arrEntidad;
 
-        // se obtienen los pacientes activos por unidada
+        // se obtienen los pacientes activos por unidadad
         $totalPaciente = new PacienteIngreso();
-        $test = $totalPaciente->getTotal();
+        for ($i = 1; $i <= 3; $i++) {
+            $idEntidad = $i;
+            $totalPaciente->setId($idEntidad);
+            $totalPac = $totalPaciente->getTotal();
+            $arrTotalPac[] = $totalPac;
+        }
+
+        foreach ($arrTotalPac as $j => $k){
+            foreach ($arrTotalPac[$j] as $key => $item){
+                $resp[] = $item;
+            }
+        }
+
+        //obtener la fecha de alta de la venta
+        $pacienteFechaAlta = new PacienteIngreso();
+        $fechaAlta = $pacienteFechaAlta->getData();
+
+        while ($fecha= $fechaAlta->fetch_assoc()){
+            $arrFechaAlta[] = $fecha;
+        }
+
+        foreach ($arrFechaAlta as $inde => $item) {
+                var_dump($item['id_ingreso_paciente']);
+        }
 
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';

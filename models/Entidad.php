@@ -39,7 +39,5 @@ class Entidad
     public function subtraction(){
         $sql = "UPDATE entidad SET cupos = cupos - 1 WHERE id_entidad = {$this->getIdEntidad()}";
         $res = $this->db->query($sql);
-        var_dump($res);
-        echo $this->db->error;
     }
 }

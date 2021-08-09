@@ -34,6 +34,7 @@ function eventListener() {
 
 // Gestion via select tratamiento a campo duracion
 function gestionSelectTratamiento(e) {
+
     const parentTxt = document.querySelector('#cont-duracion');
     const divNode = document.querySelector('#txt-bx');
 
@@ -44,10 +45,9 @@ function gestionSelectTratamiento(e) {
 
     let valor = e.target.value;
 
-    if (valor === 'CAP1' || valor === 'CAP2') {
+    if (valor === '1' || valor === '2') {
         //se elimina el nodo padre
         divNode.removeChild(parentTxt);
-
         // Se inserta el hijo en el padre eliminado
         $label.insertAdjacentText('beforeend', 'Semanas');
     } else {
@@ -134,6 +134,14 @@ function readForm(e) {
         action = document.querySelector('#action').value,
         ventaId = document.querySelector('#ventaId').value;
 
+        // Funcionalidad para la estadia del paciente
+        let estadia;
+        if(tratamiento === '1' || tratamiento === '2'){
+             estadia = '7' * duracion;
+        }else {
+            estadia = '30' * duracion;
+        }
+
     let dataCp = [];
 
     document.querySelectorAll('.table-bordered tbody tr').forEach(function (e) {
@@ -193,8 +201,8 @@ function readForm(e) {
     data.append("deposito_letra", deposito_letra);
     data.append("forma_pago", forma_pago);
     data.append("ventaId", ventaId);
+    data.append("estadia", estadia);
 
-    console.log(...data);
 
     if (nombre === '' || apellido_p === '' || apellido_m === '' || fecha_nac === '' || lugar_nac === '') {
 

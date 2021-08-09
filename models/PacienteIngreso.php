@@ -36,6 +36,7 @@ class PacienteIngreso
     private $deposito_ip;
     private $deposito_letra;
     private $forma_pago_ip;
+    private $fecha_estadia;
 
     public function __construct()
     {
@@ -417,19 +418,27 @@ class PacienteIngreso
         return $this;
     }
 
+    public function getFechaEstadia()
+    {
+        return $this->fecha_estadia;
+    }
+
+    public function setFechaEstadia($fecha_estadia)
+    {
+        $this->fecha_estadia = $fecha_estadia;
+    }
+
     public function getTotal()
     {
-        $res = 1;
         $sql = "SELECT 
                 COUNT(id_ingreso_paciente) 
                 FROM ingreso_paciente i 
-                INNER JOIN entidad u ON i.entidad_id = u.id_entidad
-                WHERE u.id_unidad = '$res'
+                INNER JOIN entidad e ON i.entidad_id = e.id_entidad
+                WHERE i.entidad_id = {$this->getId()}
                 ";
-       $obj = $this->db->query($sql);
-       return $obj->fetch_object();
+        $obj = $this->db->query($sql);
+        return $obj->fetch_object();
     }
-
 
     public function reingreso()
     {
@@ -453,6 +462,19 @@ class PacienteIngreso
                 ";
         $obj = $this->db->query($sql);
         return $obj->fetch_object();
+    }
+
+    public function getData()
+    {
+        $sql = "SELECT 
+                * 
+                FROM 
+                ingreso_paciente
+                ORDER BY 
+                id_ingreso_paciente
+                DESC
+                ";
+       return $this->db->query($sql);
     }
 
     public function getAll()
@@ -520,6 +542,9 @@ class PacienteIngreso
         $deposito = $this->deposito_ip;
         $deposito_letra = $this->deposito_letra;
         $forma_pago = $this->forma_pago_ip;
+        $estadia = $this->fecha_estadia;
+
+        //var_dump($estadia);
 
         $sql = "INSERT INTO ingreso_paciente VALUES
                                     (
@@ -530,12 +555,9 @@ class PacienteIngreso
                                      '$legal', '$actitud', '$observaciones',
                                      '$adiccion', '$ingreso', '$precio',
                                      '$precio_letra','$moneda', '$duracion', '$deposito', '$deposito_letra',
-                                     '$forma_pago', CURDATE(), CURTIME()
+                                     '$forma_pago', CURDATE(), CURTIME(), '$estadia'
                                      )";
         $save = $this->db->query($sql);
-
-        // var_dump($save);
-        // echo $this->db->error;
 
         if ($save) {
             return [

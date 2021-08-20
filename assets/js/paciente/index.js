@@ -92,7 +92,6 @@ if (mydate) {
 //Se lee el formalrio y se delimita si se va editar o crear el usuario 
 function readForm(e) {
     e.preventDefault();
-
     // paciente
     const nombre = document.querySelector('#nombre').value,
         apellido_p = document.querySelector('#apellido_p').value,
@@ -134,13 +133,13 @@ function readForm(e) {
         action = document.querySelector('#action').value,
         ventaId = document.querySelector('#ventaId').value;
 
-        // Funcionalidad para la estadia del paciente
-        let estadia;
-        if(tratamiento === '1' || tratamiento === '2'){
-             estadia = '7' * duracion;
-        }else {
-            estadia = '30' * duracion;
-        }
+    // Funcionalidad para la estadia del paciente
+    let estadia;
+    if (tratamiento === '1' || tratamiento === '2') {
+        estadia = '7' * duracion;
+    } else {
+        estadia = '30' * duracion;
+    }
 
     let dataCp = [];
 
@@ -203,6 +202,7 @@ function readForm(e) {
     data.append("ventaId", ventaId);
     data.append("estadia", estadia);
 
+    //console.log(...data);
 
     if (nombre === '' || apellido_p === '' || apellido_m === '' || fecha_nac === '' || lugar_nac === '') {
 
@@ -232,7 +232,7 @@ function readListUsers(e) {
         if (respuesta) {
             const xhr = new XMLHttpRequest();
 
-            xhr.open('GET', `http://localhost/clinica_soft/usuario/delete&id=${id}`, true)
+            xhr.open('GET', `${GLOBAL_URL}/usuario/delete&id=${id}`, true)
 
             xhr.onload = function () {
                 const rs = JSON.parse(xhr.responseText);
@@ -250,7 +250,7 @@ function readListUsers(e) {
 function sendDb(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/paciente/save', true);
+    xhr.open('POST', `${GLOBAL_URL}/paciente/save`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -258,12 +258,13 @@ function sendDb(data) {
             if (response.res === 'true') {
                 sweetAlert('Generado Correctamente', 'success');
                 formPaciente.reset();
+
+                // Elimina los datos de la bd //
                 localStorage.clear();
-                listData();
-                //Generar Boton PDF
+                // Generar Boton PDF //
                 const $button = document.createElement('a');
                 $button.setAttribute('class', 'btn btn-danger btn-flat');
-                $button.href = `http://localhost/clinica_soft/docs/contrato_ingreso_esp.php?&idP=${response.paciente_id}&idI=${response.ingreso_id}`;
+                $button.href = `${GLOBAL_URL}/docs/contrato_ingreso_esp.php?&idP=${response.paciente_id}&idI=${response.ingreso_id}`;
                 $button.setAttribute('target', '_blank');
 
                 //Icon Pdf
@@ -282,11 +283,14 @@ function sendDb(data) {
     xhr.send(data)
 }
 
+//se muestra el localstorage vacio
+listData();
+
 // se edita el usuario
 function editData(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/usuario/save', true);
+    xhr.open('POST', `${GLOBAL_URL}/clinica_soft/usuario/save`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {

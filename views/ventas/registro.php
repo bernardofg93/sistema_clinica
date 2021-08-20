@@ -111,7 +111,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Edad:</label>
-                                <input type="text" class="form-control form-control-sm" id="edad"
+                                <input type="number" class="form-control form-control-sm" id="edad"
                                        value="<?= isset($data) && is_object($data) ? $data->edad_cont : '' ?>">
                             </div>
                         </div>
@@ -130,6 +130,22 @@
                     </div>
             </div>
         </div>
+
+        <!-- Buttons -->
+        <div class="card card-white col-sm-6">
+            <div class="card-body" id="btns-social-media">
+                <a href="mailto:marchina@gmail.com">
+                    <i class="fas fa-envelope-square icons-whatsapp-email"></i>
+                </a>
+                <a href="sms://+14035550185?body=I%27m%20interested%20in%20your%20product.%20Please%20contact%20me." id="msn-cell">
+                    <i class="fas fa-mobile-alt" style="font-size: 46px;"></i>
+                </a>
+
+
+
+            </div>
+        </div>
+
     </div>
     <div class="col-md-6">
         <div class="card card-white">
@@ -201,7 +217,10 @@
                 </div>
             </div>
         </div>
+
 </form>
+
+
 <!-- DIRECT NOTES -->
 <div class="card direct-chat direct-chat-primary">
     <div class="card-header">
@@ -215,6 +234,7 @@
             </button>
         </div>
     </div>
+
     <div class="card-body list-notes">
         <div class="direct-chat-messages" id="listNotes">
             <?php if (isset($dataArr) && $dataArr) : ?>
@@ -236,6 +256,7 @@
             <?php endif; ?>
         </div>
     </div>
+
     <div class="card-footer">
         <form id="fmNota">
             <div class="input-group">
@@ -248,15 +269,13 @@
         </form>
     </div>
 </div>
+
 <!-- Buttons -->
 <div class="card card-white col-sm-6 actionHide" id="actionButtonsContainer">
     <div class="card-body" id="container-buttons">
         <button type="submit" form="rgVenta" class="btn btn-cns btn-flat">
             Guardar <i class="far fa-save"></i>
         </button>
-        <a type="button" id="btnCreate" class="btn btn-cns btn-flat" data-toggle="modal" data-target="#modalCategory">
-            <i class="far fa-list-alt"></i>
-        </a>
     </div>
 </div>
 </div>

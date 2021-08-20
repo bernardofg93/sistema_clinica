@@ -71,12 +71,17 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         color: #fff;
     }
 
+    .padding-tr {
+        padding-top: 8px;
+        line-height: 20px;
+    }
+
 </style>
 
 <!-- PAGINA 1 !-->
 <page pageset='new' backtop="10mm" backbottom="10mm" backleft="" backright="">
     <page_header class="header">
-        <h3>Contrato y Condiciones de Admisión</h3>
+        <h3>Contract and Conditions of Admission</h3>
     </page_header>
     <page_footer>
         <div style="width: 100%; background: #eeeeee; padding: 5px">
@@ -88,10 +93,21 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 <td style="font-size: 11px">Clinica Nuevo Ser A.C.</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px">
-                                    Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
-                                    B.C. México
-                                </td>
+                                <?php if ($data->nombre_entidad == 'CAP1') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
+                                        B.C. México
+                                    </td>
+                                <?php elseif ($data->nombre_entidad == 'CAP2') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Parral 3041, Fracc. Rosamar, Col.Santa Lucia, Rosarito B.C., México.
+                                        C.P.22705
+                                    </td>
+                                <?php else : ?>
+                                    <td style="font-size: 11px">
+                                        Paseo Ensenada 1385, Playas, Las Flores 1ra Secc, 22500 Tijuana, B.C
+                                    </td>
+                                <?php endif; ?>
                             </tr>
 
                             <tr>
@@ -107,12 +123,17 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                <td style="font-size: 11px; text-align: right">
+                                    <?php
+                                    echo strftime("%A %d %B %Y");
+                                    echo '  ';
+                                    date_default_timezone_set('US/Pacific');
+                                    echo date('h:i:s a', time());
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">amarc</td>
+                                <td style="font-size: 11px; text-align: right"> <?= $data->nombre_us ?> </td>
                             </tr>
                         </table>
                     </td>
@@ -120,66 +141,143 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
             </table>
         </div>
     </page_footer>
-    <p>
-        Contrato de Prestación de Servicios Profesionales que celebran por una parte Clinica Nuevo Ser A.C., en lo
-        sucesivo “Clinica Nuevo Ser”, y por la otra carlos alberto aldana diaz, en lo sucesivo “El Paciente”, al
-        tenor
-        de las siguientes declaraciones y clausulas:
-    </p>
-    <p class="subtitle">DECLARACIONES</p>
-    <p class="subtitles-b">I. Declara Clinica Nuevo Ser</p>
-    <p>
-        a) Ser una empresa Legalmente constituida de acuerdo a la legislación vigente en la República Mexicana,
-        con domicilio en Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana, B.C.
-        México.
+
+    <P class="subtitle-c">
+        Primary Treatment.
     </p>
 
-    b) Que dentro de su objeto social, se encuentra el brindar tratamiento profesional para las adicciones y la
-    salud mental.
-    <p>
-        c) Que cuenta con las facultades para brindar dichos servicios de forma profesional.
-    </p>
+    <table>
+        <tr>
+            <td>
+                Provision of professional services that celebrates in one hand Clinica Nuevo Ser A.C., hereinafter
+                “Clinica
+                Nuevo Ser”, and in the other
+                carlos alberto aldana diaz, hereinafter the “ patient ”, the wording of the following statements and
+                clauses:
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="subtitle">STATEMENTS</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="subtitles-b">I. Declares Clinica Nuevo Ser</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                a) Being a company legally incorporated under the current legislation in Mexico, residing in London
+                Street #
+                3551, Section Costa Azul,
+                Playas de Tijuana, C.P. 22506, Tijuana, B.C. Mexico
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                b) That within its corporate purpose is the provide professional treatment for addictions and mental
+                health.
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                c) Which has the powers to provide such services in a professional manner.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="subtitles-b">II. Declares the Pacient</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                a) Being a person of 41 years old, Soltero, born in leon , and that is their will to enter into the
+                present contract and receive professional
+                services Clinica Nuevo Ser.
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                b) Which is represented by the person signing below, and authorizesClinica Nuevo Ser to start the
+                primary treatment for Alcoholismo,
+                Drogadiccion, Ludopatia, Depresion, Transtorno alimenticio, Transtorno Mental hereby accepting the
+                patient to participate in each and
+                every one of the activities deemed necessary for rehabilitation, including those that take place outside
+                the premises.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="subtitle">CLAUSES</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                1. The patient is required to pay Clinica Nuevo Ser the amount of $ MXP. as compensation for the
+                professional services received.
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                2.- The treatment fill have a duration of weeks
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                3.- Upon admission the patient will deliver the amount of $ MXP amount not refundable if the patient for
+                any reason abandon treatment
+                before the stipulated time.
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                4.- The outstanding balance of: $ MXP that must be covered as follows:
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                5.- In case of inter-specialized medical consultations (radiology, dental, cardiovascular, etc.) they
+                carry an additional charge. The
+                patients personal expenses, as well as the additional medications that the patient needs during his stay
+                shall be be charged additionally,
+                for this a deposit is needed for the following amount: $ MXP.
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                Notes:_________________________________________________________________
+                ___________________________________________________________________________________
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                6.- In the case where the therapeutic staff deems necessary to prolong the stay of the patient,the fee
+                for the additional time will be
+                determined after the original days of treatment.
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                7.- In case of any medical emergency, the patient will be transferred to the hospital the doctor on duty
+                deems appropriate, in which case
+                the expenses will be covered by the family of the patient
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                8.- In the case of under age patients, it is authorized that Clinica Nuevo Ser A.C. to act as considered
+                necessary by the medical and
+            </td>
+        </tr>
+    </table>
 
-    <p class="subtitles-b">II. Declara El Paciente</p>
-    <p>
-        a) Ser una persona física de 41 años de edad, Soltero, nacido en leon , y que es su voluntad celebrar el
-        presente contrato y recibir los servicios profesionales de Clinica Nuevo Ser.
-    <p>
-        b) Que se encuentra representado por la persona que firma al calce, y que autoriza a Clinica Nuevo Ser a
-        iniciar el tratamiento por Alcoholismo, Drogadiccion, Ludopatia, Depresion, Transtorno alimenticio,
-        Transtorno
-        Mental aceptando en este acto que el paciente participe en todas y cada una de las actividades que se
-        consideren necesarias para su tratamiento, inclusive aquellas que se lleven a cabo fuera de las
-        instalaciones.
-    </p>
-    </p>
-
-    <p class="subtitle">CLAUSULAS</p>
-    <p>
-        1. El paciente, familiar responsable y/o el representante legal se obliga a pagar a Clinica Nuevo Ser como
-        contraprestación por los servicios profesionales recibidos la cantidad de: $ MXP ()
-    <p>
-        2.- El tratamiento tendrá una duración de semanas.
-    </p>
-    3.- Al ingresar el paciente se deberá entregar la cantidad de $ MXP () cantidad que no será reembolsable si
-    el paciente por cualquier razón abandonara el tratamiento antes del tiempo estipulado.
-    <p>
-        4.- El saldo pendiente por liquidar es de: $ MXP que deberá ser cubierto de la siguiente manera:
-    </p>
-    </p>
-    <p>
-        5.- Tendra un costo adicional al valor del tratamiento lo siguiente:
-    <p>
-        a.- Interconsultas medicas especializadas como psiquiatricas, neurologicas,
-        dentales y otras.
-    </p>
-    b.- Medicamentos que el paciente requiera durante su estancia.
-    </p>
 </page>
 
 <!-- PAGINA 2 !-->
 <page pageset='new' backtop="10mm" backbottom="10mm" backleft="" backright="">
     <page_header class="header">
+        <p>therapeutic staff.</p>
     </page_header>
 
     <page_footer>
@@ -192,10 +290,21 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 <td style="font-size: 11px">Clinica Nuevo Ser A.C.</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px">
-                                    Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
-                                    B.C. México
-                                </td>
+                                <?php if ($data->nombre_entidad == 'CAP1') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
+                                        B.C. México
+                                    </td>
+                                <?php elseif ($data->nombre_entidad == 'CAP2') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Parral 3041, Fracc. Rosamar, Col.Santa Lucia, Rosarito B.C., México.
+                                        C.P.22705
+                                    </td>
+                                <?php else : ?>
+                                    <td style="font-size: 11px">
+                                        Paseo Ensenada 1385, Playas, Las Flores 1ra Secc, 22500 Tijuana, B.C
+                                    </td>
+                                <?php endif; ?>
                             </tr>
 
                             <tr>
@@ -211,12 +320,17 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                <td style="font-size: 11px; text-align: right">
+                                    <?php
+                                    echo strftime("%A %d %B %Y");
+                                    echo '  ';
+                                    date_default_timezone_set('US/Pacific');
+                                    echo date('h:i:s a', time());
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">amarc</td>
+                                <td style="font-size: 11px; text-align: right"> <?= $data->nombre_us ?> </td>
                             </tr>
                         </table>
                     </td>
@@ -224,64 +338,86 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
             </table>
         </div>
     </page_footer>
-    c.- Estudios psicometricos, electroencefalogramas y otros.
-    <P>
-        d.- Consumo de articulos de aseo personal y gastos de tiendita.
-    </P>
-    6.- Para lo antes mencionado es necesario dejar un deposito de $ MXP ().
-    <p>
-        7.- En caso de presentarse alguna emergencia médica, el paciente será trasladado al Hospital que el médico
-        en turno considere conveniente, en cuyo caso los gastos ocasionados serán cubiertos por cuenta del familiar
-        responsable.
-    </p>
-    8.- El tratamiento incluye cuidados médicos las 24 horas del día, , análisis de laboratorio, alimentación
-    adecuada en cantidad y calidad, servicios de atención psicológica individualizada y psicoterapia de grupo
-    que el paciente requiera durante su estancia, así como el tratamiento familiar.
-    <p>
-        9.- Nos reservamos el derecho de admisión y aclaramos que no serán aceptadas como pacientes aquellas
-        personas que padezcan alguna enfermedad infecto contagiosa o aquellas personas con trastornos mentales
-        agudos o crónicos graves.
-    <P>
-        10.- No nos hacemos responsables de la pérdida o daños en las propiedades personales que el paciente
-        retenga durante su estancia en este lugar; ni de los daños físicos que se ocasione por conductas
-        autodestructivas o riñas en las que se pudiera ver involucrado.
-    </P>
-    11.- Los daños materiales que el paciente provoque en nuestras instalaciones, así como a terceros correrán
-    por cuenta del familiar responsable.
-    <p>
-        12.- Esta institución no se hace responsable de mantener al paciente dentro de la misma, ya que el
-        tratamiento es 100% voluntario quedando exenta de cualquier responsabilidad sobre la vida y pertenencias
-        del paciente si este abandona nuestras instalaciones por cualquier motivo.
-    <p>
-        13.- El familiar y/o tutor aceptan los reglamentos que la institución sugiere para la rehabilitación del
-        paciente.
-        La no observancia de estos causa la baja inmediata. Las llamadas telefónicas y las visitas familiares
-        solamente serán autorizadas por acuerdo del equipo terapéutico.
-    </p>
-    14.- Los abajo firmantes certifican que han leído y aceptado todo lo anterior, se identifican como paciente,
-    familiar del paciente y/o apoderado del paciente debida y legalmente autorizados declarando no tener
-    ninguna relación con la producción, distribución o venta de drogas ilegales, ni estar en persecución por estos
-    delitos.
-    </p>
-    </p>
 
-    <div>
-    </div>
-
+    <table>
+        <tr>
+            <td class="padding-tr">
+                9.- Treatment includes medical care 24 hours a day, lab work, adequate food in quantity and quality,
+                individualized counseling services
+                and group psychotherapy that the patient requires during their stay, as well as family therapy
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                10.- We reserve the right to refuse admission and clarified that patients will not be accepted as those
+                suffering from any infectious or
+                contagious disease or those with severe acute or chronic mental disorders.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="subtitles-b">I. Declares Clinica Nuevo Ser</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                11.- We are not responsible for loss or damage to personal property that the patient maintains during
+                their stay in this place; or physical
+                damages incurred by self-destructive behavior or fights in which you could see involved
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                12.- The damage causes the patient at our facilities, as well as third parties shall be paid by the
+                family member.
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                13.- This institution is not responsible for keeping the patient within it, since the treatment is 100%
+                volunteer shall be exempt from any
+                responsibility for the life and belongings of the patient if this leaves our facilities for any reason
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                14.- Family and / or guardian accept the regulations suggests by the institution for the rehabilitation
+                of the patient. Disregard of these
+                clause will cause immediate discharge. Telephone calls and family visits will only be authorized by
+                agreement of the therapeutic team
+            </td>
+        </tr>
+        <tr>
+            <td class="padding-tr">
+                15.- The undersigned certify that they have read and accepted the above, they are identified as a
+                patient, relative of the patient and / or
+                guardian of the patient properly and legally authorized claiming to have no connection with the
+                production, distribution or sale of illegal
+                drugs, or be in prosecution for these crimes.
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <table>
         <thead>
         <tr>
             <th>
-                PACIENTE
+                Patient
                 <p>
                     <?= $data->nombre_ip ?> <?= $data->apellido_paterno_ip ?> <?= $data->apellido_materno_ip ?>
                 </p>
             </th>
             <th>
-                FAMILIAR DEL PACIENTE
+                Family Member
             </th>
             <th>
-                APODERADO O TUTOR
+                Legal Guardian
             </th>
             <th>
                 CLINICA NUEVO SER A.C.
@@ -292,19 +428,19 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         <tr>
             <td>
                 <p class="firma-line">_______________________</p>
-                <p class="firma-d">Firma</p>
+                <p class="firma-d">Signature</p>
             </td>
             <td>
                 <p class="firma-line">_______________________</p>
-                <p class="firma-d">Firma</p>
+                <p class="firma-d">Signature</p>
             </td>
             <td>
                 <p class="firma-line">_______________________</p>
-                <p class="firma-d">Nombre y Firma</p>
+                <p class="firma-d">Name and Signature</p>
             </td>
             <td>
                 <p class="firma-line">_______________________</p>
-                <p class="firma-d">Nombre y Firma</p>
+                <p class="firma-d">Signature</p>
             </td>
         </tr>
         </tbody>
@@ -315,7 +451,7 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
 <!-- PAGINA 3 !-->
 <page pageset='new' backtop="10mm" backbottom="10mm" backleft="" backright="">
     <page_header class="header">
-        <h3>Hoja de Eximision de Responsabilidades</h3>
+        <h3>Eximisiones Sheet of Liability</h3>
     </page_header>
     <page_footer>
         <div style="width: 100%; background: #eeeeee; padding: 5px">
@@ -327,10 +463,21 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 <td style="font-size: 11px">Clinica Nuevo Ser A.C.</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px">
-                                    Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
-                                    B.C. México
-                                </td>
+                                <?php if ($data->nombre_entidad == 'CAP1') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
+                                        B.C. México
+                                    </td>
+                                <?php elseif ($data->nombre_entidad == 'CAP2') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Parral 3041, Fracc. Rosamar, Col.Santa Lucia, Rosarito B.C., México.
+                                        C.P.22705
+                                    </td>
+                                <?php else : ?>
+                                    <td style="font-size: 11px">
+                                        Paseo Ensenada 1385, Playas, Las Flores 1ra Secc, 22500 Tijuana, B.C
+                                    </td>
+                                <?php endif; ?>
                             </tr>
 
                             <tr>
@@ -346,12 +493,17 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                <td style="font-size: 11px; text-align: right">
+                                    <?php
+                                    echo strftime("%A %d %B %Y");
+                                    echo '  ';
+                                    date_default_timezone_set('US/Pacific');
+                                    echo date('h:i:s a', time());
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">amarc</td>
+                                <td style="font-size: 11px; text-align: right"> <?= $data->nombre_us ?> </td>
                             </tr>
                         </table>
                     </td>
@@ -360,27 +512,27 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         </div>
     </page_footer>
     <P class="subtitle-c">
-        Clínica NuevoSer A.C.
+        Primary Treatment
+    </p>
+    <P class="subtitle-c">
+        Clínica Nuevo Ser A.C.
     </p>
     <p class="txt-top subtitle-c">
-        Unidad de internamiento.
+        Inpatient unit.
     </p>
     <p>
         ElSr.(a)
         <?= $data->resp_legal ?>
     <p>
-        Responsable Legal del
-        paciente <?= $data->nombre_ip ?> <?= $data->apellido_paterno_ip ?> <?= $data->apellido_materno_ip ?> que ingresa
-        a la unidad de
-        internamiento, el día <?= $data->fecha_alta_ing ?> en punto de las <?= $data->hora_alta_ig ?> está de acuerdo
-        con
-        lo siguiente:
+        s the legal guardian for Mr.
+        (Mrs.) <?= $data->nombre_ip ?> <?= $data->apellido_paterno_ip ?> <?= $data->apellido_materno_ip ?>
+        who enters this inpacient
+        unit on the day: <?= $data->fecha_alta_ing ?> <?= $data->hora_alta_ig ?> agree with the following:
     </p>
     <p>
-        Esta Institución (Clinica Nuevo Ser A.C.) no es responsable de causas directas o indirectas
-        del estado de salud causado por el abuso de drogas y/o alcohol que pudiesen ocasionar el
-        fallecimiento del paciente, la fuga del mismo así como las lesiones sufridas (a éste y/o por
-        éste).
+        This institution is not responsible for direct or indirect health status caused by the
+        abuse of drugs and / or alcohol that could cause the patient's death causes the leak
+        and the injuries (to this and / or this).
     <P>
     </p>
     Tijuana B.C. a <?php echo date("d/m/y") ?>
@@ -390,36 +542,50 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
     <div>
     </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <table>
         <thead>
         <tr>
             <th>
-                Responsable Legal
-            </th>
-            <th>
-                Testigo
-            </th>
-            <th>
-                Clinica Nuevo SER A.C.
+                Legal Guardia
                 <p>
-                    Director General
+                    <?= $data->resp_legal ?>
                 </p>
+            </th>
+            <th>
+                Witness 1
+            </th>
+            <th>
+                Witness 2
+            </th>
+            <th>
+                CLINICA NUEVO SER A.C.
+                <p>Director Genera</p>
             </th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>
-                <p class="firma-line">______________________________</p>
-                <p class="firma-d">Firma</p>
+                <p class="firma-line">_______________________</p>
+                <p class="firma-d">Signature</p>
             </td>
             <td>
-                <p class="firma-line">______________________________</p>
-                <p class="firma-d">Nombre y Firma</p>
+                <p class="firma-line">_______________________</p>
+                <p class="firma-d">Name and Signature</p>
             </td>
             <td>
-                <p class="firma-line">______________________________</p>
-                <p class="firma-d">Firma</p>
+                <p class="firma-line">_______________________</p>
+                <p class="firma-d">Name and Signature</p>
+            </td>
+            <td>
+                <p class="firma-line">_______________________</p>
+                <p class="firma-d">Signature</p>
             </td>
         </tr>
         </tbody>
@@ -442,10 +608,21 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 <td style="font-size: 11px">Clinica Nuevo Ser A.C.</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px">
-                                    Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
-                                    B.C. México
-                                </td>
+                                <?php if ($data->nombre_entidad == 'CAP1') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
+                                        B.C. México
+                                    </td>
+                                <?php elseif ($data->nombre_entidad == 'CAP2') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Parral 3041, Fracc. Rosamar, Col.Santa Lucia, Rosarito B.C., México.
+                                        C.P.22705
+                                    </td>
+                                <?php else : ?>
+                                    <td style="font-size: 11px">
+                                        Paseo Ensenada 1385, Playas, Las Flores 1ra Secc, 22500 Tijuana, B.C
+                                    </td>
+                                <?php endif; ?>
                             </tr>
 
                             <tr>
@@ -461,12 +638,17 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                <td style="font-size: 11px; text-align: right">
+                                    <?php
+                                    echo strftime("%A %d %B %Y");
+                                    echo '  ';
+                                    date_default_timezone_set('US/Pacific');
+                                    echo date('h:i:s a', time());
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">amarc</td>
+                                <td style="font-size: 11px; text-align: right"> <?= $data->nombre_us ?> </td>
                             </tr>
                         </table>
                     </td>
@@ -577,56 +759,73 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
 <!-- PAGINA 5 !-->
 <page pageset='new' backtop="10mm" backbottom="10mm" backleft="" backright="30">
     <page_header class="header">
-        <h3>Carta de Consentimiento Informado</h3>
+        <h3>LETTER OF INFORMED CONSENT</h3>
         <p style="margin-top: -12px">
             NOM-168-SSA1-1998
         </p>
         <p>
-            Clinica Nuevo Ser A.C., en apego a la Norma Oficial Mexicana NOM-168-SSA1-1998, hace de su
-            conocimiento los beneficios y riesgos pertinentes a la naturaleza del servicio que esta institución ofrece
-            en el tratamiento de (Sr.) (Sra.) (Joven) carlos alberto aldana diaz.
+            Clinica Nuevo Ser A.C., in compliance with the Official Mexican Standard NOM-168-SSA1-1998, we
+            inform the benefits and risks relevant to the nature of the service that the institution offers in the
+            treatment
+            of (Mr) (Mrs.) (Young) carlos alberto aldana diaz.
         </p>
         <h3 style="font-weight: bold;">
-            Beneficios de nuestro Programa:
+            Benefits of our program:
         </h3>
         <ul>
-            <li>Atención del Área Médica las 24 hrs.</li>
-            <li>Valoración médica y estudios de laboratorio clínico al ingreso.</li>
-            <li>Procedimiento médico para desintoxicación (exceptuando los casos de pacientes no intoxicados).</li>
-            <li>Seguimiento del estado de salud del paciente y recomendaciones al mismo o a su familia, según el caso.
+            <li>Medical Care 24 hrs.</li>
+            <li>Medical evaluation and laboratory studies upon admission.</li>
+            <li>Medical procedure for detoxification (except in cases where the patient is not intoxicated).</li>
+            <li>Monitoring the health status of the patient recommendations, as appropriate.
             </li>
-            <li>Psicoterapia grupal cuatro horas diarias de lunes a sábado.</li>
-            <li>Sesiones de terapia individual.</li>
-            <li>Consultoría en el Programa de Doce Pasos.</li>
-            <li>Sesiones diarias de Acondicionamiento físico.</li>
-            <li>Alimentos saludables y agradables al paladar.</li>
-            <li>Juntas diarias de A. A. o N. A.</li>
+            <li>Group psychotherapy four hours a day from Monday to Saturday</li>
+            <li>Individual therapy sessions.</li>
+            <li>Consulting in Twelve Step Program.</li>
+            <li>Daily fitness sessions.</li>
+            <li>Healthy and palatable food.</li>
+            <li>Daily sessions or N.A. and / or A.A.</li>
             <li>Sesiones de Estudio de Pasos.</li>
-            <li>Visita familiar y sesiones de Terapia Multifamiliar semanal.</li>
-            <li>Encuentros familiares terapéuticos programados.</li>
-            <li>Asesoría y Consultoría familiar.</li>
+            <li>Family visit and multifamily weekly therapy sessions.</li>
+            <li>Therapeutic family meetings.</li>
+            <li>Family Member Counseling and Consulting.</li>
         </ul>
         <h3 style="font-weight: bold;">
-            Que es lo que NO esta incluido en el tratamiento:
+            What is NOT included in the treatment:
         </h3>
         <ul>
-            <li>Alimentación que requiera el paciente distinta a nuestro menú.</li>
-            <li>Artículos de aseo personal como jabón para rasurar, rastrillos, shampoo etc.</li>
-            <li>Compra de artículos o alimentos que se venden en la tienda de la Clínica (chocolates, galletas, dulces
-                entre otros).
+            <li>Food that the patient requires different that the one we provide.</li>
+            <li>Toiletries such as shaving soap, razors, shampoo etc.</li>
+            <li>Buying items or foods sold in the clinic’s store (chocolates, biscuits, sweets etc.).
             </li>
-            <li>Medicamentos, interconsultas medicas como psiquiatra, pruebas psicologias, dentista radiologia.</li>
-            <li>Danos ocasionados por vandalismo de el paciente o familiares..</li>
+            <li>Drugs for other diseases (eg diabetes, hypertension) than those used in the patient at detoxification
+                stage.
+            </li>
+            <li>Damage caused by vandalism by the patient or family.</li>
         </ul>
         <h3 style="font-weight: bold;">
-            Riesgos:
+            Risks:
         </h3>
         <ul>
-            <li>Reacción alérgica a medicamentos o alimentos que reciba y que no hubiesen sido reportados a su ingreso
-                debido a desconocimiento de ello.
+            <li>Allergic reaction to medications or food it receives that have not been reported at there admission.
             </li>
-            <li>Hipotensión inducida por alteraciones hemodinámicas producto del consumo de sustancias y deterioro
-                general del paciente.
+            <li>
+                Hyperotension produce by hemodynamic changes due to substance and general deterioration of
+                the patient.
+            </li>
+            <li>
+                Self-harm due to exacerbation of emotional states.
+            </li>
+            <li>
+                Accidents caused by drug-induced sedation.
+            </li>
+            <li>
+                Viral infectious processes because of their already compromised immune system.
+            </li>
+            <li>
+                Manifestation of symptoms previously masked by substance use.
+            </li>
+            <li>
+                Clashes with colleagues or members of the treatment team.
             </li>
         </ul>
     </page_header>
@@ -640,10 +839,21 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 <td style="font-size: 11px">Clinica Nuevo Ser A.C.</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px">
-                                    Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
-                                    B.C. México
-                                </td>
+                                <?php if ($data->nombre_entidad == 'CAP1') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
+                                        B.C. México
+                                    </td>
+                                <?php elseif ($data->nombre_entidad == 'CAP2') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Parral 3041, Fracc. Rosamar, Col.Santa Lucia, Rosarito B.C., México.
+                                        C.P.22705
+                                    </td>
+                                <?php else : ?>
+                                    <td style="font-size: 11px">
+                                        Paseo Ensenada 1385, Playas, Las Flores 1ra Secc, 22500 Tijuana, B.C
+                                    </td>
+                                <?php endif; ?>
                             </tr>
 
                             <tr>
@@ -659,12 +869,17 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                <td style="font-size: 11px; text-align: right">
+                                    <?php
+                                    echo strftime("%A %d %B %Y");
+                                    echo '  ';
+                                    date_default_timezone_set('US/Pacific');
+                                    echo date('h:i:s a', time());
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">amarc</td>
+                                <td style="font-size: 11px; text-align: right"> <?= $data->nombre_us ?> </td>
                             </tr>
                         </table>
                     </td>
@@ -688,10 +903,21 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 <td style="font-size: 11px">Clinica Nuevo Ser A.C.</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px">
-                                    Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
-                                    B.C. México
-                                </td>
+                                <?php if ($data->nombre_entidad == 'CAP1') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
+                                        B.C. México
+                                    </td>
+                                <?php elseif ($data->nombre_entidad == 'CAP2') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Parral 3041, Fracc. Rosamar, Col.Santa Lucia, Rosarito B.C., México.
+                                        C.P.22705
+                                    </td>
+                                <?php else : ?>
+                                    <td style="font-size: 11px">
+                                        Paseo Ensenada 1385, Playas, Las Flores 1ra Secc, 22500 Tijuana, B.C
+                                    </td>
+                                <?php endif; ?>
                             </tr>
 
                             <tr>
@@ -707,12 +933,17 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                <td style="font-size: 11px; text-align: right">
+                                    <?php
+                                    echo strftime("%A %d %B %Y");
+                                    echo '  ';
+                                    date_default_timezone_set('US/Pacific');
+                                    echo date('h:i:s a', time());
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">amarc</td>
+                                <td style="font-size: 11px; text-align: right"> <?= $data->nombre_us ?> </td>
                             </tr>
                         </table>
                     </td>
@@ -721,24 +952,16 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         </div>
     </page_footer>
     <ul>
-        <li>Auto agresiones debido a exacerbación de estados emocionales.</li>
-        <li>Accidentes provocados por la sedación inducida por medicamento.</li>
-        <li>Procesos infecciosos virales debido a su ya afectado sistema inmunológico.</li>
-        <li>Manifestación de sintomatología enmascarada anteriormente por el consumo de sustancias.</li>
-        <li>Enfrentamientos con otros compañeros o miembros del equipo terapéutico.</li>
-        <li>Fuga.</li>
-        <li>Actitud de resistencia al tratamiento.</li>
-        <li>En caso de presentarse alguna emergencia médica, el paciente será trasladado al hospital que
-            el médico en turno considere conveniente, en cuyo caso los gastos ocasionados serán
-            cubiertos por cuenta del familiar responsable.
-        </li>
-        <li>En caso de presentar positivo a COVID-19 SAAR-2 se canalizara el paciente junto con sus familiares a un
-            aislamiento minimo de 14 dias por lo tanto no podra permanecer en esta insitucion.
+        <li>Escape.</li>
+        <li>Attitude of resistance to treatment.</li>
+        <li>In case of any medical emergency, the patient will be taken to the hospital the doctor on duty
+            deems appropriate, in which case the expenses will be covered by responsible family member.
         </li>
     </ul>
-    <div></div>
-    <div></div>
-    <div></div>
+    <br>
+    <br>
+    <br>
+    <br>
     <table>
         <thead>
         <tr>
@@ -800,10 +1023,21 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 <td style="font-size: 11px">Clinica Nuevo Ser A.C.</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px">
-                                    Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
-                                    B.C. México
-                                </td>
+                                <?php if ($data->nombre_entidad == 'CAP1') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
+                                        B.C. México
+                                    </td>
+                                <?php elseif ($data->nombre_entidad == 'CAP2') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Parral 3041, Fracc. Rosamar, Col.Santa Lucia, Rosarito B.C., México.
+                                        C.P.22705
+                                    </td>
+                                <?php else : ?>
+                                    <td style="font-size: 11px">
+                                        Paseo Ensenada 1385, Playas, Las Flores 1ra Secc, 22500 Tijuana, B.C
+                                    </td>
+                                <?php endif; ?>
                             </tr>
 
                             <tr>
@@ -819,12 +1053,17 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                <td style="font-size: 11px; text-align: right">
+                                    <?php
+                                    echo strftime("%A %d %B %Y");
+                                    echo '  ';
+                                    date_default_timezone_set('US/Pacific');
+                                    echo date('h:i:s a', time());
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="font-size: 11px; text-align: right"
-                                ">amarc</td>
+                                <td style="font-size: 11px; text-align: right"> <?= $data->nombre_us ?> </td>
                             </tr>
                         </table>
                     </td>
@@ -1022,6 +1261,62 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         <h3>Ficha de Ingreso</h3>
     </page_header>
     <page_footer>
+        <div style="width: 100%; background: #eeeeee; padding: 5px">
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td style="font-size: 11px">Clinica Nuevo Ser A.C.</td>
+                            </tr>
+                            <tr>
+                                <?php if ($data->nombre_entidad == 'CAP1') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Londres #3551, Sección Costa Azul, Playas de Tijuana, C.P. 22506, Tijuana,
+                                        B.C. México
+                                    </td>
+                                <?php elseif ($data->nombre_entidad == 'CAP2') : ?>
+                                    <td style="font-size: 11px">
+                                        Calle Parral 3041, Fracc. Rosamar, Col.Santa Lucia, Rosarito B.C., México.
+                                        C.P.22705
+                                    </td>
+                                <?php else : ?>
+                                    <td style="font-size: 11px">
+                                        Paseo Ensenada 1385, Playas, Las Flores 1ra Secc, 22500 Tijuana, B.C
+                                    </td>
+                                <?php endif; ?>
+                            </tr>
+
+                            <tr>
+                                <td style="font-size: 11px">MX +52 (664) 630.9935 » USA 1.800.664.625</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td style="font-size: 11px; text-align: right; width: 230px;">
+                                    Pag. 1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 11px; text-align: right">
+                                    <?php
+                                    echo strftime("%A %d %B %Y");
+                                    echo '  ';
+                                    date_default_timezone_set('US/Pacific');
+                                    echo date('h:i:s a', time());
+                                    ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 11px; text-align: right"> <?= $data->nombre_us ?> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </page_footer>
 
     <table>

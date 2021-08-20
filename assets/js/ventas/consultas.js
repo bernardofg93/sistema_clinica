@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         "ajax": {
             type: 'POST',
-            url: 'http://localhost/clinica_soft/venta/test',
+            url: `${GLOBAL_URL}/venta/test`,
             mimeType: 'json',
             "dataSrc": ""
         },
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
             {"data": "nombre_us"},
             {"data": "estado_ve"},
             {"data": "edit"},
-            {"data": "nota"},
             {"data": "finalizar"},
             {"data": "ingreso"}
         ],
@@ -49,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function mostrar() {
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/clinica_soft/venta/test',
+        url: `${GLOBAL_URL}/venta/test`,
         mimeType: 'json',
         success: function (data) {
             data.forEach(function (el, i, data) {
@@ -79,7 +78,7 @@ function mostrar() {
                 const $tdEdit = document.createElement('td');
                 const $buttonEdit = document.createElement('a');
                 $buttonEdit.setAttribute('class', 'btn bg-gradient-white btn-md');
-                $buttonEdit.href = `http://localhost/clinica_soft/venta/editar&id=${el.id_venta}`;
+                $buttonEdit.href = `${GLOBAL_URL}/venta/editar&id=${el.id_venta}`;
                 const $iconEdit = document.createElement('i');
                 $iconEdit.setAttribute('class', 'fas fa-edit');
                 $buttonEdit.appendChild($iconEdit);
@@ -89,7 +88,7 @@ function mostrar() {
                 const $tdNotaSeg = document.createElement('td');
                 const $buttonNota = document.createElement('a');
                 $buttonNota.setAttribute('class', 'btn bg-gradient-white btn-md');
-                $buttonNota.href = `http://localhost/clinica_soft/venta/editar&id=${el.id_venta}`;
+                $buttonNota.href = `${GLOBAL_URL}/venta/editar&id=${el.id_venta}`;
                 const $iconNota = document.createElement('i');
                 $iconNota.setAttribute('class', 'fas fa-file-alt');
                 $buttonNota.appendChild($iconNota);
@@ -109,7 +108,7 @@ function mostrar() {
                 const $tdIngreso = document.createElement('td');
                 const $buttonIngreso = document.createElement('a');
                 $buttonIngreso.setAttribute('class', 'btn bg-gradient-white btn-md');
-                $buttonIngreso.href = `http://localhost/clinica_soft/venta/registro&id=${el.id_venta}`;
+                $buttonIngreso.href = `${GLOBAL_URL}/venta/registro&id=${el.id_venta}`;
                 const $iconIngreso = document.createElement('i');
                 $iconIngreso.setAttribute('class', 'fas fa-user-plus');
                 $buttonIngreso.appendChild($iconIngreso);
@@ -132,7 +131,7 @@ function readClickTable(e) {
         id = e.target.getAttribute('data-id');
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `http://localhost/clinica_soft/venta/finalizar&id=${id}`, true);
+        xhr.open('GET', `${GLOBAL_URL}/venta/finalizar&id=${id}`, true);
 
         xhr.onload = function () {
             if (xhr.status === 200) {

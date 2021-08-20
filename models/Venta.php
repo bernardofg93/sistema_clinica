@@ -87,7 +87,6 @@ class Venta
         return $this->parentesco_cont;
     }
 
-
     public function setParentescoCont($parentesco_cont)
     {
         $this->parentesco_cont = $this->db->real_escape_string($parentesco_cont);
@@ -164,6 +163,52 @@ class Venta
         $this->medio_entero = $medio_entero;
     }
 
+    public function getTotalCash()
+    {
+        $month = date("m");
+        $year = date("Y");
+
+        $sql = "SELECT
+                SUM(deposito_ip)
+                FROM ingreso_paciente i
+                INNER JOIN entidad e ON i.entidad_id = e.id_entidad
+                WHERE e.id_entidad = {$this->getId()} 
+                AND MONTH(fecha_alta_ing) = '$month' AND YEAR(fecha_alta_ing) = '$year'";
+
+        $res = $this->db->query($sql);
+        return $res->fetch_assoc();
+    }
+
+    public function getPacienteVenta()
+    {
+        $sql = "SELECT 
+                * 
+                FROM 
+                ingreso_paciente i
+                INNER JOIN venta v ON i.venta_id = v.id_venta
+                WHERE id_venta = {$this->getId()}
+                ";
+        $res = $this->db->query($sql);
+        return $res->fetch_object();
+    }
+
+    public function getProximosEgresados()
+    {
+        $month = date("m");
+        $year = date("Y");
+
+        $sql = "SELECT 
+                * 
+                FROM 
+                ingreso_paciente i
+                INNER JOIN paciente p ON i.paciente_id = p.id_paciente
+                INNER JOIN entidad e ON i.entidad_id = e.id_entidad
+                WHERE 
+                MONTH(fecha_alta_ing) = '$month' AND YEAR(fecha_alta_ing) = '$year'
+                ";
+        return $this->db->query($sql);
+    }
+
     public function getLLamadasSeguimiento()
     {
         $fecha = date("Y-m-d");
@@ -187,6 +232,7 @@ class Venta
         $query = $this->db->query($sql);
         return $query->fetch_object();
     }
+
 
     public function getAll()
     {
@@ -261,7 +307,7 @@ class Venta
         $save = $this->db->query($sql);
 
         if ($save) {
-            return ['res' => 'true', 'ventaId' => $ventaId = $this->db->insert_id];
+            return ['res' => 'true', 'ventaId' => $ventaId = $this->db->insert_id, 'phone' => $ladaTel];
         } else {
             return ['res' => 'false'];
         }

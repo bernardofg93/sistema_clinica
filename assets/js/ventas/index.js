@@ -3,19 +3,48 @@ const fecha = document.querySelector('#fechaLlamada'),
     hora = document.querySelector('#horaLlamada'),
     cal = document.querySelector('#calLLamada'),
     segSelect = document.querySelector('#fechaSeg'),
-    razonSelect = document.querySelector('#razon');
+    razonSelect = document.querySelector('#razon'),
+    nombre = document.querySelector("#nombre"),
+    correo = document.querySelector("#correo"),
+    parentesco = document.querySelector('#parentesco'),
+    consumo = document.querySelector('#consumo'),
+    edad = document.querySelector('#edad'),
+    acepta = document.querySelector('#acepta'),
+    detalles = document.querySelector('#detalles'),
+    medioEnvio = document.querySelector('#medioEnvio'),
+    medioEntero = document.querySelector('#medioEntero'),
+    fechaSeg = document.querySelector('#fechaSeg');
+    //ladaTel = document.querySelector('#ladaTel');
 
+fecha.disabled = true;
+hora.disabled = true;
+
+/*
 if (razonSelect.value != 'Prospecto') {
-    document.querySelector("#nombre").disabled = true;
-    document.querySelector("#correo").disabled = true;
-    document.querySelector('#parentesco').disabled = true;
-    document.querySelector('#consumo').disabled = true;
-    document.querySelector('#edad').disabled = true;
-    document.querySelector('#acepta').disabled = true;
-    document.querySelector('#detalles').disabled = true;
-    document.querySelector('#medioEnvio').disabled = true;
-    document.querySelector('#medioEntero').disabled = true;
-    document.querySelector('#fechaSeg').disabled = true;
+    fecha.disabled = true;
+    hora.disabled = true;
+    cal.value = '';
+    cal.disabled = true;
+    segSelect.value = '';
+    segSelect.disabled = true;
+    nombre.value = "";
+    nombre.disabled = true;
+    correo.value = '';
+    correo.disabled = true;
+    parentesco.value = '';
+    parentesco.disabled = true;
+    edad.value = '';
+    edad.disabled = true;
+    acepta.value = '';
+    acepta.disabled = true;
+    detalles.value = '';
+    detalles.disabled = true;
+    medioEnvio.value = '';
+    medioEnvio.disabled = true;
+    medioEntero.value = '';
+    medioEntero.disabled = true;
+    fechaSeg.value = '';
+    fechaSeg.disabled = true;
 } else {
     document.querySelector("#nombre").disabled = false;
     document.querySelector("#correo").disabled = false;
@@ -28,6 +57,7 @@ if (razonSelect.value != 'Prospecto') {
     document.querySelector('#medioEntero').disabled = false;
     document.querySelector('#fechaSeg').disabled = false;
 }
+ */
 
 eventListener();
 
@@ -89,16 +119,28 @@ function actionRazonLlamada(e) {
     let calLLamada = document.querySelector('#calLLamada');
     let action = e.target.value;
     if (action === 'Prospecto') {
-        document.querySelector("#nombre").disabled = false;
-        document.querySelector("#correo").disabled = false;
-        document.querySelector('#parentesco').disabled = false;
-        document.querySelector('#consumo').disabled = false;
-        document.querySelector('#edad').disabled = false;
-        document.querySelector('#acepta').disabled = false;
-        document.querySelector('#detalles').disabled = false;
-        document.querySelector('#medioEnvio').disabled = false;
-        document.querySelector('#medioEntero').disabled = false;
-        document.querySelector('#fechaSeg').disabled = false;
+        cal.value = '';
+        cal.disabled = false;
+        segSelect.value = '';
+        segSelect.disabled = false;
+        nombre.value = "";
+        nombre.disabled = false;
+        correo.value = '';
+        correo.disabled = false;
+        parentesco.value = '';
+        parentesco.disabled = false;
+        edad.value = '';
+        edad.disabled = false;
+        acepta.value = '';
+        acepta.disabled = false;
+        detalles.value = '';
+        detalles.disabled = false;
+        medioEnvio.value = '';
+        medioEnvio.disabled = false;
+        medioEntero.value = '';
+        medioEntero.disabled = false;
+        fechaSeg.value = '';
+        fechaSeg.disabled = false;
         calLLamada.disabled = false;
 
         if (calLLamada.value === '1') {
@@ -107,16 +149,28 @@ function actionRazonLlamada(e) {
     } else {
         calLLamada.value = '1';
         calLLamada.disabled = true;
-        document.querySelector("#nombre").disabled = true;
-        document.querySelector("#correo").disabled = true;
-        document.querySelector('#parentesco').disabled = true;
-        document.querySelector('#consumo').disabled = true;
-        document.querySelector('#edad').disabled = true;
-        document.querySelector('#acepta').disabled = true;
-        document.querySelector('#detalles').disabled = true;
-        document.querySelector('#medioEnvio').disabled = true;
-        document.querySelector('#medioEntero').disabled = true;
-        document.querySelector('#fechaSeg').disabled = true;
+        cal.value = '';
+        cal.disabled = true;
+        segSelect.value = '';
+        segSelect.disabled = true;
+        nombre.value = "";
+        nombre.disabled = true;
+        correo.value = '';
+        correo.disabled = true;
+        parentesco.value = '';
+        parentesco.disabled = true;
+        edad.value = '';
+        edad.disabled = true;
+        acepta.value = '';
+        acepta.disabled = true;
+        detalles.value = '';
+        detalles.disabled = true;
+        medioEnvio.value = '';
+        medioEnvio.disabled = true;
+        medioEntero.value = '';
+        medioEntero.disabled = true;
+        fechaSeg.value = '';
+        fechaSeg.disabled = true;
     }
 }
 
@@ -151,32 +205,29 @@ function actionFechaSeguimiento(e) {
     }
 }
 
-/*
+/* Quitar espacios s textareas */
+detalles.value.replace(" ", "");
+
+/* leer al momento de cargar */
 document.addEventListener('DOMContentLoaded', function () {
-     const ventaId = document.querySelector('#ventaId').value;
-     const divButtons = document.querySelector('#actionButtonsContainer');
-    //console.log(ventaId);
-    if(parseInt(ventaId)){
+    const ventaId = document.querySelector('#ventaId').value;
 
-        const data = new FormData();
-        data.append('ventaId', ventaId);
+    const xhr = new XMLHttpRequest();
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `http://localhost/clinica_soft/venta/validateDetalleProspecto&id=${ventaId}` , true );
+    xhr.open('GET', `${GLOBAL_URL}/venta/validatePacienteVenta&id=${ventaId}`, true)
 
-        xhr.onload = function (){
-            if (xhr.status === 200){
-                const res = JSON.parse(xhr.responseText);
-                if(res.res === 'true'){
-                    divButtons.classList.remove('actionHide');
-                    divButtons.setAttribute('class', 'card card-white col-sm-6 actionHideOff');
-                }
+    xhr.onload = function () {
+        if(this.status === 200){
+            const res = JSON.parse(xhr.responseText);
+            if(res.id_ingreso_paciente){
+                fechaSeg.disabled = true;
+                calLLamada.disabled = true;
             }
         }
-        xhr.send(data);
     }
-
+    xhr.send();
 })
-*/
 
+
+// Telefono && whatsapp //
 

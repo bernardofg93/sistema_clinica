@@ -32,7 +32,6 @@
                 <th style="font-size: 15px;"> Ascesor</th>
                 <th style="font-size: 15px;"> Estado</th>
                 <th style="font-size: 12px;"> Modificar</th>
-                <th style="font-size: 12px;"> Nota Seguimiento</th>
                 <th style="font-size: 12px;"> Finalizar Seguimiento</th>
                 <th style="font-size: 12px;"> Ingreso paciente</th>
             </tr>

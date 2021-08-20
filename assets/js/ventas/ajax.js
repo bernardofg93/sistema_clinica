@@ -111,19 +111,36 @@ function readForm(e) {
 function sendDb(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/venta/save', true);
+    xhr.open('POST', `${GLOBAL_URL}/venta/save`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (response.res === 'true') {
+
+                //Variable para el numero traido del campo de llamada
+                let numberPhone = response.phone;
+
+                //Se crea boton de whatsapp
+                const $divSocialMedia = document.querySelector('#btns-social-media');
+                const buttonWhatsapp = document.createElement('a');
+                buttonWhatsapp.href = `https://api.whatsapp.com/send?phone=+${numberPhone}&text=`;
+                buttonWhatsapp.setAttribute('class', 'float');
+                buttonWhatsapp.setAttribute('target', '_blank');
+
+                const iconWhatsapp = document.createElement('i');
+                iconWhatsapp.setAttribute('class', 'fab fa-whatsapp-square icons-whatsapp-email');
+
+                buttonWhatsapp.appendChild(iconWhatsapp);
+                $divSocialMedia.appendChild(buttonWhatsapp);
+
                 sweetAlert('Generado correctamente', 'success');
                 formVenta.reset();
+                //Se eliminan las notas despues de ser ingresado el registro
                 const $nodoNotas = document.querySelector('#listNotes');
                 while ($nodoNotas.firstChild) {
                     $nodoNotas.removeChild($nodoNotas.firstChild);
                 }
-
             }
 
         }
@@ -135,7 +152,7 @@ function sendDb(data) {
 function editDb(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/venta/save', true);
+    xhr.open('POST', `${GLOBAL_URL}/venta/save`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -195,7 +212,7 @@ function readFormNota(e) {
             data.append('id', id);
 
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost/clinica_soft/venta/saveNota', true);
+            xhr.open('POST', `${GLOBAL_URL}/venta/saveNota`, true);
 
             xhr.onload = function () {
                 if (xhr.status === 200) {

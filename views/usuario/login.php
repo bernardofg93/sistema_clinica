@@ -17,6 +17,7 @@
 </head>
 
 <body class="hold-transition login-page">
+
     <div class="login-box">
         <div class="login-logo">
             <h4>Clínica nueva ser</h4>

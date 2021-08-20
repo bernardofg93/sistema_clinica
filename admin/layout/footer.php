@@ -26,6 +26,8 @@
   <strong>Copyright &copy; 2021-2022 <a href="#">CLINICA NUEVO SER</a>.</strong> All rights reserved.
 </footer>
 </div>
+<!-- GLOBAL URL -->
+<script src="<?= base_url ?>assets/js/globalUrl.js"></script>
 <!-- Alert -->
 <script src="<?= base_url ?>assets/js/alerts.js"></script>
 <!-- Select -->

@@ -31,7 +31,7 @@
                 <a class="btn btn-app bg-primary" href="<?= base_url ?>venta/registro">
                     <i class="fas fa-barcode"></i> Nuevo prospecto
                 </a>
-                <a class="btn btn-app bg-primary">
+                <a href="<?= base_url ?>venta/registros" class="btn btn-app bg-primary">
                     <i class="fas fa-phone-volume"></i> Llamadas en seg
                 </a>
                 <a class="btn btn-app bg-primary" href="<?= base_url ?>paciente/registro">
@@ -42,6 +42,7 @@
     </div>
 </div>
 
+<!-- Buttons -->
 <div class="row">
     <div class="col-md-6">
         <div class="card card-white">
@@ -83,7 +84,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <!-- /.card-header -->
-                        <table class="table table-bordered" id="listContactos">
+                        <table class="table table-bordered" id="proximosEgreso">
                             <thead>
                             <tr>
                                 <th style="font-size: 13px;">Unidad</th>
@@ -92,13 +93,12 @@
                                 <th style="font-size: 13px;">Salida</th>
                             </tr>
                             </thead>
-                            <tbody id="contactosPaciente">
+                            <tbody>
 
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </div>
             <!-- /.card-body -->
         </div>
@@ -170,12 +170,11 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
                     <li class="item">
-                        <span class="badge col-1 badge-warning float-right">11</span>
+                        <span class="badge col-1 badge-warning float-right"><?=$val?></span>
                         <span class="product-description">
                             Ingresos
                         </span>
@@ -183,7 +182,10 @@
                     <!-- /.item -->
                     <li class="item">
                         <a href="javascript:void(0)" class="product-title">
-                            <span class="badge badge-info float-right">$700</span></a>
+                            <span class="badge badge-info float-right">
+                                 <?php echo $arrResultVenta[0] ?><span>$</span>
+                            </span>
+                        </a>
                         <span class="product-description">
                             CAP 1
                         </span>
@@ -191,7 +193,7 @@
                     <!-- /.item -->
                     <li class="item">
                         <span class="badge badge-danger float-right">
-                            $350
+                            <?php echo $arrResultVenta[1] ?><span>$</span>
                         </span>
 
                         <span class="product-description">
@@ -200,7 +202,9 @@
                     </li>
                     <!-- /.item -->
                     <li class="item">
-                        <span class="badge badge-success float-right">$399</span>
+                        <span class="badge badge-success float-right">
+                           <?php echo $arrResultVenta[2] ?><span>$</span>
+                        </span>
                         <span class="product-description">
                             CAS
                         </span>
@@ -212,11 +216,11 @@
         </div>
     </div>
     <div class="col-md-6">
-
     </div>
 </div>
 
 <!-- /.table -->
 <?php include "admin/layout/footer.php" ?>
 <script src="<?= base_url ?>assets/js/alerts.js"></script>
+<script src="<?= base_url ?>assets/js/ventas/dashboard.js"></script>
 <script src="<?= base_url ?>admin/assets/js/table.js"></script>

@@ -8,7 +8,7 @@ use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
 try {
     ob_start();
-    require_once '../views/pdf/contrato_ingreso_esp.php';
+    require_once '../views/pdf/contrato_ingreso_ing.php';
     $content = ob_get_clean();
 
     $html2pdf = new Html2Pdf('P', 'A4', 'en', true, 'utf8', array(10,20,30, 8));

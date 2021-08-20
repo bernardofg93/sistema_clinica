@@ -47,7 +47,7 @@ function readModal(e) {
     function sendDb() {
         const xhr = new XMLHttpRequest();
 
-        xhr.open('POST', 'http://localhost/clinica_soft/pacientePersona/save', true);
+        xhr.open('POST', `${GLOBAL_URL}/pacientePersona/save`, true);
 
         xhr.onload = function () {
             if (this.status === 200) {

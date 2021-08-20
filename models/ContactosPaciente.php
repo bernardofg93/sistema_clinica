@@ -64,7 +64,6 @@ class ContactosPaciente
         return $this->telefono_cp;
     }
 
-
     public function setTelefonoCp($telefono_cp)
     {
         $this->telefono_cp = $this->db->real_escape_string($telefono_cp);

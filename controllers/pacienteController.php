@@ -143,7 +143,15 @@ class pacienteController
             $forma_pago = isset($_POST['forma_pago']) ? filter_var($_POST['forma_pago'], FILTER_SANITIZE_STRING) : false;
             $usuaio_id = $_SESSION['identity']->id_usuario;
             $paciente_id = isset($_POST['paciente_id']) ? filter_var($_POST['paciente_id'], FILTER_VALIDATE_INT) : false;
-            $ventaId = isset($_POST['ventaId']) ? filter_var($_POST['ventaId'], FILTER_VALIDATE_INT) : false;
+
+            // Se comprueba si existe el id de venta
+            if(isset($_POST['ventaId']) && !empty($_POST['ventaId'])){
+                $ventaId = filter_var($_POST['ventaId'], FILTER_VALIDATE_INT);
+            }else {
+                $ventaId = "NULL";
+            }
+
+            //estadia del paciente
             $entidad_id = isset($_POST['tratamiento']) ? filter_var($_POST['tratamiento'], FILTER_VALIDATE_INT) : false;
             $estadia = isset($_POST['estadia']);
 
@@ -211,6 +219,7 @@ class pacienteController
                     $entidad = new Entidad();
                     $entidad->setIdEntidad($id_ent);
                     $entidad->subtraction();
+
                     //Se insertan los contactos del paciente
                     $contacto = new ContactosPaciente();
                     $arr = json_decode($_POST['arrData'], true);
@@ -222,13 +231,14 @@ class pacienteController
                         $contacto->setTelefonoCp(filter_var($row['telCp'], FILTER_SANITIZE_STRING));
                         $contacto->setCorreoCp(filter_var($row['correoCp'], FILTER_SANITIZE_STRING));
                         $contacto->setParentescoCp(filter_var($row['parentescoCp'], FILTER_SANITIZE_STRING));
-                        $contacto->save();
+                        $test = $contacto->save();
                     }
+
                     // Si existe el id de la venta y se crea un nuevo registro
                     // del paciente se manda a llamar la funcion para finalizar el status
                     if ($ventaId) {
                         $status = new Venta();
-                        $status->setIdVenta($ventaId);
+                        $status->setId($ventaId);
                         $status->finalizarSeguimiento();
                     }
                 }

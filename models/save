@@ -1,122 +1,49 @@
-        $query = "SELECT * FROM asignacion_usuario_paciente WHERE usuario_id = '{$this->getUsuarioId()}' AND paciente_id = '{$this->getPacienteId()}'";
-        $res = $this->db->query($query);
+    <?php if (isset($arr)) : ?>
+            <?php for ($i = 0; $i < count($arr); $i++) : ?>
+                <tr>
+                    <td>
+                        Nombre:
+                        <div>
+                            _____________________________________________
+                        </div>
+                    </td>
+                    <span style="font-weight: bold; margin-left: 5px;"><?php echo $arr[$i]['nombre_contacto'] ?></span>
+                    <td>
+                        Parentesco: <span
+                                style="font-weight: bold; margin-left: 5px;"><?php echo $arr[$i]['parentesco_cp'] ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tel: <span
+                                style="font-weight: bold; margin-left: 5px;"><?php echo $arr[$i]['telefono_cp'] ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Correo: <span
+                                style="font-weight: bold; margin-left: 5px;"><?php echo $arr[$i]['correo_cp'] ?></span>
+                    </td>
+                </tr>
+            <?php endfor; ?>
+        <?php endif; ?>
 
 
 
-
-
-
-                                        <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-6">
-                                                <!-- small box -->
-                                                <div class="small-box bg-info">
-                                                    <div class="inner">
-                                                        <?php if (isset($data) && is_object($data)) : ?>
-                                                            <i class="fas fa-check"></i>
-                                                        <?php else : ?>
-                                                            <i class="fas fa-plus"></i>
-                                                        <?php endif; ?>
-                                                        <p>Consumo Sustancias</p>
-                                                    </div>
-                                                    <div class="icon">
-                                                        <i class="fas fa-user-alt"></i>
-                                                    </div>
-                                                    <a href="<?= base_url ?>consumoSustancias/registro&id=<?= $id ?>" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
-                                                </div>
-                                            </div>
-                                            <!-- ./col -->
-                                            <div class="col-lg-3 col-6">
-                                                <!-- small box -->
-                                                <div class="small-box bg-success">
-                                                    <div class="inner">
-                                                        <?php if (isset($info) && is_object($info)) : ?>
-                                                            <i class="fas fa-check"></i>
-                                                        <?php else : ?>
-                                                            <i class="fas fa-plus"></i>
-                                                        <?php endif; ?>
-                                                        <p>Disposición al Cambio</p>
-                                                    </div>
-                                                    <div class="icon">
-                                                        <i class="ion ion-stats-bars"></i>
-                                                    </div>
-                                                    <a href="<?= base_url ?>dispocisionCambio/registro&id=<?= $id ?>" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
-                                                </div>
-                                            </div>
-                                            <!-- ./col -->
-                                            <div class="col-lg-3 col-6">
-                                                <!-- small box -->
-                                                <div class="small-box bg-warning">
-                                                    <div class="inner">
-                                                        <?php if (isset($dom) && is_object($dom)) : ?>
-                                                            <i class="fas fa-check"></i>
-                                                        <?php else : ?>
-                                                            <i class="fas fa-plus"></i>
-                                                        <?php endif; ?>
-                                                        <p>SITUACIÓN SOCIAL FAMILIAR</p>
-                                                    </div>
-                                                    <div class="icon">
-                                                        <i class="ion ion-person-add"></i>
-                                                    </div>
-                                                    <a href="<?= base_url ?>situacionSocialFamiliar/registro&id=<?= $id ?>" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
-                                                </div>
-                                            </div>
-                                            <!-- ./col -->
-                                            <div class="col-lg-3 col-6">
-                                                <!-- small box -->
-                                                <div class="small-box bg-danger">
-                                                    <div class="inner">
-                                                        <?php if (isset($sust) && is_object($sust)) : ?>
-                                                            <i class="fas fa-check"></i>
-                                                        <?php else : ?>
-                                                            <i class="fas fa-plus"></i>
-                                                        <?php endif; ?>
-
-                                                        <p>sustancias</p>
-                                                    </div>
-                                                    <div class="icon">
-                                                        <i class="ion ion-pie-graph"></i>
-                                                    </div>
-                                                    <a href="<?= base_url ?>consumo/paciente&id=<?= $id ?>" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <td>
+                                <div style="width: 100%;">
+                                    <table>
+                                        <tr>
+                                            <td style="font-size: 11px; text-align: right;">
+                                                <p style="text-align: right">Pag. 1</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 11px; text-align: right"">Jun 4, 2021 1:26:43 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 11px; text-align: right"">amarc</td>
+                                        </tr>
+                                    </table>
                                 </div>
-
-
-
-                                <?php while ($data = $reg->fetch_object()) : ?>
-                                                <tr>
-                                                    <td><?= $data->fecha_llamada ?></td>
-                                                    <td><?= $data->fecha_seguimiento ?></td>
-                                                    <td><?= $data->nombre_cont ?></td>
-                                                    <td><?= $data->usuario_id ?></td>
-                                                    <td><?= $data->venta_id != "" ? 'Asignado': ''?></td>
-                                                    <td style="width:5%; text-align: center">
-                                                        <a type="button" class="btn bg-gradient-white btn-md"
-                                                           href="<?= base_url ?>venta/editar&id=<?= $data->id_venta ?>">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td style="width:5%; text-align: center">
-                                                        <a type="button" class="btn bg-gradient-white btn-md"
-                                                           href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
-                                                            <i class="fas fa-file-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td style="width:5%; text-align: center">
-                                                        <a type="button" class="btn bg-gradient-white btn-md"
-                                                           href="<?= base_url ?>paciente/expediente&id=<?= $pac->id_paciente ?>">
-                                                            <i class="fas fa-hourglass-end" style="color: #C70039;"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td style="width:5%; text-align: center">
-                                                        <a type="button" class="btn bg-gradient-white btn-md"
-                                                           href="<?= base_url ?>paciente/registro&id=<?= base64_encode($data->id_venta) ?>">
-                                                            <i class="fas fa-user-plus" style="color: #2471a3;"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <?php endwhile; ?>
+                            </td>

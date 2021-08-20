@@ -99,3 +99,27 @@ textarea {
     white-space: pre-line;
     resize: none !important;
 }
+
+/* icons venta */
+.icons-whatsapp-email{
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.fa-envelope-square  {
+    color:  #db4a39;
+}
+
+.fa-whatsapp-square {
+    color: #075e54;
+}
+
+#msn-cell {
+    display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    #msn-cell {
+        display: none;
+    }
+}

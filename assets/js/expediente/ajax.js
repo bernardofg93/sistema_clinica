@@ -14,7 +14,7 @@ function actionSelectIngreso(e) {
 
     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', `http://localhost/clinica_soft/paciente/generatePdf&id=${id}`, true);
+    xhr.open('GET', `${GLOBAL_URL}/paciente/generatePdf&id=${id}`, true);
 
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -28,7 +28,7 @@ function actionSelectIngreso(e) {
             $buttonPdf.setAttribute('type', 'button');
             $buttonPdf.setAttribute('class', 'btn btn-danger btn-flat');
             $buttonPdf.setAttribute('target', '_blank');
-            $buttonPdf.href = `http://localhost/clinica_soft/docs/contrato_ingreso_esp.php?&idP=${idP}&idI=${idI}`;
+            $buttonPdf.href = `${GLOBAL_URL}/docs/contrato_ingreso_esp.php?&idP=${idP}&idI=${idI}`;
 
             const $iconPdf = document.createElement('i');
             $iconPdf.setAttribute('class', 'fas fa-file-pdf');
@@ -56,7 +56,7 @@ $('.select2').change(function (e) {
 
 
             $.ajax({
-                url: 'http://localhost/clinica_soft/asignacionPaciente/insert',
+                url: `${GLOBAL_URL}/asignacionPaciente/insert`,
                 type: 'POST',
                 dataType: 'json',
                 data: {

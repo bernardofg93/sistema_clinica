@@ -16,7 +16,7 @@ function actionRead(e) {
         if(res){
             const xhr = new XMLHttpRequest();
 
-            xhr.open('GET', `http://localhost/clinica_soft/asignacionPaciente/delete&id${id}`, true);
+            xhr.open('GET', `${GLOBAL_URL}/asignacionPaciente/delete&id${id}`, true);
 
             xhr.send();
         }

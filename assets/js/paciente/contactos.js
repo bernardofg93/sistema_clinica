@@ -53,7 +53,6 @@ function readForm(e) {
         listData();
         contactosForm.reset();
     }
-
 }
 
 function listData() {

@@ -69,10 +69,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="<?= base_url ?>dashboard/index" class="nav-link" id="r-home">Home</a>
+                <a href="<?= base_url ?>dashboard/index" class="nav-link" id="r-home">Inicio</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="<?= base_url ?>usuario/logout" class="nav-link">Log out</a>
+                <a href="<?= base_url ?>usuario/logout" class="nav-link">Cerrar sesión</a>
             </li>
         </ul>
 

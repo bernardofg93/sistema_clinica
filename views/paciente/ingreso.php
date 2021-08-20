@@ -56,6 +56,15 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                 Detalle prospecto <i class="fas fa-arrow-right"></i>
             </a>
         <?php endif; ?>
+        <!-- PDF  -->
+        <?php if(isset($data) && $data && is_object($data)) : ?>
+            <a href="<?= base_url ?>docs/contrato_ingreso_esp.php?&idP=<?=$data->id_paciente?>&idI=<?=$data->id_ingreso_paciente?>" class="btn btn-danger btn-flat" target="_blank">
+                <i class="fas fa-file-pdf"> PDF Español</i>
+            </a>
+            <a href="<?= base_url ?>docs/contrato_ingreso_ing.php?&idP=<?=$data->id_paciente?>&idI=<?=$data->id_ingreso_paciente?>" class="btn btn-danger btn-flat" target="_blank">
+                <i class="fas fa-file-pdf"> PDF Ingles</i>
+            </a>
+        <?php endif ; ?>
     </div>
 </div>
 
@@ -279,6 +288,8 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
             </div>
             <!-- /.card-body -->
         </div>
+
+
     </div>
     <div class="col-md-6">
         <div class="card card-white">
@@ -371,7 +382,7 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                                 <?php for ($i = 0; $i < count($arr); $i++) : ?>
                                     <tr>
                                         <td>
-                                            <?php echo $arr[$i]['nombre_cp'] ?>
+                                            <?php echo $arr[$i]['nombre_contacto'] ?>
                                         </td>
                                         <td>
                                             <?php echo $arr[$i]['parentesco_cp'] ?>
@@ -436,8 +447,8 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                             <label for="nombre">
                                 Ingreso:
                             </label>
-                            <input  type="text" class="form-control form-control-sm" id="ingreso"
-                                   value="<?= isset($data) && is_object($data) ? $data->ingreso_ip : $dataNow ?> ">
+                            <input type="text" class="form-control form-control-sm" id="ingreso"
+                                   value="<?= isset($data) && is_object($data) ? $data->fecha_alta_ing : $dataNow ?> ">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -447,7 +458,7 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="text" class="form-control" id="precio_trat"
+                                <input type="number" class="form-control" id="precio_trat"
                                        value="<?= isset($data) && is_object($data) ? $data->precio_tratamiento_ip : '' ?>">
                             </div>
                         </div>
@@ -483,7 +494,7 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="deposito_ip">Deposito:</label>
-                            <input type="text" class="form-control form-control-sm" id="deposito_ip"
+                            <input type="number" class="form-control form-control-sm" id="deposito_ip"
                                    value="<?= isset($data) && is_object($data) ? $data->deposito_ip : '' ?>">
                         </div>
                     </div>
@@ -536,7 +547,6 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-
                 <form id="cpForm">
                     <div class="form-group">
                         <label for="nombre">Nombre contacto:</label>
@@ -563,7 +573,6 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
                         <i class="far fa-save"> Guardar</i>
                     </button>
                 </form>
-
             </div>
         </div>
     </div>

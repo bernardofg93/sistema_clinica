@@ -61,7 +61,7 @@ function readForm(e) {
 function sendDb(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/consumoSustancias/save', true);
+    xhr.open('POST', `${GLOBAL_URL}/consumoSustancias/save`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -91,7 +91,7 @@ function sendDb(data) {
 function editData(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/usuario/save');
+    xhr.open('POST', `${GLOBAL_URL}/usuario/save`);
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -111,7 +111,7 @@ function sustanciaSelect(e) {
         const id_pac = e.target.getAttribute('data-id');
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `http://localhost/clinica_soft/consumoSustancias/check&id=${id}&id_pac=${id_pac}`, true);
+        xhr.open('GET', `${GLOBAL_URL}/consumoSustancias/check&id=${id}&id_pac=${id_pac}`, true);
 
         xhr.onload = function (){
             if(this.status === 200){

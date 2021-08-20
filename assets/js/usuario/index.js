@@ -80,7 +80,7 @@ function readListUsers(e) {
         if (respuesta) {
             const xhr = new XMLHttpRequest();
 
-            xhr.open('GET', `http://localhost/clinica_soft/usuario/delete&id=${id}`, true)
+            xhr.open('GET', `${GLOBAL_URL}/usuario/delete&id=${id}`, true)
 
             xhr.onload = function () {
                 const rs = JSON.parse(xhr.responseText);
@@ -98,7 +98,7 @@ function readListUsers(e) {
 function sendDb(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/usuario/save', true);
+    xhr.open('POST', `${GLOBAL_URL}/usuario/save`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -118,7 +118,7 @@ function sendDb(data) {
 function editData(data) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'http://localhost/clinica_soft/usuario/save');
+    xhr.open('POST', `${GLOBAL_URL}/usuario/save`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -153,7 +153,7 @@ function readPass(e) {
     } else {
         const xhr = new XMLHttpRequest();
 
-        xhr.open("POST", "http://localhost/clinica_soft/usuario/changePassword", true);
+        xhr.open("POST", `${GLOBAL_URL}/usuario/changePassword`, true);
 
         xhr.onload = function () {
             if (this.status === 200) {
@@ -185,7 +185,7 @@ function stateUsers(e) {
             data.append('status', status);
             data.append('id', id);
 
-            xhr.open("POST", "http://localhost/clinica_soft/usuario/estado", true);
+            xhr.open("POST", `${GLOBAL_URL}/usuario/estado`, true);
 
             xhr.onload = function () {
                 if (this.status === 200) {
@@ -209,7 +209,7 @@ function stateUsers(e) {
             data.append('status', status);
             data.append('id', id);
 
-            xhr.open("POST", "http://localhost/clinica_soft/usuario/estado", true);
+            xhr.open("POST", `${GLOBAL_URL}/usuario/estado`, true);
 
             xhr.onload = function () {
                 if (this.status === 200) {

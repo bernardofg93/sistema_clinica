@@ -8,6 +8,7 @@ class ventaController
 {
     public function index()
     {
+
         $llamadaSeguimiento = new Venta();
         $llamadas = $llamadaSeguimiento->getLLamadasSeguimiento();
 
@@ -26,28 +27,60 @@ class ventaController
             $totalPac = $totalPaciente->getTotal();
             $arrTotalPac[] = $totalPac;
         }
-
-        foreach ($arrTotalPac as $j => $k){
-            foreach ($arrTotalPac[$j] as $key => $item){
+        foreach ($arrTotalPac as $j => $k) {
+            foreach ($arrTotalPac[$j] as $key => $item) {
                 $resp[] = $item;
             }
         }
-
-        //obtener la fecha de alta de la venta
-        $pacienteFechaAlta = new PacienteIngreso();
-        $fechaAlta = $pacienteFechaAlta->getData();
-
-        while ($fecha= $fechaAlta->fetch_assoc()){
-            $arrFechaAlta[] = $fecha;
+        // Se obtiene el total de ventas de cada entidad
+        $totalVenta = new Venta();
+        for($i=1; $i <= 3; $i++) {
+            $totalVenta->setId($i);
+           $resTotalVenta = $totalVenta->getTotalCash();
+           $arrTotalVenta[] = $resTotalVenta;
         }
 
-        foreach ($arrFechaAlta as $inde => $item) {
-                var_dump($item['id_ingreso_paciente']);
+        foreach ($arrTotalVenta as $item => $i) {
+            $resTotalEntidad[] = $i;
+            foreach ($arrTotalVenta[$item] as $j){
+                $arrResultVenta[] = $j;
+            }
+        }
+
+        //Total de pacientes por mes
+        $totalPaciente = new PacienteIngreso();
+        $totalPac = $totalPaciente->getTotalIngresos();
+        foreach ($totalPac as $val){
+            $val;
         }
 
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
         require_once './views/ventas/index.php';
+    }
+
+    public function proximosEgresados()
+    {
+        $proximosEgresarEntidad = new Venta();
+        $testeo = $proximosEgresarEntidad->getProximosEgresados();
+
+        while($data = $testeo->fetch_assoc()){
+            $arrProx[] = $data;
+        }
+
+        echo json_encode($arrProx, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function validatePacienteVenta()
+    {
+        if (isset($_GET['id'])) {
+            $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+            $pacienteVenta = new Venta();
+            $pacienteVenta->setId($id);
+            $obj = $pacienteVenta->getPacienteVenta();
+        }
+        echo json_encode($obj);
     }
 
     public function detalleProspecto()

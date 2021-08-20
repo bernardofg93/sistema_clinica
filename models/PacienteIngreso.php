@@ -428,6 +428,22 @@ class PacienteIngreso
         $this->fecha_estadia = $fecha_estadia;
     }
 
+
+    public function getTotalIngresos()
+    {
+        $month = date("m");
+        $year = date("Y");
+
+        $sql = "SELECT 
+                COUNT(id_ingreso_paciente) 
+                FROM ingreso_paciente i 
+                INNER JOIN entidad e ON i.entidad_id = e.id_entidad
+                WHERE MONTH(fecha_alta_ing) = '$month' AND YEAR(fecha_alta_ing) = '$year'
+                ";
+        $obj = $this->db->query($sql);
+        return $obj->fetch_assoc();
+    }
+
     public function getTotal()
     {
         $sql = "SELECT 
@@ -474,7 +490,7 @@ class PacienteIngreso
                 id_ingreso_paciente
                 DESC
                 ";
-       return $this->db->query($sql);
+        return $this->db->query($sql);
     }
 
     public function getAll()
@@ -487,6 +503,8 @@ class PacienteIngreso
                 paciente p ON i.paciente_id = p.id_paciente
                 INNER JOIN
                 entidad e ON i.entidad_id = e.id_entidad
+                INNER JOIN 
+                usuario u ON i.usuario_id = u.id_usuario
                 WHERE 
                 i.paciente_id = {$this->getPacienteId()} 
                 AND 
@@ -544,11 +562,9 @@ class PacienteIngreso
         $forma_pago = $this->forma_pago_ip;
         $estadia = $this->fecha_estadia;
 
-        //var_dump($estadia);
-
         $sql = "INSERT INTO ingreso_paciente VALUES
                                     (
-                                     NULL, '$entidad_id', '$paciente_id', '$usuario_id', null, '$edad', '$civil', '$hijos', '$edades'
+                                     NULL, '$entidad_id', '$paciente_id', '$usuario_id', {$this->getVentaId()}, '$edad', '$civil', '$hijos', '$edades'
                                      '$ocupacion','$escolaridad', '$vive', '$calle', '$colonia', '$ext',
                                      '$interior', '$colonia', '$ciudad_vive', '$postal',
                                      '$estado_vive', '$pais', '$modo', '$recomendado',
@@ -559,12 +575,14 @@ class PacienteIngreso
                                      )";
         $save = $this->db->query($sql);
 
+        //$ventaId = empty($venta_id) ? $venta_id : false;
+
         if ($save) {
             return [
                 'res' => 'true',
                 'paciente_id' => $paciente_id,
                 'ingreso_id' => $ingreso_id = $this->db->insert_id,
-                'entidad_id' => $entidad_id
+                'entidad_id' => $entidad_id,
             ];
         } else {
             return ['res' => 'false'];

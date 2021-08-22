@@ -92,6 +92,8 @@
                                 <label for="ocupacion">Correo de contacto:</label>
                                 <input type="email" class="form-control form-control-sm" id="correo"
                                        value="<?= isset($data) && is_object($data) ? $data->correo_cont : '' ?>">
+                                <p id="email-validate" class="input-true">Campo obligatorio.</p>
+                                <p id="email-validate-format" class="input-true">No contiene el formato de un correo electronico.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -132,17 +134,14 @@
         </div>
 
         <!-- Buttons -->
-        <div class="card card-white col-sm-6">
+        <div class="card card-white col-sm-6" id="btns-media">
             <div class="card-body" id="btns-social-media">
-                <a href="mailto:marchina@gmail.com">
+                <a id="email-btn">
                     <i class="fas fa-envelope-square icons-whatsapp-email"></i>
                 </a>
                 <a href="sms://+14035550185?body=I%27m%20interested%20in%20your%20product.%20Please%20contact%20me." id="msn-cell">
                     <i class="fas fa-mobile-alt" style="font-size: 46px;"></i>
                 </a>
-
-
-
             </div>
         </div>
 
@@ -176,7 +175,7 @@
                                 <option value="<?= isset($data) && is_object($data) ? $data->medio_entero : '' ?>"
                                         disabled
                                         selected><?= isset($data) && is_object($data) ? $data->medio_entero : 'Selecciona'; ?></option>
-                                <option value="Prospecto">Prospecto</option>
+                                <option value="Prospecto">Televisión</option>
                                 <option value="Internet">Internet</option>
                                 <option value="Facebook">Facebook</option>
                                 <option value="Radio">Radio</option>

@@ -47,6 +47,7 @@
                         <option value="<?= isset($data) && is_object($data) ? $data->rol : '' ?>" disabled
                                 selected><?= isset($data) && is_object($data) ? $data->rol : 'Selecciona'; ?></option>
                         <option value="admin">Administrador</option>
+                        <option value="ventas">Ventas</option>
                         <option value="doctor">Doctor</option>
                         <option value="psicologo">Psicólogo</option>
                         <option value="consultor">Consultor</option>

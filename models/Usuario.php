@@ -212,8 +212,10 @@ class Usuario
             $verify = password_verify($password, $usuario->password);
             if ($verify) {
                 $result = $usuario;
+                return ['res' => 'true', 'data' => $result];
+            } else {
+                return ['res' => 'false', 'data' => $result];
             }
         }
-        return $result;
     }
 }

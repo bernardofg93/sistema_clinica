@@ -1,7 +1,8 @@
 const formUsuario = document.querySelector('#rgUsuario'),
     listUsers = document.querySelector('#tblRegistros tbody'),
     userPass = document.querySelector('#userPass'),
-    stateUs = document.querySelector('#card-body .card-body');
+    stateUs = document.querySelector('#card-body .card-body'),
+    login = document.querySelector('#login-form');
 
 const mgError = 'Favor de llenar los campos requeridos',
     resError = 'error',
@@ -11,6 +12,7 @@ const mgError = 'Favor de llenar los campos requeridos',
     mgPassTrue = 'Contraseña actualizada correctamente';
 
 eventListener();
+
 
 function eventListener() {
     if (formUsuario) {
@@ -24,6 +26,9 @@ function eventListener() {
     }
     if (stateUs) {
         stateUs.addEventListener('change', stateUsers);
+    }
+    if (login) {
+        login.addEventListener('submit', readFormLogin);
     }
 }
 
@@ -46,7 +51,7 @@ function readForm(e) {
     data.append("entidad_id", entidad_id);
     data.append("action", action);
 
-    console.log(...data);
+    //console.log(...data);
 
     if (nombre === '' || apellidos === '' || email === '' || entidad_id === '') {
 
@@ -223,6 +228,40 @@ function stateUsers(e) {
             xhr.send(data);
         }
     }
+}
+
+/* Validaciones para el logeo */
+function readFormLogin(e) {
+    e.preventDefault();
+
+    const email = document.querySelector('#email').value,
+        pass = document.querySelector('#pass').value;
+
+    const data = new FormData();
+    data.append('email', email);
+    data.append('pass', pass);
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', `${GLOBAL_URL}/usuario/login`, true);
+
+    xhr.onload = function () {
+        if (this.status === 200) {
+            const res = JSON.parse(xhr.responseText);
+
+            if (res.res === 'true') {
+                if (res.data.rol === 'ventas') {
+                    location.replace("http://localhost/clinica_soft/venta/index");
+                } else {
+                    location.replace("http://localhost/clinica_soft/dashboard/index");
+                }
+            } else {
+                sweetAlert('Error de usuario y/o contraseña favor de contactar a su administrador', 'error');
+            }
+        }
+    }
+    xhr.send(data);
+
 }
 
 

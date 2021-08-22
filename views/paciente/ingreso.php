@@ -38,7 +38,6 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
         </div><!-- /.col -->
     </div><!-- /.row -->
 </div>
-
 <!-- Buttons -->
 <div class="card card-white col-sm-6">
     <div class="card-body" id="container-buttons">
@@ -537,7 +536,6 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
         </div>
     </div>
 </div>
-
 <!-- Modal Create-->
 <div class="modal fade" id="modalCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -577,7 +575,6 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
         </div>
     </div>
 </div>
-
 <!-- Modal Edit-->
 <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">

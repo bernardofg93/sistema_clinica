@@ -1,3 +1,4 @@
+
 const action = document.querySelector('#action').value;
 const fecha = document.querySelector('#fechaLlamada'),
     hora = document.querySelector('#horaLlamada'),
@@ -13,51 +14,12 @@ const fecha = document.querySelector('#fechaLlamada'),
     detalles = document.querySelector('#detalles'),
     medioEnvio = document.querySelector('#medioEnvio'),
     medioEntero = document.querySelector('#medioEntero'),
-    fechaSeg = document.querySelector('#fechaSeg');
-    //ladaTel = document.querySelector('#ladaTel');
+    fechaSeg = document.querySelector('#fechaSeg'),
+    btnsMedia = document.querySelector('#btns-media .card-body'),
+    bntEmail = document.querySelector('#email-btn');
 
 fecha.disabled = true;
 hora.disabled = true;
-
-/*
-if (razonSelect.value != 'Prospecto') {
-    fecha.disabled = true;
-    hora.disabled = true;
-    cal.value = '';
-    cal.disabled = true;
-    segSelect.value = '';
-    segSelect.disabled = true;
-    nombre.value = "";
-    nombre.disabled = true;
-    correo.value = '';
-    correo.disabled = true;
-    parentesco.value = '';
-    parentesco.disabled = true;
-    edad.value = '';
-    edad.disabled = true;
-    acepta.value = '';
-    acepta.disabled = true;
-    detalles.value = '';
-    detalles.disabled = true;
-    medioEnvio.value = '';
-    medioEnvio.disabled = true;
-    medioEntero.value = '';
-    medioEntero.disabled = true;
-    fechaSeg.value = '';
-    fechaSeg.disabled = true;
-} else {
-    document.querySelector("#nombre").disabled = false;
-    document.querySelector("#correo").disabled = false;
-    document.querySelector('#parentesco').disabled = false;
-    document.querySelector('#consumo').disabled = false;
-    document.querySelector('#edad').disabled = false;
-    document.querySelector('#acepta').disabled = false;
-    document.querySelector('#detalles').disabled = false;
-    document.querySelector('#medioEnvio').disabled = false;
-    document.querySelector('#medioEntero').disabled = false;
-    document.querySelector('#fechaSeg').disabled = false;
-}
- */
 
 eventListener();
 
@@ -70,6 +32,9 @@ function eventListener() {
     }
     if (segSelect) {
         segSelect.addEventListener('change', actionFechaSeguimiento);
+    }
+    if (btnsMedia){
+        btnsMedia.addEventListener('click', readBtnsMedia);
     }
 }
 
@@ -109,6 +74,7 @@ function readCal(e) {
     let idCal = e.target.value;
     if (idCal === '1') {
         segSelect.disabled = true;
+        segSelect.value = '';
     } else {
         segSelect.disabled = false;
     }
@@ -230,4 +196,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Telefono && whatsapp //
+function readBtnsMedia(e) {
+    const emailValidate = document.querySelector('#email-validate');
+    const emailValidateFormat = document.querySelector('#email-validate-format');
 
+    if(e.target.classList.contains('icons-whatsapp-email')){
+
+        if(correo.value === ''){
+            bntEmail.href = "javascript:void(0)";
+            correo.classList.add('border-danger', 'validate-input');
+            emailValidate.classList.replace('input-true', 'input-error');
+            emailValidateFormat.classList.replace('input-error', 'input-true');
+        }else{
+            const email = correo.value;
+            const res = fntEmailValidate(email);
+            if(res) {
+                correo.classList.remove('border-danger', 'validate-input');
+                emailValidate.classList.replace('input-error', 'input-true');
+                emailValidateFormat.classList.replace('input-error', 'input-true');
+                bntEmail.href = `mailto:${email}`;
+            }else {
+                bntEmail.href = "javascript:void(0)";
+                emailValidate.classList.replace('input-error', 'input-true');
+                emailValidateFormat.classList.replace('input-true', 'input-error');
+            }
+
+        }
+    }
+}
+
+
+
+function fntEmailValidate(email){
+    var stringEmail = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    if (stringEmail.test(email) == false){
+        return false;
+    }else{
+        return true;
+    }
+}

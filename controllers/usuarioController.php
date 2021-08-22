@@ -130,31 +130,29 @@ class usuarioController
     public function login()
     {
         if (isset($_POST)) {
-            $email = filter_var($_POST['email_us'], FILTER_SANITIZE_STRING);
-            $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+            $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+            $pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
             $usuario = new Usuario();
             $usuario->setEmailUs($email);
             $usuario->setPassword($pass);
 
             $identity = $usuario->login();
 
-            if ($identity && is_object($identity)) {
-                if ($identity->estado_us == 1) {
-                    $_SESSION['identity'] = $identity;
+            if ($identity && is_object($identity['data'])) {
+                if ($identity['data']->estado_us == 1) {
+                    $_SESSION['identity'] = $identity['data'];
 
-                    if ($identity->rol == 'admin') {
+                    if ($identity['data']->rol == 'admin') {
                         $_SESSION['admin'] = true;
                     }
-                    header('Location:' . base_url . 'dashboard/index');
                 } else {
                     $_SESSION['error_login'] = 'Identificacion fallida';
-                    header("Location:" . base_url);
                 }
             } else {
                 $_SESSION['error_login'] = 'Identificacion fallida';
-                header("Location:" . base_url);
             }
         }
+        echo json_encode($identity);
     }
 
     public function logout()

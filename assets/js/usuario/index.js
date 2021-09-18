@@ -248,15 +248,18 @@ function readFormLogin(e) {
     xhr.onload = function () {
         if (this.status === 200) {
             const res = JSON.parse(xhr.responseText);
-
-            if (res.res === 'true') {
-                if (res.data.rol === 'ventas') {
-                    location.replace("http://localhost/clinica_soft/venta/index");
+            if (res) {
+                if (res.res === 'true') {
+                    if (res.data.rol === 'ventas') {
+                        location.replace("http://localhost/clinica_soft/venta/index");
+                    } else {
+                        location.replace("http://localhost/clinica_soft/dashboard/index");
+                    }
                 } else {
-                    location.replace("http://localhost/clinica_soft/dashboard/index");
+                    sweetAlert('Error de usuario y/o contraseña favor de contactar a su administrador', 'error');
                 }
-            } else {
-                sweetAlert('Error de usuario y/o contraseña favor de contactar a su administrador', 'error');
+            }else {
+                sweetAlert('El usuario no existe, favor de contactar a su administrador !', 'error');
             }
         }
     }

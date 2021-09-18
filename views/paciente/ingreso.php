@@ -26,14 +26,14 @@ $idVenta = isset($_GET['idv']) ? filter_var($_GET['idv'], FILTER_VALIDATE_INT) :
             <ol class="breadcrumb float-sm-right">
                 <?php if (isset($arr)) : ?>
                     <li class="breadcrumb-item">
-                        <a href="<?= base_url ?>paciente/registros">Registros</a>
+                        <a href="<?= base_url ?>venta/registros">Seguimientos</a>
                     </li>
                 <?php else: ?>
                     <li class="breadcrumb-item">
                         <a href="<?= base_url ?>venta/registros">Seguimientos</a>
                     </li>
                 <?php endif; ?>
-                <li class="breadcrumb-item active">Registro</li>
+                <li class="breadcrumb-item active">Ingreso</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->

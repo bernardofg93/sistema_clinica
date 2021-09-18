@@ -204,9 +204,10 @@ class Venta
                 INNER JOIN paciente p ON i.paciente_id = p.id_paciente
                 INNER JOIN entidad e ON i.entidad_id = e.id_entidad
                 WHERE 
-                MONTH(fecha_alta_ing) = '$month' AND YEAR(fecha_alta_ing) = '$year'
+                MONTH(fecha_estadia) = '$month' AND YEAR(fecha_estadia) = '$year'
                 ";
-        return $this->db->query($sql);
+       return $this->db->query($sql);
+
     }
 
     public function getLLamadasSeguimiento()
@@ -280,6 +281,24 @@ class Venta
                 ";
         $data = $this->db->query($sql);
         return $data;
+    }
+
+    public function getComplete() {
+        $sql = "
+                SELECT 
+                *  
+                FROM ingreso_paciente i
+                INNER JOIN venta v ON i.venta_id = v.id_venta
+                INNER JOIN paciente p ON i.paciente_id = p.id_paciente
+                ORDER BY 
+                id_ingreso_paciente 
+                ASC
+                ";
+        $data = $this->db->query($sql);
+        while ($arr = $data->fetch_assoc()) {
+            $obj[] = $arr;
+        }
+        return $obj;
     }
 
     public function save()

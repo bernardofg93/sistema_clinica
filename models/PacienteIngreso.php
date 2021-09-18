@@ -564,8 +564,8 @@ class PacienteIngreso
 
         $sql = "INSERT INTO ingreso_paciente VALUES
                                     (
-                                     NULL, '$entidad_id', '$paciente_id', '$usuario_id', {$this->getVentaId()}, '$edad', '$civil', '$hijos', '$edades'
-                                     '$ocupacion','$escolaridad', '$vive', '$calle', '$colonia', '$ext',
+                                     NULL, '$entidad_id', '$paciente_id', '$usuario_id', {$this->getVentaId()}, '$edad', '$civil', '$hijos', '$edades',
+                                     '$ocupacion','$escolaridad', '$vive', '$calle', '$ext',
                                      '$interior', '$colonia', '$ciudad_vive', '$postal',
                                      '$estado_vive', '$pais', '$modo', '$recomendado',
                                      '$legal', '$actitud', '$observaciones',
@@ -574,6 +574,9 @@ class PacienteIngreso
                                      '$forma_pago', CURDATE(), CURTIME(), '$estadia'
                                      )";
         $save = $this->db->query($sql);
+
+        var_dump($save);
+        echo $this->db->error;
 
         //$ventaId = empty($venta_id) ? $venta_id : false;
 

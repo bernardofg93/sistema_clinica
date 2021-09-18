@@ -54,20 +54,22 @@
                         <!-- /.card-header -->
                         <table class="table table-bordered" id="tbldata">
                             <thead>
-                            <tr>
-                                <th style="font-size: 13px;">Fecha de llamada</th>
-                                <th style="font-size: 13px;">Fecha de seguimiento</th>
-                                <th style="font-size: 13px;">Nombre contacto</th>
-                            </tr>
+                                <tr>
+                                    <th style="font-size: 13px;">Fecha de llamada</th>
+                                    <th style="font-size: 13px;">Fecha de seguimiento</th>
+                                    <th style="font-size: 13px;">Nombre contacto</th>
+                                </tr>
                             </thead>
                             <tbody id="contactosPaciente">
-                            <?php while ($res = $llamadas->fetch_object()) : ?>
-                                <tr>
-                                    <td><?= $res->fecha_llamada ?></td>
-                                    <td><?= $res->fecha_seguimiento ?></td>
-                                    <td><?= $res->nombre_cont ?></td>
-                                </tr>
-                            <?php endwhile; ?>
+                                <?php if (isset($llamadas) && $llamadas) : ?>
+                                    <?php while ($res = $llamadas->fetch_object()) : ?>
+                                        <tr>
+                                            <td><?= $res->fecha_llamada ?></td>
+                                            <td><?= $res->fecha_seguimiento ?></td>
+                                            <td><?= $res->nombre_cont ?></td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -86,12 +88,12 @@
                         <!-- /.card-header -->
                         <table class="table table-bordered" id="proximosEgreso">
                             <thead>
-                            <tr>
-                                <th style="font-size: 13px;">Unidad</th>
-                                <th style="font-size: 13px;">Paciente</th>
-                                <th style="font-size: 13px;">Fecha</th>
-                                <th style="font-size: 13px;">Salida</th>
-                            </tr>
+                                <tr>
+                                    <th style="font-size: 13px;">Unidad</th>
+                                    <th style="font-size: 13px;">Paciente</th>
+                                    <th style="font-size: 13px;">Fecha</th>
+                                    <th style="font-size: 13px;">Salida</th>
+                                </tr>
                             </thead>
                             <tbody>
 
@@ -112,7 +114,7 @@
                         <div class="description-block border-left border-right">
                             <span class="description-percentage text-success">
                                 <i class="fas fa-caret-up"></i>
-                                 <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[0]['cupos'] - 25 : false ?>
+                                <?= isset($arrEntidad) && $arrEntidad ? $arrEntidad[0]['cupos'] - 25 : false ?>
                                 Lugares
                             </span>
                             <h5 class="description-header">
@@ -170,57 +172,57 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <ul class="products-list product-list-in-card pl-2 pr-2">
-                    <li class="item">
-                        <span class="badge col-1 badge-warning float-right"><?=$val?></span>
-                        <span class="product-description">
-                            Ingresos
-                        </span>
-                    </li>
-                    <!-- /.item -->
-                    <li class="item">
-                        <a href="javascript:void(0)" class="product-title">
-                            <span class="badge badge-info float-right">
-                                 <?php echo $arrResultVenta[0] ?><span>$</span>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <ul class="products-list product-list-in-card pl-2 pr-2">
+                        <li class="item">
+                            <span class="badge col-1 badge-warning float-right"><?= $val ?></span>
+                            <span class="product-description">
+                                Ingresos
                             </span>
-                        </a>
-                        <span class="product-description">
-                            CAP 1
-                        </span>
-                    </li>
-                    <!-- /.item -->
-                    <li class="item">
-                        <span class="badge badge-danger float-right">
-                            <?php echo $arrResultVenta[1] ?><span>$</span>
-                        </span>
+                        </li>
+                        <!-- /.item -->
+                        <li class="item">
+                            <a href="javascript:void(0)" class="product-title">
+                                <span class="badge badge-info float-right">
+                                    <?php echo isset($arrResultVenta) && $arrResultVenta ? $arrResultVenta[0] : false ?><span>$</span>
+                                </span>
+                            </a>
+                            <span class="product-description">
+                                CAP 1
+                            </span>
+                        </li>
+                        <!-- /.item -->
+                        <li class="item">
+                            <span class="badge badge-danger float-right">
+                                <?php echo isset($arrResultVenta) && $arrResultVenta ? $arrResultVenta[1] : false ?><span>$</span>
+                            </span>
 
-                        <span class="product-description">
-                            CAP 2
-                        </span>
-                    </li>
-                    <!-- /.item -->
-                    <li class="item">
-                        <span class="badge badge-success float-right">
-                           <?php echo $arrResultVenta[2] ?><span>$</span>
-                        </span>
-                        <span class="product-description">
-                            CAS
-                        </span>
-                    </li>
-                    <!-- /.item -->
-                </ul>
+                            <span class="product-description">
+                                CAP 2
+                            </span>
+                        </li>
+                        <!-- /.item -->
+                        <li class="item">
+                            <span class="badge badge-success float-right">
+                                <?php echo isset($arrResultVenta) && $arrResultVenta ? $arrResultVenta[2] : false ?><span>$</span>
+                            </span>
+                            <span class="product-description">
+                                CAS
+                            </span>
+                        </li>
+                        <!-- /.item -->
+                    </ul>
+                </div>
+                <!-- /.card-footer -->
             </div>
-            <!-- /.card-footer -->
+        </div>
+        <div class="col-md-6">
         </div>
     </div>
-    <div class="col-md-6">
-    </div>
-</div>
 
-<!-- /.table -->
-<?php include "admin/layout/footer.php" ?>
-<script src="<?= base_url ?>assets/js/alerts.js"></script>
-<script src="<?= base_url ?>assets/js/ventas/dashboard.js"></script>
-<script src="<?= base_url ?>admin/assets/js/table.js"></script>
+    <!-- /.table -->
+    <?php include "admin/layout/footer.php" ?>
+    <script src="<?= base_url ?>assets/js/alerts.js"></script>
+    <script src="<?= base_url ?>assets/js/ventas/dashboard.js"></script>
+    <script src="<?= base_url ?>admin/assets/js/table.js"></script>

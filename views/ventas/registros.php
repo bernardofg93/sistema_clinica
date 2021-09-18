@@ -8,6 +8,9 @@
                 <li class="breadcrumb-item">
                     <a href="<?= base_url ?>venta/index">Panel de ventas</a>
                 </li>
+                <li class="breadcrumb-item">
+                    <a href="<?= base_url ?>venta/ingresoVenta">Ventas concretadas</a>
+                </li>
                 <li class="breadcrumb-item active">Registros</li>
             </ol>
         </div><!-- /.col -->
@@ -28,6 +31,7 @@
             <tr>
                 <th style="font-size: 15px;"> Fecha llamada</th>
                 <th style="font-size: 15px;"> Fecha seguimiento</th>
+                <th style="font-size: 15px;"> Teléfono </th>
                 <th style="font-size: 15px;"> Nombre</th>
                 <th style="font-size: 15px;"> Ascesor</th>
                 <th style="font-size: 15px;"> Estado</th>

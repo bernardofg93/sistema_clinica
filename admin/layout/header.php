@@ -61,10 +61,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Left navbar links -->
         <ul class="navbar-nav navbar-center">
             <li>
-                <a href="<?= base_url ?>admin/layout/plugins/index3.html" class="navbar-brand">
-                    <img src="<?= base_url ?>admin/layout/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                <a class="navbar-brand">
+                    <img src="<?= base_url ?>assets/img/logo.svg" alt="AdminLTE Logo"
                          class="brand-image img-circle elevation-3"
-                         style="opacity: .8">
+                         style="opacity: .8; margin-left: 1rem" id="logo">
                     <span class="brand-text font-weight-light">Clínica nuevo ser</span>
                 </a>
             </li>
@@ -100,8 +100,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <aside class="main-sidebar sidebar-light-white elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link navbar">
-            <img src="<?= base_url ?>admin/layout/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                 class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Clínica nuevo ser</span>
-        </a>
+        <div class="login-logo" style="display: flex; align-items: center; justify-content: center;">
+            <img src="<?=base_url?>assets/img/logoLogin.svg" alt="" style="width:100%; padding: 1rem">
+        </div>

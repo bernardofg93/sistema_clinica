@@ -16,7 +16,9 @@ const fecha = document.querySelector('#fechaLlamada'),
     medioEntero = document.querySelector('#medioEntero'),
     fechaSeg = document.querySelector('#fechaSeg'),
     btnsMedia = document.querySelector('#btns-media .card-body'),
-    bntEmail = document.querySelector('#email-btn');
+    bntEmail = document.querySelector('#email-btn'),
+    btnWhatsapp = document.querySelector('#btn-whatsapp'),
+    btnVenta = document.querySelector('#btnVenta');
 
 fecha.disabled = true;
 hora.disabled = true;
@@ -33,7 +35,7 @@ function eventListener() {
     if (segSelect) {
         segSelect.addEventListener('change', actionFechaSeguimiento);
     }
-    if (btnsMedia){
+    if (btnsMedia) {
         btnsMedia.addEventListener('click', readBtnsMedia);
     }
 }
@@ -183,11 +185,12 @@ document.addEventListener('DOMContentLoaded', function () {
     xhr.open('GET', `${GLOBAL_URL}/venta/validatePacienteVenta&id=${ventaId}`, true)
 
     xhr.onload = function () {
-        if(this.status === 200){
+        if (this.status === 200) {
             const res = JSON.parse(xhr.responseText);
-            if(res.id_ingreso_paciente){
+            if (res.id_ingreso_paciente) {
                 fechaSeg.disabled = true;
                 calLLamada.disabled = true;
+                btnVenta.disabled = true;
             }
         }
     }
@@ -200,38 +203,50 @@ function readBtnsMedia(e) {
     const emailValidate = document.querySelector('#email-validate');
     const emailValidateFormat = document.querySelector('#email-validate-format');
 
-    if(e.target.classList.contains('icons-whatsapp-email')){
-
-        if(correo.value === ''){
+    if (e.target.classList.contains('fa-envelope-square')) {
+        if (correo.value === '') {
             bntEmail.href = "javascript:void(0)";
             correo.classList.add('border-danger', 'validate-input');
             emailValidate.classList.replace('input-true', 'input-error');
             emailValidateFormat.classList.replace('input-error', 'input-true');
-        }else{
+        } else {
             const email = correo.value;
             const res = fntEmailValidate(email);
-            if(res) {
+            if (res) {
                 correo.classList.remove('border-danger', 'validate-input');
                 emailValidate.classList.replace('input-error', 'input-true');
                 emailValidateFormat.classList.replace('input-error', 'input-true');
                 bntEmail.href = `mailto:${email}`;
-            }else {
+                medioEnvio.value = "Correo";
+            } else {
                 bntEmail.href = "javascript:void(0)";
                 emailValidate.classList.replace('input-error', 'input-true');
                 emailValidateFormat.classList.replace('input-true', 'input-error');
             }
-
+        }
+    }
+    if (e.target.classList.contains('wts-mobile')) {
+        const whatsappValidate = document.querySelector('#whatsapp-validate');
+        if (ladaTel.value === '') {
+            btnWhatsapp.href = "javascript:void(0)";
+            ladaTel.classList.add('border-danger', 'validate-input');
+            whatsappValidate.classList.replace('input__tel__true', 'input__tel__error');
+        } else {
+            e.target.classList.contains('fa-mobile-alt') ? medioEnvio.value = "Mensaje de texto" : medioEnvio.value = 'Whatsapp';
+            const whatsNumber = ladaTel.value;
+            ladaTel.classList.remove('border-danger', 'validate-input');
+            whatsappValidate.classList.replace('input__tel__error', 'input__tel__true');
+            btnWhatsapp.href = `https://api.whatsapp.com/send?phone=+${whatsNumber}&text=`;
         }
     }
 }
 
-
-
-function fntEmailValidate(email){
+/*validar el email*/
+function fntEmailValidate(email) {
     var stringEmail = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
-    if (stringEmail.test(email) == false){
+    if (stringEmail.test(email) == false) {
         return false;
-    }else{
+    } else {
         return true;
     }
 }

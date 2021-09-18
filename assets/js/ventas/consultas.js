@@ -12,10 +12,10 @@ function eventListener() {
     }
 }
 
-var tableVenta;
+let tableVentaRegistros;
 
 document.addEventListener('DOMContentLoaded', function () {
-    tableVenta = $('#tblRegistros').dataTable({
+    tableVentaRegistros = $('#tblRegistros').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "autoWidth": false,
@@ -31,12 +31,42 @@ document.addEventListener('DOMContentLoaded', function () {
         "columns": [
             {"data": "fecha_llamada"},
             {"data": "fecha_seguimiento"},
+            {"data": "lada_tel"},
             {"data": "nombre_cont"},
             {"data": "nombre_us"},
             {"data": "estado_ve"},
             {"data": "edit"},
             {"data": "finalizar"},
             {"data": "ingreso"}
+        ],
+        "resonsieve": "true",
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "order": [[0, "desc"]]
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    tableVenta = $('#tblventaIngreso').dataTable({
+        "aProcessing": true,
+        "aServerSide": true,
+        "autoWidth": false,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax": {
+            type: 'POST',
+            url: `${GLOBAL_URL}/venta/concretada`,
+            mimeType: 'json',
+            "dataSrc": ""
+        },
+        "columns": [
+            {"data": "nombre_ip"},
+            {"data": "apellido_paterno_ip"},
+            {"data": "apellido_materno_ip"},
+            {"data": "fecha_alta_ing"},
+            {"data": "detalle"}
         ],
         "resonsieve": "true",
         "bDestroy": true,
@@ -137,7 +167,7 @@ function readClickTable(e) {
             if (xhr.status === 200) {
                 const obj = JSON.parse(xhr.responseText);
                 if (obj.res === 'true') {
-                    tableVenta.api().ajax.reload();
+                    tableVentaRegistros.api().ajax.reload();
                 }
             }
         }

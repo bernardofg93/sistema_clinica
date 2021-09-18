@@ -206,6 +206,7 @@ class Usuario
         // Comprobar si existe el usuario
         $sql = "SELECT * FROM usuario WHERE email_us = '$email'";
         $login = $this->db->query($sql);
+  
         if ($login && $login->num_rows == 1) {
             $usuario = $login->fetch_object();
             // Verificar la contraseña

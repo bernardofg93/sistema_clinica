@@ -33,15 +33,13 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label for="nombre">Fecha de llamada:</label>
-                                <input type="text" class="form-control form-control-sm" id="fechaLlamada"
-                                       value="<?= isset($data) && is_object($data) ? $data->fecha_llamada : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="fechaLlamada" value="<?= isset($data) && is_object($data) ? $data->fecha_llamada : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="apellido_p">Hora de llamada:</label>
-                                <input type="text" class="form-control form-control-sm" id="horaLlamada"
-                                       value="<?= isset($data) && is_object($data) ? $data->hora_llamada : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="horaLlamada" value="<?= isset($data) && is_object($data) ? $data->hora_llamada : '' ?>">
                             </div>
                         </div>
                     </div>
@@ -50,17 +48,15 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label for="apellido_m">Lada + Telefono:</label>
-                                <input type="text" class="form-control form-control-sm" id="ladaTel" required
-                                       value="<?= isset($data) && is_object($data) ? $data->lada_tel : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="ladaTel" required value="<?= isset($data) && is_object($data) ? $data->lada_tel : '' ?>">
+                                <p id="whatsapp-validate" class="input__tel__true">Campo obligatorio.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="nombre">Razon de llamada:</label>
                                 <select class="form-control form-control-sm" id="razon" required>
-                                    <option value="<?= isset($data) && is_object($data) ? $data->razon_llamada : '' ?>"
-                                            disabled
-                                            selected><?= isset($data) && is_object($data) ? $data->razon_llamada : 'Selecciona'; ?></option>
+                                    <option value="<?= isset($data) && is_object($data) ? $data->razon_llamada : '' ?>" disabled selected><?= isset($data) && is_object($data) ? $data->razon_llamada : 'Selecciona'; ?></option>
                                     <option value="Prospecto">Prospecto</option>
                                     <option value="Cobrar algún servicio o producto">Cobrar algún servicio o producto
                                     </option>
@@ -83,47 +79,41 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="lugar_nac">Nombre contacto:</label>
-                                <input type="text" class="form-control form-control-sm" id="nombre"
-                                       value="<?= isset($data) && is_object($data) ? $data->nombre_cont : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="nombre" value="<?= isset($data) && is_object($data) ? $data->nombre_cont : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Correo de contacto:</label>
-                                <input type="email" class="form-control form-control-sm" id="correo"
-                                       value="<?= isset($data) && is_object($data) ? $data->correo_cont : '' ?>">
+                                <input type="email" class="form-control form-control-sm" id="correo" value="<?= isset($data) && is_object($data) ? $data->correo_cont : '' ?>">
                                 <p id="email-validate" class="input-true">Campo obligatorio.</p>
-                                <p id="email-validate-format" class="input-true">No contiene el formato de un correo electronico.</p>
+                                <p id="email-validate-format" class="input-true">No contiene el formato de un correo
+                                    electronico.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Parentesco:</label>
-                                <input type="text" class="form-control form-control-sm" id="parentesco"
-                                       value="<?= isset($data) && is_object($data) ? $data->parentesco_cont : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="parentesco" value="<?= isset($data) && is_object($data) ? $data->parentesco_cont : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Tipo de consumo:</label>
-                                <input type="text" class="form-control form-control-sm" id="consumo"
-                                       value="<?= isset($data) && is_object($data) ? $data->tipo_consumo : '' ?>">
+                                <input type="text" class="form-control form-control-sm" id="consumo" value="<?= isset($data) && is_object($data) ? $data->tipo_consumo : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ocupacion">Edad:</label>
-                                <input type="number" class="form-control form-control-sm" id="edad"
-                                       value="<?= isset($data) && is_object($data) ? $data->edad_cont : '' ?>">
+                                <input type="number" class="form-control form-control-sm" id="edad" value="<?= isset($data) && is_object($data) ? $data->edad_cont : '' ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="nombre">Acepta:</label>
                                 <select class="form-control form-control-sm" id="acepta">
-                                    <option value="<?= isset($data) && is_object($data) ? $data->aceptacion : '' ?>"
-                                            disabled
-                                            selected><?= isset($data) && is_object($data) ? $data->aceptacion : 'Selecciona'; ?></option>
+                                    <option value="<?= isset($data) && is_object($data) ? $data->aceptacion : '' ?>" disabled selected><?= isset($data) && is_object($data) ? $data->aceptacion : 'Selecciona'; ?></option>
                                     <option value="si">Si</option>
                                     <option value="no">No</option>
                                 </select>
@@ -139,8 +129,11 @@
                 <a id="email-btn">
                     <i class="fas fa-envelope-square icons-whatsapp-email"></i>
                 </a>
+                <a href="" class="float" target="_blanck" id="btn-whatsapp">
+                    <i class="fab fa-whatsapp-square icons-whatsapp-email wts-mobile"></i>
+                </a>
                 <a href="sms://+14035550185?body=I%27m%20interested%20in%20your%20product.%20Please%20contact%20me." id="msn-cell">
-                    <i class="fas fa-mobile-alt" style="font-size: 46px;"></i>
+                    <i class="fas fa-mobile-alt wts-mobile" style="font-size: 46px;"></i>
                 </a>
             </div>
         </div>
@@ -163,18 +156,14 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="actitud">Por que medio se envio:</label>
-                            <input type="text" class="form-control form-control-sm" id="medioEnvio"
-                                   value="<?= isset($data) && is_object($data) ? $data->medio_de_envio : '' ?>"
-                                   required>
+                            <input type="text" class="form-control form-control-sm" id="medioEnvio" value="<?= isset($data) && is_object($data) ? $data->medio_de_envio : '' ?>" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nombre">Medio por el cual se entero:</label>
                             <select class="form-control form-control-sm" id="medioEntero">
-                                <option value="<?= isset($data) && is_object($data) ? $data->medio_entero : '' ?>"
-                                        disabled
-                                        selected><?= isset($data) && is_object($data) ? $data->medio_entero : 'Selecciona'; ?></option>
+                                <option value="<?= isset($data) && is_object($data) ? $data->medio_entero : '' ?>" disabled selected><?= isset($data) && is_object($data) ? $data->medio_entero : 'Selecciona'; ?></option>
                                 <option value="Prospecto">Televisión</option>
                                 <option value="Internet">Internet</option>
                                 <option value="Facebook">Facebook</option>
@@ -189,12 +178,8 @@
                         <div class="form-group">
                             <label>Fecha de seguimiento:</label>
                             <div class="input-group date " data-target-input="nearest">
-                                <input type="date" id="fechaSeg" class="form-control form-control-sm"
-                                       data-target="#reservationdate"
-                                       value="<?= isset($data) && is_object($data) ? $data->fecha_seguimiento : '' ?>"
-                                >
-                                <div class="input-group-append" data-target="#reservationdate"
-                                     data-toggle="datetimepicker">
+                                <input type="date" id="fechaSeg" class="form-control form-control-sm" data-target="#reservationdate" value="<?= isset($data) && is_object($data) ? $data->fecha_seguimiento : '' ?>">
+                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
@@ -262,7 +247,7 @@
                 <input type="text" id="notaSeg" placeholder="Crear nota..." class="form-control">
                 <input type="hidden" id="nombreUs" value="<?= $_SESSION['identity']->nombre_us ?>">
                 <span class="input-group-append">
-                      <input type="submit" class="btn btn-primary" value="Enviar">
+                    <input type="submit" class="btn btn-primary" value="Enviar">
                 </span>
             </div>
         </form>
@@ -272,7 +257,7 @@
 <!-- Buttons -->
 <div class="card card-white col-sm-6 actionHide" id="actionButtonsContainer">
     <div class="card-body" id="container-buttons">
-        <button type="submit" form="rgVenta" class="btn btn-cns btn-flat">
+        <button type="submit" form="rgVenta" class="btn btn-cns btn-flat" id="btnVenta">
             Guardar <i class="far fa-save"></i>
         </button>
     </div>

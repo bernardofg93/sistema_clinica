@@ -24,7 +24,7 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <h4>Clínica nueva ser</h4>
+        <img src="<?=base_url?>assets/img/logoLogin.svg" alt="" style="width:80%; margin-bottom: 1rem">
     </div>
     <!-- /.login-logo -->
     <div class="card">

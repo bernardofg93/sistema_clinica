@@ -15,44 +15,56 @@ class ventaController
         // se obtionenen los lugares disponibles por unidad
         $entidad = new Entidad();
         $ent = $entidad->getAll();
-        while ($arr = $ent->fetch_assoc()) {
-            $arrEntidad[] = $arr;
+        if ($ent) {
+            while ($arr = $ent->fetch_assoc()) {
+                $arrEntidad[] = $arr;
+            }
         }
 
         // se obtienen los pacientes activos por unidadad
         $totalPaciente = new PacienteIngreso();
-        for ($i = 1; $i <= 3; $i++) {
-            $idEntidad = $i;
-            $totalPaciente->setId($idEntidad);
-            $totalPac = $totalPaciente->getTotal();
-            $arrTotalPac[] = $totalPac;
-        }
-        foreach ($arrTotalPac as $j => $k) {
-            foreach ($arrTotalPac[$j] as $key => $item) {
-                $resp[] = $item;
+
+        if ($totalPaciente) {
+            for ($i = 1; $i <= 3; $i++) {
+                $idEntidad = $i;
+                $totalPaciente->setId($idEntidad);
+                $totalPac = $totalPaciente->getTotal();
+                $arrTotalPac[] = $totalPac;
+            }
+
+            foreach ($arrTotalPac as $j => $k) {
+                foreach ($arrTotalPac[$j] as $key => $item) {
+                    $resp[] = $item;
+                }
             }
         }
         // Se obtiene el total de ventas de cada entidad
         $totalVenta = new Venta();
-        for($i=1; $i <= 3; $i++) {
-            $totalVenta->setId($i);
-           $resTotalVenta = $totalVenta->getTotalCash();
-           $arrTotalVenta[] = $resTotalVenta;
-        }
+        if ($totalVenta) {
+            for ($i = 1; $i <= 3; $i++) {
+                $totalVenta->setId($i);
+                $resTotalVenta = $totalVenta->getTotalCash();
+                $arrTotalVenta[] = $resTotalVenta;
+            }
 
-        foreach ($arrTotalVenta as $item => $i) {
-            $resTotalEntidad[] = $i;
-            foreach ($arrTotalVenta[$item] as $j){
-                $arrResultVenta[] = $j;
+            foreach ($arrTotalVenta as $item => $i) {
+                $resTotalEntidad[] = $i;
+                foreach ($arrTotalVenta[$item] as $j) {
+                    $arrResultVenta[] = $j;
+                }
             }
         }
 
         //Total de pacientes por mes
         $totalPaciente = new PacienteIngreso();
-        $totalPac = $totalPaciente->getTotalIngresos();
-        foreach ($totalPac as $val){
-            $val;
+
+        if ($totalPaciente) {
+            $totalPac = $totalPaciente->getTotalIngresos();
+            foreach ($totalPac as $val) {
+                $val;
+            }
         }
+
 
         require_once './admin/layout/header.php';
         require_once './admin/layout/sidebar.php';
@@ -64,7 +76,7 @@ class ventaController
         $proximosEgresarEntidad = new Venta();
         $testeo = $proximosEgresarEntidad->getProximosEgresados();
 
-        while($data = $testeo->fetch_assoc()){
+        while ($data = $testeo->fetch_assoc()) {
             $arrProx[] = $data;
         }
 
@@ -138,6 +150,7 @@ class ventaController
     {
         $registros = new Venta();
         $arrData = $registros->getAllObj();
+
         for ($i = 0; $i < count($arrData); $i++) {
 
             if ($arrData[$i]['fecha_seguimiento'] == 0) {
@@ -156,6 +169,27 @@ class ventaController
         }
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
         die();
+    }
+
+    public function concretada()
+    {
+        $registros = new Venta();
+        $arrData = $registros->getComplete();
+
+        for ($i = 0; $i < count($arrData); $i++) {
+            $arrData[$i]['detalle'] =
+                '<a href=http://localhost/clinica_soft/venta/detalleProspecto&idDp=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-user-plus"></i></a>';
+        }
+
+        echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function ingresoVenta()
+    {
+        require_once './admin/layout/header.php';
+        require_once './admin/layout/sidebar.php';
+        require_once './views/ventas/ventaIngreso.php';
     }
 
     public function principalTable()
